@@ -1,16 +1,27 @@
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 import styled from "styled-components";
+import App from "./components/app.js";
 
 const MainBackground =styled.div`
-    background-color:black;
-    width:100px;
-    height:100px;
+    background-color:white;
+    width:1920px;
+    height:1853px;
 `
+
 
 
 function Main(){
     return(
-        <MainBackground></MainBackground>
+        <MainBackground>
+                <BrowserRouter>
+                    <App>
+                        <Routes>
+
+
+                        </Routes>
+                    </App>
+                </BrowserRouter>
+        </MainBackground>
     );
 };
 
