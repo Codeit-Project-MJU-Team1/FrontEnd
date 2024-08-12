@@ -6,9 +6,8 @@ const NavDiv =styled.div`
     height:100px;
 `
 
-function Nav (){
+function Nav(){
     return (<NavDiv>헤더입니다.</NavDiv>);
 }
 
 export default Nav;
-

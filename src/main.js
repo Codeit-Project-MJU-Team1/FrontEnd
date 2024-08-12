@@ -1,6 +1,7 @@
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 import styled from "styled-components";
 import App from "./components/app.js";
+import Home from './pages/Home.js';
 
 const MainBackground =styled.div`
     background-color:white;
@@ -14,12 +15,10 @@ function Main(){
     return(
         <MainBackground>
                 <BrowserRouter>
-                    <App>
-                        <Routes>
-
-
-                        </Routes>
-                    </App>
+                    <App/>
+                    <Routes>
+                        <Route path="/" Component={Home}/>
+                    </Routes>
                 </BrowserRouter>
         </MainBackground>
     );
