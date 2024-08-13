@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import HeadSearch from "../components/headSearch.js"
+import Groups from "../components/groups.js";
 
 const CenterOutter=styled.div`
     display:flex;
@@ -11,6 +12,7 @@ function Home(){
     return(
         <CenterOutter>
             <HeadSearch/>
+            <Groups/>
         </CenterOutter>
         
     )
