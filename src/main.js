@@ -10,7 +10,6 @@ const MainBackground =styled.div`
 `
 
 
-
 function Main(){
     return(
         <MainBackground>
