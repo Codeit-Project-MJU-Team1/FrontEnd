@@ -2,6 +2,7 @@ import { BrowserRouter,Routes,Route } from "react-router-dom";
 import styled from "styled-components";
 import App from "./components/app.js";
 import Home from './pages/Home.js';
+import CreateGroup from "./pages/createGroup.js";
 
 const MainBackground =styled.div`
     background-color:white;
@@ -17,6 +18,7 @@ function Main(){
                     <App/>
                     <Routes>
                         <Route path="/" Component={Home}/>
+                        <Route path="/createGroup" Component={CreateGroup}/>
                     </Routes>
                 </BrowserRouter>
         </MainBackground>

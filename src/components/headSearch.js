@@ -8,6 +8,7 @@ const HeadSearchOuter=styled.div`
     background-color:white;
     width:1560px;
     height:45px;
+    margin:40px 0 0 0;
 `
 
 //공개버튼
@@ -76,6 +77,8 @@ function HeadSearch(){
     const onChange = (e) =>{
         setSearch(e.target.value)
     }
+    // 검색 그룹 필터링 함수
+    // const filterGroups = **받아온 그룹 배열**.filter((g)=>{ return g.**그룹이름프로퍼티**.toLoclaeLowerCase().includes(search.toLoclaeLowerCase())})
 
     return(
         <HeadSearchOuter>
@@ -83,7 +86,7 @@ function HeadSearch(){
             <PrivateButton>비공개</PrivateButton>
             <SearchTab>
                 <Link>
-                    <SearchImg src="../images/searchImg.png"/>
+                    <SearchImg src={searchImg}/>
                 </Link>
                 
                 <SearchInput value={search} onChange={onChange} type="text" placeholder="그룹명을 검색해주세요"/>
