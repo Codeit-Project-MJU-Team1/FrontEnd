@@ -1,4 +1,7 @@
 import styled from "styled-components"
+import { useState } from "react"
+import searchImg from "../images/searchImg.png";
+import { Link } from "react-router-dom";
 
 const HeadSearchOuter=styled.div`
     display: flex;
@@ -30,13 +33,23 @@ const PrivateButton=styled.button`
 `
 
 //검색창
-const SearchInput=styled.input`
+const SearchTab= styled.div`
+    display:flex;
     width: 1186px;
     height: 45px;
-    gap: 0px;
+    background-color:#F4F4F4;
     border-radius: 6px 0px 0px 0px;
     opacity: 0px;
     margin: 0 20px 0 0;
+    
+`
+const SearchInput=styled.input`
+    height: 45px;
+    width: 1131px;
+    gap: 0px;
+    padding:0;
+    border-width: 0;
+    background-color:#F4F4F4;
 
 `
 
@@ -49,15 +62,33 @@ const SortSelect=styled.input`
     opacity: 0px;
     margin: 0 0 0 20px;
 ` 
+const SearchImg=styled.img`
+    width:24.31px;
+    height:24px;
+    margin: 11px 10.13px 10px 20.26px;
+
+`
+
 
 function HeadSearch(){
+
+    const [search,setSearch]= useState("");
+    const onChange = (e) =>{
+        setSearch(e.target.value)
+    }
 
     return(
         <HeadSearchOuter>
             <PublicButton>공개</PublicButton>
             <PrivateButton>비공개</PrivateButton>
-            <SearchInput type="text" placeholder="그룹명을 검색해주세요"/>
-            
+            <SearchTab>
+                <Link>
+                    <SearchImg src="../images/searchImg.png"/>
+                </Link>
+                
+                <SearchInput value={search} onChange={onChange} type="text" placeholder="그룹명을 검색해주세요"/>
+            </SearchTab>
+
             <SortSelect/>
         </HeadSearchOuter>
     );

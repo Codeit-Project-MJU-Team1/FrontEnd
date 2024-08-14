@@ -49,7 +49,7 @@ const MiddleGroups=styled.div`
 function Groups(){
 
     return(
-
+        
         <GroupsOutter>
             <MiddleGroups>
                 <SmallGroups>
