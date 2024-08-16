@@ -9,6 +9,7 @@ const CenterOutter=styled.div`
     align-items:center;
 `
 
+
 function Home(){
     return(
         <CenterOutter>

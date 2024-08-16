@@ -20,6 +20,7 @@ const DummyDiv=styled.div`
 const LogoImg=styled.img`
 
 `
+
 const CreateGroupButton =styled.div`
     display:flex;
     justify-content:center;
@@ -30,7 +31,6 @@ const CreateGroupButton =styled.div`
     color:#FAFAFA;
     gap: 0px;
     border-radius: 6px;
-    opacity: 0px;
 
     font-family: Spoqa Han Sans Neo;
     font-size: 14px;
@@ -39,20 +39,24 @@ const CreateGroupButton =styled.div`
     letter-spacing: -0.03em;
     text-align: center;
 
-    margin:27px 180px 0 0;
+    margin:0 180px 0 0;
 
 
 `
 function CreateGroupOutter(){
-    return(
-        <div>
-            <Link to="/createGroup">
-                <CreateGroupButton>그룹 만들기</CreateGroupButton>
-            </Link>
-        </div>
+   
+        
 
+    return(
+    
+        <Link to="/createGroup">
+            <CreateGroupButton>그룹 만들기</CreateGroupButton>
+        </Link>
     )
+
+
 }
+
 
 
 function Nav(){

@@ -50,6 +50,7 @@ const SearchInput=styled.input`
     gap: 0px;
     padding:0;
     border-width: 0;
+    outline:none;
     background-color:#F4F4F4;
 
 `
