@@ -3,6 +3,7 @@ import styled from "styled-components";
 import App from "./components/app.js";
 import Home from './pages/Home.js';
 import CreateGroup from "./pages/createGroup.js";
+import DetailedGroup from "./pages/detailedGroup.js";
 
 const MainBackground =styled.div`
     background-color:white;
@@ -19,6 +20,7 @@ function Main(){
                     <Routes>
                         <Route path="/" Component={Home}/>
                         <Route path="/createGroup" Component={CreateGroup}/>
+                        <Route path="/group:" Component={DetailedGroup}/>
                     </Routes>
                 </BrowserRouter>
         </MainBackground>
