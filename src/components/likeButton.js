@@ -14,7 +14,7 @@ function LikeButton(){
 
     return(
         <LikeButtonOutter>
-
+            공감 보내기
         </LikeButtonOutter>
     )
 }
