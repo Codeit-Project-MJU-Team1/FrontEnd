@@ -28,7 +28,7 @@ const GroupNameOutter=styled.div`
     height:75px
 `
 const GroupNameInput=styled.input`
-    width: 400px;
+    width: 380px;
     height: 45px;
     gap: 0px;
     border-radius: 6px;
@@ -54,7 +54,6 @@ function ImgInput(){
         margin: 0 10px 0 0;
         padding-left:20px;
         align-content:center;
-        font-family: Spoqa Han Sans Neo;
         font-size: 14px;
         font-weight: 400;
         line-height: 17.53px;
@@ -101,8 +100,8 @@ const GruopIntroOutter=styled.div`
 
 `
 const GroupIntroInput=styled.textarea`
-    width: 400px;
-    height: 120px;
+    width: 380px;
+    height: 110px;
     gap: 0px;
     border-radius: 6px;
     border: 1px;
@@ -125,10 +124,8 @@ const GroupReleaseOutter=styled.div`
     margin-top:40px;
     width:104px;
     height:64px;
-    font-family: Spoqa Han Sans Neo;
     font-weight: 500;
     line-height: 20.03px;
-    letter-spacing: -0.03em;
     text-align: left;
 
 `
@@ -210,12 +207,11 @@ const GroupPWOutter=styled.div`
     height:75px
 `
 const GroupPW =styled.input`
-    width: 400px;
+    width: 380px;
     height: 45px;
     gap: 0px;
     border-radius: 6px;
     border: 1px solid #DDDDDD;
-    font-family: Spoqa Han Sans Neo;
     font-size: 14px;
     font-weight: 400;
     line-height: 17.53px;

@@ -56,6 +56,7 @@ function InfoHead(){
         display:space-between;
         font-size:18px;
         font-weight:700px;
+        align-items:center;
 
     `
     const InfoHeadMiddleStart=styled.div`
@@ -97,7 +98,7 @@ function InfoHead(){
                         그룹 정보 수정하기
                         </Link>
                     </InfoHeadTopFragLeft>
-                    <div style={{marginLeft: '25px;'}}>
+                    <div style={{marginLeft: '25px'}}>
                         <Link>
                         그룹 삭제하기
                         </Link>
