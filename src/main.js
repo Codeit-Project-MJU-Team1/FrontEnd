@@ -6,9 +6,9 @@ import CreateGroup from "./pages/createGroup.js";
 import DetailedGroup from "./pages/detailedGroup.js";
 
 const MainBackground =styled.div`
-    background-color:white;
+    background-color:#FAFAFA;
     width:1920px;
-    height:1853px;
+    padding-bottom:120px;
 `
 
 

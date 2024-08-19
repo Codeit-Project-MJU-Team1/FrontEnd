@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const GroupsOutter=styled.div`
@@ -46,12 +47,10 @@ const MiddleGroups=styled.div`
 `
 
 
-function Groups(){
-
+function Test(){
     return(
-        
-        <GroupsOutter>
-            <MiddleGroups>
+        <>
+             <MiddleGroups>
                 <SmallGroups>
                         <TestSmallGroup1/>
                         <TestSmallGroup1/>
@@ -99,8 +98,19 @@ function Groups(){
                         <TestSmallGroup1/>
                 </SmallGroups>
             </MiddleGroups>
-        </GroupsOutter>
-    );
+        </>
+    )
+}
+
+
+
+
+function Groups(){
+ return(
+    <GroupsOutter>
+        <Test></Test>
+    </GroupsOutter>
+ )
 }
 
 export default Groups;

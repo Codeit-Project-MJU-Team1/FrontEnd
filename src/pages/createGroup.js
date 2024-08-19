@@ -6,6 +6,7 @@ const CenterOutter=styled.div`
     align-items:center;
 `
 const PageName=styled.h2`
+    margin-top:40px;
     font-size:24px;
     font-family: Spoqa Han Sans Neo;
     font-size: 24px;
@@ -16,6 +17,7 @@ const PageName=styled.h2`
 
 `
 const InputOutter=styled.form`
+    margin-top:40px;
     width:400px;
     gap:40px;
 `
@@ -38,6 +40,7 @@ const GroupNameInput=styled.input`
 `
 
 const RepresentImgOutter=styled.div`
+    margin-top:40px;
     width:400px;
     height:75px
 `
@@ -224,6 +227,7 @@ const Submmit =styled.input`
     width: 400px;
     height: 50px;
     margin-top:60px;
+    margin-bottom:21px;
     gap: 0px;
     border-radius: 6px;
     background-color: #282828;

@@ -6,7 +6,7 @@ const NavDiv =styled.div`
     display:flex;
     justify-content:space-between;
     align-items:center;
-    background-color:white;
+    background-color:#FAFAFA;
     width:1920px;
     height:100px;
     
