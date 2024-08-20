@@ -252,29 +252,7 @@ function CreateGroup(){
 
     const imgRef =useRef();
     const checkSignUp = (e) => {
-        e.preventDefault();
-        const formData = new FormData();
-        formData.append("img", imgRef.current.files[0]);
-      
-        fetch("API 주소", {
-          method: "POST",
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          body: formData,
-        })
-          .then((response) => {
-            if (response.ok === true) {
-              return response.json();
-            }
-            throw new Error("에러 발생!");
-          })
-          .catch((error) => {
-            alert(error);
-          })
-          .then((data) => {
-            console.log(data);
-          });
+        
       };
 
     return(
