@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Modal from "../components/modal";
+
 const CenterOutter=styled.div`
     display:flex;
     flex-direction:column;
@@ -245,15 +247,21 @@ const Submmit =styled.input`
 
 
 `
-
+const CreatModal=styled.div`
+    width: 480px;
+    height: 298px;
+    gap: 0px;
+    border-radius: 6px;
+    background:white;
+`
 
 function CreateGroup(){
-
-
+    const [modal,setModal]= useState(false);
     const imgRef =useRef();
     const checkSignUp = (e) => {
-        
+        setModal(true);
       };
+
 
     return(
         <CenterOutter>
@@ -282,7 +290,7 @@ function CreateGroup(){
                 </GroupPWOutter>
                 <Submmit onClick={checkSignUp} type="submit" value="만들기"></Submmit>
             </InputOutter>
-
+            <Modal modalOpen= {modal} setModalOpen={setModal}><CreatModal>안녕하세요 모달창 입니다</CreatModal></Modal>
         </CenterOutter>
         
     )
