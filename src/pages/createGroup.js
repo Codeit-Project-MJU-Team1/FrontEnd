@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useRef, useState } from "react";
 const CenterOutter=styled.div`
     display:flex;
     flex-direction:column;
@@ -248,6 +248,35 @@ const Submmit =styled.input`
 
 
 function CreateGroup(){
+
+
+    const imgRef =useRef();
+    const checkSignUp = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("img", imgRef.current.files[0]);
+      
+        fetch("API 주소", {
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          body: formData,
+        })
+          .then((response) => {
+            if (response.ok === true) {
+              return response.json();
+            }
+            throw new Error("에러 발생!");
+          })
+          .catch((error) => {
+            alert(error);
+          })
+          .then((data) => {
+            console.log(data);
+          });
+      };
+
     return(
         <CenterOutter>
             <PageName>그룹 만들기</PageName>
@@ -273,7 +302,7 @@ function CreateGroup(){
                     <Headname>비밀번호</Headname>
                     <GroupPW type="Password" placeholder="비밀번호를 입력해 주세요"></GroupPW>
                 </GroupPWOutter>
-                <Submmit type="submit" value="만들기"></Submmit>
+                <Submmit onClick={checkSignUp} type="submit" value="만들기"></Submmit>
             </InputOutter>
 
         </CenterOutter>
