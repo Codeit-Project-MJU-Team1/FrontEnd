@@ -1,7 +1,38 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-function Modal({modalOpen,setModalOpen,Children}){
+
+
+
+function VerifiedModal({verify}){
+    const CreatModal=styled.div`
+    width: 480px;
+    height: 298px;
+    gap: 0px;
+    border-radius: 6px;
+    background:white;
+    display:flex;
+`
+    if(verify==true){
+        return(
+            <>
+                <CreatModal>안녕하세요.모달창입니다</CreatModal>
+            
+            </>
+        )
+    }else{
+        return(
+            <>
+                <CreatModal>안녕 못해!</CreatModal>
+            
+            </>
+        )
+    }
+    
+} 
+
+
+function Modal({modalOpen,setModalOpen,isComplete = true}){
     const modalBackground = useRef();
 
     const ModalContainer= styled.div`
@@ -26,7 +57,7 @@ function Modal({modalOpen,setModalOpen,Children}){
                   setModalOpen(false);
                 }
               }}>
-                {Children}
+                <VerifiedModal verify={isComplete}></VerifiedModal>
 
             </ModalContainer>
             }

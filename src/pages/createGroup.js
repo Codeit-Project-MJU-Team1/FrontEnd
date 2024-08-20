@@ -18,7 +18,7 @@ const PageName=styled.h2`
     text-align: center;
 
 `
-const InputOutter=styled.form`
+const InputOutter=styled.div`
     margin-top:40px;
     width:400px;
     gap:40px;
@@ -252,6 +252,7 @@ const CreatModal=styled.div`
     height: 298px;
     gap: 0px;
     border-radius: 6px;
+
     background:white;
 `
 
@@ -290,7 +291,7 @@ function CreateGroup(){
                 </GroupPWOutter>
                 <Submmit onClick={checkSignUp} type="submit" value="만들기"></Submmit>
             </InputOutter>
-            <Modal modalOpen= {modal} setModalOpen={setModal}><CreatModal>안녕하세요 모달창 입니다</CreatModal></Modal>
+            <Modal modalOpen= {modal} setModalOpen={setModal} isComplete={true}></Modal>
         </CenterOutter>
         
     )
