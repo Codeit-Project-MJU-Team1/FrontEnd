@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import CreateGroupModal from "../components/modals/createGroupModal";
-
 const CenterOutter=styled.div`
     display:flex;
     flex-direction:column;
@@ -18,7 +17,7 @@ const PageName=styled.h2`
     text-align: center;
 
 `
-const InputOutter=styled.div`
+const InputOutter=styled.form`
     margin-top:40px;
     width:400px;
     gap:40px;
@@ -46,7 +45,7 @@ const RepresentImgOutter=styled.div`
     width:400px;
     height:75px
 `
-function ImgInput(){
+function ImgInput({onChange}){
     const ImgInputOutter=styled.div`
         display:flex;
     `
@@ -81,7 +80,10 @@ function ImgInput(){
 
 
     `
-
+    const handleChange = (e)=> {
+        const nextValue=e.target.files[0]
+        onChange(nextValue);
+    }
 
     const DummyInput=styled.input`
         display:none;
@@ -93,7 +95,7 @@ function ImgInput(){
                 <ImgLinkDisplay htmlFor="repreImg">파일을 선택해 주세요</ImgLinkDisplay>
                 <Imgbutton htmlFor="repreImg">파일 선택</Imgbutton>
                 
-            <DummyInput id="repreImg" type="file" accept="image/*"></DummyInput>
+            <DummyInput id="repreImg" type="file" name accept="image/*" onChange={handleChange} ></DummyInput>
         </ImgInputOutter>
     );
 }
@@ -247,22 +249,44 @@ const Submmit =styled.input`
 
 
 `
-const CreatModal=styled.div`
-    width: 480px;
-    height: 298px;
-    gap: 0px;
-    border-radius: 6px;
 
-    background:white;
-`
 
 function CreateGroup(){
-    const [modal,setModal]= useState(false);
-    const imgRef =useRef();
-    const checkSignUp = (e) => {
-        setModal(true);
-      };
 
+    const [modal,setModal]=useState();
+    const [isComplete,setIsComplete]=useState();
+    const [img,setImg]=useState();
+    const checkSignUp = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("image", img);
+        console.log("보내기전");
+        console.log(img);
+      
+        fetch("https://backend-b4qi.onrender.com/api/image", {
+          method: "POST",
+          body: formData,
+          
+        })
+          .then((response) => {
+            if (response.ok === true) {
+              return response.json();
+              
+            }
+            setIsComplete(false);
+            setModal(true);
+            throw new Error("에러 발생!");
+          })
+          .catch((error) => {
+            alert(error);
+          })
+          .then((data) => {
+            console.log(data);
+            setIsComplete(true);
+            setModal(true);
+            
+          });
+      };
 
     return(
         <CenterOutter>
@@ -274,7 +298,7 @@ function CreateGroup(){
                 </GroupNameOutter>
                 <RepresentImgOutter>
                     <Headname>대표 이미지</Headname>
-                    <ImgInput></ImgInput>
+                    <ImgInput onChange={setImg}></ImgInput>
 
                 </RepresentImgOutter>
                 <GruopIntroOutter>
@@ -291,7 +315,7 @@ function CreateGroup(){
                 </GroupPWOutter>
                 <Submmit onClick={checkSignUp} type="submit" value="만들기"></Submmit>
             </InputOutter>
-            <CreateGroupModal modalOpen= {modal} setModalOpen={setModal} isComplete={true}></CreateGroupModal>
+            <CreateGroupModal modalOpen={modal} setModalOpen={setModal} isComplete={isComplete}></CreateGroupModal>
         </CenterOutter>
         
     )

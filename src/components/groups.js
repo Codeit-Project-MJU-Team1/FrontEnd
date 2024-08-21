@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import GroupCard from "./groupCard";
 
 const GroupsOutter=styled.div`
     display:flex;
@@ -52,50 +53,50 @@ function Test(){
         <>
              <MiddleGroups>
                 <SmallGroups>
-                        <TestSmallGroup1/>
-                        <TestSmallGroup1/>
+                        <GroupCard/>
+                        <GroupCard/>
                         <TestSmallGroup3/>
                 </SmallGroups>
                 <SmallGroups>
                         <TestSmallGroup2/>
-                        <TestSmallGroup1/>
-                        <TestSmallGroup1/>
-                </SmallGroups>
-            </MiddleGroups>
-            <MiddleGroups>
-                <SmallGroups>
-                        <TestSmallGroup2/>
-                        <TestSmallGroup1/>
-                        <TestSmallGroup3/>
-                </SmallGroups>
-                <SmallGroups>
-                        <TestSmallGroup1/>
-                        <TestSmallGroup2/>
-                        <TestSmallGroup1/>
+                        <GroupCard/>
+                        <GroupCard/>
                 </SmallGroups>
             </MiddleGroups>
             <MiddleGroups>
                 <SmallGroups>
-                        <TestSmallGroup3/>
                         <TestSmallGroup2/>
+                        <GroupCard/>
                         <TestSmallGroup3/>
                 </SmallGroups>
                 <SmallGroups>
+                        <GroupCard/>
                         <TestSmallGroup2/>
-                        <TestSmallGroup3/>
-                        <TestSmallGroup1/>
+                        <GroupCard/>
                 </SmallGroups>
             </MiddleGroups>
             <MiddleGroups>
                 <SmallGroups>
-                        <TestSmallGroup1/>
+                        <TestSmallGroup3/>
+                        <TestSmallGroup2/>
+                        <TestSmallGroup3/>
+                </SmallGroups>
+                <SmallGroups>
+                        <TestSmallGroup2/>
+                        <TestSmallGroup3/>
+                        <GroupCard/>
+                </SmallGroups>
+            </MiddleGroups>
+            <MiddleGroups>
+                <SmallGroups>
+                        <GroupCard/>
                         <TestSmallGroup2/>
                         <TestSmallGroup3/>
                 </SmallGroups>
                 <SmallGroups>
                         <TestSmallGroup3/>
                         <TestSmallGroup2/>
-                        <TestSmallGroup1/>
+                        <GroupCard/>
                 </SmallGroups>
             </MiddleGroups>
         </>
