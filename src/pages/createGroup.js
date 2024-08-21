@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useEffect, useRef, useState } from "react";
-import Modal from "../components/modal";
+import { useRef, useState } from "react";
+import CreateGroupModal from "../components/modals/createGroupModal";
 
 const CenterOutter=styled.div`
     display:flex;
@@ -291,7 +291,7 @@ function CreateGroup(){
                 </GroupPWOutter>
                 <Submmit onClick={checkSignUp} type="submit" value="만들기"></Submmit>
             </InputOutter>
-            <Modal modalOpen= {modal} setModalOpen={setModal} isComplete={true}></Modal>
+            <CreateGroupModal modalOpen= {modal} setModalOpen={setModal} isComplete={true}></CreateGroupModal>
         </CenterOutter>
         
     )
