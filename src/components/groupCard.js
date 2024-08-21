@@ -9,7 +9,7 @@ const GroupCardOutter= styled.div`
     gap:20px;
     background-color:#FAFAFA;
     border: 1px solid #DDDDDD;
-    width: 375px;
+    width: 335px;
     border-radius: 12px;
 
 
