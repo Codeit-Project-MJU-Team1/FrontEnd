@@ -317,7 +317,7 @@ const ModalButton=styled.input`
                     <ModalOffButton src={exitIcon} onClick={()=>setModalOpen(false)}>
 
                     </ModalOffButton>
-                    <ModalName>그룹 정보 수정</ModalName>
+                    <ModalName>그룹 만들기</ModalName>
                 <InputOutter>
                 <GroupNameOutter>
                     <Headname>그룹명</Headname>
@@ -340,7 +340,7 @@ const ModalButton=styled.input`
                     <Headname>수정 권한 인증</Headname>
                     <GroupPW type="Password" placeholder="비밀번호를 입력해 주세요"></GroupPW>
                 </GroupPWOutter>
-                <ModalButton onClick={checkSignUp} type="submit" value="수정하기"></ModalButton>
+                <ModalButton onClick={checkSignUp} type="submit" value="만들기"></ModalButton>
             </InputOutter>
             {/* <CreateGroupModal modalOpen={verifyModal} setModalOpen={setVerifyModal} isComplete={isComplete}></CreateGroupModal> */}
             </CreateModal>
