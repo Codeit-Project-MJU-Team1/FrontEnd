@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import GroupCard from "../components/groupCard";
+import PrivateAccessFailModal from "../components/modals/privateAccessFailModal";
+import { useState } from "react";
 const TestOuter=styled.div`
     display:flex;
     align-items:center;
@@ -9,10 +11,11 @@ const TestOuter=styled.div`
 
 
 function Test(){
+    const [test,setTest]=useState(true);
 
     return(
         <TestOuter>
-            <GroupCard></GroupCard>
+            <PrivateAccessFailModal modalOpen={test} setModalOpen={setTest}></PrivateAccessFailModal>
         </TestOuter>
     )
 }
