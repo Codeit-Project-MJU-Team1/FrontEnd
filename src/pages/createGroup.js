@@ -45,7 +45,7 @@ const RepresentImgOutter=styled.div`
     width:400px;
     height:75px
 `
-function ImgInput({onChange}){
+function ImgInput({image,onChange}){
     const ImgInputOutter=styled.div`
         display:flex;
     `
@@ -92,7 +92,9 @@ function ImgInput({onChange}){
 
     return(
         <ImgInputOutter>
-                <ImgLinkDisplay htmlFor="repreImg">파일을 선택해 주세요</ImgLinkDisplay>
+                <ImgLinkDisplay htmlFor="repreImg">{ image?.name ||
+                "파일을 선택해 주세요"
+                }</ImgLinkDisplay>
                 <Imgbutton htmlFor="repreImg">파일 선택</Imgbutton>
                 
             <DummyInput id="repreImg" type="file" name accept="image/*" onChange={handleChange} ></DummyInput>
@@ -298,8 +300,7 @@ function CreateGroup(){
                 </GroupNameOutter>
                 <RepresentImgOutter>
                     <Headname>대표 이미지</Headname>
-                    <ImgInput onChange={setImg}></ImgInput>
-
+                    <ImgInput image={img} onChange={setImg}></ImgInput>
                 </RepresentImgOutter>
                 <GruopIntroOutter>
                     <Headname>그룹 소개</Headname>
