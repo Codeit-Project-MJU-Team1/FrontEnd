@@ -103,6 +103,7 @@ function InnerModal({setModalOpen}){
           })
           .then((data) => {
             console.log(data);
+            alert("성공적으로 수정이 완료되었습니다.");
             setIsComplete(true);
             // setModal(true);
             
@@ -336,7 +337,7 @@ const ModalButton=styled.input`
                     <Toggle></Toggle>
                 </GroupReleaseOutter>
                 <GroupPWOutter>
-                    <Headname>비밀번호</Headname>
+                    <Headname>수정 권한 인증</Headname>
                     <GroupPW type="Password" placeholder="비밀번호를 입력해 주세요"></GroupPW>
                 </GroupPWOutter>
                 <ModalButton onClick={checkSignUp} type="submit" value="만들기"></ModalButton>
