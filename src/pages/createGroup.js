@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useRef, useState, useCallback } from "react";
 import CreateGroupModal from "../components/modals/createGroupModal";
+import { json } from "react-router-dom";
 const CenterOutter=styled.div`
     display:flex;
     flex-direction:column;
@@ -182,7 +183,7 @@ margin:0;
 }
 `;
 
-function Toggle()  {
+function Toggle({onChange,value})  {
     const [isOn, setisOn] = useState(false);
         
         const toggleHandler = () => {
@@ -202,7 +203,7 @@ function Toggle()  {
                     <div className={`toggle-container ${isOn ? "toggle--checked" : null}`}/>
                     <div className={`toggle-circle ${isOn ? "toggle--checked" : null}`}/>
                 </ToggleContainer>
-                <DummyCheck id="toggle" type="checkbox"></DummyCheck>
+                <DummyCheck id="toggle" onChange={onChange} value={value} type="checkbox"></DummyCheck>
             </label>
     </GroupReleaseInput>
 
@@ -256,38 +257,117 @@ const Submmit =styled.input`
 function CreateGroup(){
 
     const [modal,setModal]=useState();
+    const [isPublic,setIsPublic]=useState(false);
     const [isComplete,setIsComplete]=useState();
+    const [values,setValues] =useState({});
     const [img,setImg]=useState();
+    const groupNameHandler= (e)=>{
+        setValues(
+            {...values ,
+                "name": e.target.value,
+            }
+        ); 
+    }
+    const groupIntroHandler= (e)=>{
+        
+    setValues(
+        {...values ,
+            "introduction": e.target.value,
+        }
+    );
+    }
+
+    const groupReleaseHandler = (e)=>{
+        
+    setValues(
+        {...values ,
+            "isPublic": e.target.value,
+        }
+    );
+    }
+
+    const groupPWHandler= (e)=>{
+        
+    setValues(
+        {...values ,
+            "password": e.target.value,
+        }
+    );
+    }
+
+    
+    
     const checkSignUp = (e) => {
+        if(values.isPublic=="on"){
+            setIsPublic(true);
+        }else{
+            setIsPublic(false);
+        }
+        
+
         e.preventDefault();
-        const formData = new FormData();
-        formData.append("image", img);
+        const formImage = new FormData();
+        formImage.append("image", img);
         console.log("보내기전");
-        console.log(img);
+        console.log(formImage);
+        
       
         fetch("https://backend-b4qi.onrender.com/api/image", {
           method: "POST",
-          body: formData,
+          body: formImage,
           
-        })
-          .then((response) => {
+        }).then((response) => {
             if (response.ok === true) {
-              return response.json();
-              
+            return response.json();
+            
             }
             setIsComplete(false);
             setModal(true);
             throw new Error("에러 발생!");
-          })
-          .catch((error) => {
+        })
+        .catch((error) => {
             alert(error);
-          })
-          .then((data) => {
-            console.log(data);
-            setIsComplete(true);
-            setModal(true);
+        }).then( (data) => {
+            console.log("이미지주소")
+            console.log(data.imageUrl)
+            const groupData={
+                "name": values.name,
+                "introduction": values.introduction,
+                "isPublic": isPublic,
+                "password": values.password,
+                "imageUrl": data.imageUrl,
+            }
+            console.log(JSON.stringify(groupData))
             
-          });
+            fetch( "https://backend-b4qi.onrender.com/api/groups", {
+                method: "POST",
+                body: JSON.stringify(groupData),
+                headers: {
+                    "Content-Type": `application/json`, // application/json 타입 선언
+                  },
+                
+            }).then((response) => {
+                if (response.ok === true) {
+                return response.json();
+                
+                }
+                console.log(response.ok);
+                setIsComplete(false);
+                setModal(true);
+                throw new Error("에러 발생!");
+            })
+            .catch((error) => {
+                alert(error);
+            })
+            .then((data) => {
+                console.log(data);
+                setIsComplete(true);
+                setModal(true);
+                
+            });
+                
+            }
+        )
       };
 
     return(
@@ -296,7 +376,7 @@ function CreateGroup(){
             <InputOutter>
                 <GroupNameOutter>
                     <Headname>그룹명</Headname>
-                    <GroupNameInput type="text" placeholder="그룹명을 입력해 주세요"/>
+                    <GroupNameInput type="text" value={values.name} onChange={groupNameHandler} placeholder="그룹명을 입력해 주세요"/>
                 </GroupNameOutter>
                 <RepresentImgOutter>
                     <Headname>대표 이미지</Headname>
@@ -304,15 +384,15 @@ function CreateGroup(){
                 </RepresentImgOutter>
                 <GruopIntroOutter>
                     <Headname>그룹 소개</Headname>
-                    <GroupIntroInput placeholder="그룹을 소개해주세요"></GroupIntroInput>
+                    <GroupIntroInput onChange={groupIntroHandler} value={values.introduction} placeholder="그룹을 소개해주세요"></GroupIntroInput>
                 </GruopIntroOutter>
                 <GroupReleaseOutter>
                     <Headname>그룹 공개 선택</Headname>
-                    <Toggle></Toggle>
+                    <Toggle onChange={groupReleaseHandler} value={values.isPublic}></Toggle>
                 </GroupReleaseOutter>
                 <GroupPWOutter>
                     <Headname>비밀번호</Headname>
-                    <GroupPW type="Password" placeholder="비밀번호를 입력해 주세요"></GroupPW>
+                    <GroupPW type="Password" onChange={groupPWHandler} value={values.password} placeholder="비밀번호를 입력해 주세요"></GroupPW>
                 </GroupPWOutter>
                 <Submmit onClick={checkSignUp} type="submit" value="만들기"></Submmit>
             </InputOutter>
