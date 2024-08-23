@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { useRef, useState, useCallback } from "react";
+import { useState } from "react";
 import CreateGroupModal from "../components/modals/createGroupModal";
-import { json } from "react-router-dom";
+
+
 const CenterOutter=styled.div`
     display:flex;
     flex-direction:column;
@@ -255,8 +256,8 @@ const Submmit =styled.input`
 
 
 function CreateGroup(){
-
     const [modal,setModal]=useState();
+    const [datas,setDatas]=useState();
     const [isPublic,setIsPublic]=useState(false);
     const [isComplete,setIsComplete]=useState();
     const [values,setValues] =useState({});
@@ -352,23 +353,32 @@ function CreateGroup(){
                 
                 }
                 console.log(response.ok);
-                setIsComplete(false);
+                setIsComplete(response.ok);
                 setModal(true);
-                throw new Error("에러 발생!");
+                return;
+                
             })
             .catch((error) => {
                 alert(error);
             })
             .then((data) => {
-                console.log(data);
-                setIsComplete(true);
-                setModal(true);
-                
+                if(data){
+                    console.log("결과");
+                    console.log(data);
+                    setIsComplete(true);
+                    setModal(true);
+                    setDatas(data)
+                    
+
+                }
             });
                 
             }
         )
+
+        
       };
+      
 
     return(
         <CenterOutter>
@@ -396,7 +406,7 @@ function CreateGroup(){
                 </GroupPWOutter>
                 <Submmit onClick={checkSignUp} type="submit" value="만들기"></Submmit>
             </InputOutter>
-            <CreateGroupModal modalOpen={modal} setModalOpen={setModal} isComplete={isComplete}></CreateGroupModal>
+            <CreateGroupModal modalOpen={modal} setModalOpen={setModal} isComplete={isComplete} data={datas}></CreateGroupModal>
         </CenterOutter>
         
     )

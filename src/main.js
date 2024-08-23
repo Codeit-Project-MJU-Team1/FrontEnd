@@ -23,7 +23,7 @@ function Main(){
                         <Route path="/" Component={Home}/>
                         <Route path="/createGroup" Component={CreateGroup}/>
                         <Route path="/privateGroupAccess" Component={PrivateGroupAccess}/>
-                        <Route path="/group:" Component={DetailedGroup}/>
+                        <Route path="/group/:id" Component={DetailedGroup}/>
                         <Route path="/Test" Component={Test}/>
                     </Routes>
                 </BrowserRouter>

@@ -1,10 +1,12 @@
 import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 
 
 
-function VerifiedModal({verify,setModalOpen}){
+function VerifiedModal({verify,setModalOpen,data}){
+    const navigate=useNavigate();
     const CreatModal=styled.div`
     display:flex;
     flex-direction:column;
@@ -65,7 +67,9 @@ const ModalButton=styled.button`
                     <ModalExplain>
                         그룹이 성공적으로 등록되었습니다.
                     </ModalExplain>
-                    <ModalButton onClick={()=>setModalOpen(false)} >확인</ModalButton>
+                    <ModalButton onClick={()=>{setModalOpen(false);
+                        navigate("/group/"+data.id);
+                    }} >확인</ModalButton>
                 </CreatModal>
             
             </>
@@ -90,7 +94,7 @@ const ModalButton=styled.button`
 } 
 
 
-function CreateGroupModal({modalOpen,setModalOpen,isComplete = true}){
+function CreateGroupModal({modalOpen,setModalOpen,isComplete = true ,data}){
     const modalBackground = useRef();
 
     const ModalContainer= styled.div`
@@ -118,7 +122,7 @@ function CreateGroupModal({modalOpen,setModalOpen,isComplete = true}){
             //   }
             // }
               >
-                <VerifiedModal verify={isComplete} setModalOpen={setModalOpen}></VerifiedModal>
+                <VerifiedModal verify={isComplete} setModalOpen={setModalOpen} data={data}></VerifiedModal>
 
             </ModalContainer>
             }
