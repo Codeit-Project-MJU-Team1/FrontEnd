@@ -106,12 +106,42 @@ function Test(){
 
 
 
-function Groups(){
- return(
-    <GroupsOutter>
-        <Test></Test>
-    </GroupsOutter>
- )
+function Groups({middleGroups1,middleGroups2,middleGroups3,middleGroups4}){
+    console.log("전달된 데이터");
+    console.log(middleGroups1)
+    console.log(middleGroups2)
+    console.log(middleGroups3)
+    console.log(middleGroups4)
+        return(
+        <GroupsOutter>
+            <MiddleGroups>
+                {middleGroups1 && middleGroups1.map((group)=>{
+                    console.log(group.id)
+                    return <GroupCard key={group.id} group={group}/>
+                })}
+            </MiddleGroups>
+            <MiddleGroups>
+                {middleGroups2 && middleGroups2.map((group)=>{
+                    console.log(group.id)
+                    return <GroupCard key={group.id} group={group}/>
+                })}
+            </MiddleGroups>
+            <MiddleGroups>
+                {middleGroups3 && middleGroups3.map((group)=>{
+                    console.log(group.id)
+                    return <GroupCard key={group.id} group={group}/>
+                })}
+            </MiddleGroups>
+            <MiddleGroups>
+                {middleGroups4 && middleGroups4.map((group)=>{
+                    console.log(group.id)
+                    return <GroupCard key={group.id} group={group}/>
+                })}
+            </MiddleGroups>
+        </GroupsOutter>
+     )
+    
+    
 }
 
 export default Groups;

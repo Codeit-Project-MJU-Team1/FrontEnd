@@ -1,3 +1,4 @@
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const GroupCardOutter= styled.div`
@@ -11,10 +12,6 @@ const GroupCardOutter= styled.div`
     border: 1px solid #DDDDDD;
     width: 335px;
     border-radius: 12px;
-
-
-
-
 
 `
 const GroupImg= styled.img`
@@ -80,49 +77,58 @@ const BottomFragValue=styled.div`
 
 `
 
+const getDateDiff= (date)=>{
+    const currentDate = new Date();
+    const groupDate = new Date(date);
+    const diffDate = currentDate.getTime()-groupDate.getTime();
+    return Math.floor(Math.abs(diffDate/(1000* 60 *60* 24))) ;
+
+};
 
 
 
-function GroupCard(){
-
-
+function GroupCard({group}){
+    
     return(
         <GroupCardOutter>
-            <GroupImg/>
+            <Link to={"/group/"+group?.id} >
+                <GroupImg src={group.imageUrl}/>
+            </Link>
+            
             <InfoOutter>
                 <TopInfo>
                     <div>
-                        D+265
+                        D+{getDateDiff(group.createdAt)}
                     </div>
                     <div>
                         |
                     </div>
                     <div>
-                        공개
+                        {group.isPublic ? "공개": "비공개"}
                     </div>
                 </TopInfo>
                 <MiddelInfo>
                     <GroupName>
-                    에델바이스
+                    {group.name}
                     </GroupName>
                     <GroupExplain>
-                    서로 한 마음으로 응원하고 아끼는 달봉이네 가족입니다.
+                    {group.introduction}
                     </GroupExplain>
                 </MiddelInfo>
                 <BottomInfo>
                     
                     <BottomFrag>
                         <BottomInfoHeader>획득배지</BottomInfoHeader>
-                        <BottomFragValue>2</BottomFragValue>
+                        <BottomFragValue>{3}</BottomFragValue>
                     </BottomFrag>
                     
                     <BottomFrag>
                         <BottomInfoHeader>추억</BottomInfoHeader>
-                        <BottomFragValue>8</BottomFragValue>
+                        <BottomFragValue>{group.postCount}</BottomFragValue>
                     </BottomFrag>
                     <BottomFrag>
                         <BottomInfoHeader>그룹 공감</BottomInfoHeader>
-                        <BottomFragValue>8k</BottomFragValue>
+                        <BottomFragValue>{group.likeCount}</BottomFragValue>
                     </BottomFrag>
                 </BottomInfo>
             </InfoOutter>

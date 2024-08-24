@@ -74,9 +74,8 @@ function CreatePostButton(){
 
     return(
     
-        <Link to="/">
-            <CreatePostOutter>추억 올리기</CreatePostOutter>
-        </Link>
+        <CreatePostOutter>추억 올리기</CreatePostOutter>
+        
     )
 
 

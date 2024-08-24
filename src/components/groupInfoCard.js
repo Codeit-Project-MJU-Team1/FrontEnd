@@ -22,10 +22,7 @@ const CardInfo=styled.div`
     width:1238px;
     height:273px;
 `
-
-//카드 윗 부분
-function InfoHead(){
-    const InfoHeadOutter=styled.div`
+const InfoHeadOutter=styled.div`
         display:flex;
         flex-direction:column;
         justify-content:space-between;
@@ -78,6 +75,9 @@ function InfoHead(){
         text-align: left;
 
     `
+//카드 윗 부분
+function InfoHead(){
+    
     return(
         <InfoHeadOutter>
             <InfoHeadTop>
@@ -142,9 +142,8 @@ function InfoHead(){
 }
 
 //카드 아래 부분
-function InfoFoot(){
-    
-    const InfoFootOutter=styled.div`
+
+const InfoFootOutter=styled.div`
         display:flex;
         flex-direction:column;
         justify-content:space-between;
@@ -156,8 +155,8 @@ function InfoFoot(){
         width:1238px;
         justify-content:space-between;
     `
-    function Badges(){
-        const BadgesOutter=styled.div`
+
+    const BadgesOutter=styled.div`
             display:flex;
             justify-content:start;
             height:52px;
@@ -173,6 +172,8 @@ function InfoFoot(){
 
 
         `
+    function Badges(){
+        
         return(
             <BadgesOutter>
                 <Badge></Badge>
@@ -182,7 +183,12 @@ function InfoFoot(){
             
         )
     }
+
+function InfoFoot(){
+    
+    
     return(
+        
         <InfoFootOutter>
             <div>획득 배지</div>
             <InfoFootBottom>
