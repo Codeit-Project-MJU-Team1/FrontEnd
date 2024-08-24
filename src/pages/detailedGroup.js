@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import GroupInfoCard from "../components/groupInfoCard";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import HeadSearch from "../components/headSearch";
 import Groups from "../components/groups";
 import ListLoading from "../components/listLoading";
@@ -83,11 +83,11 @@ function CreatePostButton(){
 }
 
 function DetailedGroup(){
-
+    const params = useParams()
 
     return(
         <DetailedGroupOutter>
-            <GroupInfoCard/>
+            <GroupInfoCard id={params} />
             <Line/>
             <GroupPostsHeaderOutter>
                 <DummyDiv/>

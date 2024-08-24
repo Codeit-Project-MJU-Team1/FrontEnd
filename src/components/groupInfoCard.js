@@ -200,7 +200,7 @@ function InfoFoot(){
 
 
 
-function GroupInfoCard(){
+function GroupInfoCard({id}){
 
 return(
 
