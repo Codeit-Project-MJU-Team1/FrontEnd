@@ -13,6 +13,18 @@ const CenterOutter=styled.div`
 
 function Home(){
     const [datas,setDatas]=useState();
+    const [searchValues,setSearchValues]=useState({
+        option : "latest",
+        search : "",
+    })
+    const onLoading = () =>{
+
+    }
+    const onSearch =()=> {
+
+    }
+
+
     const [middleGroups1,setMiddleGroups1]=useState([]);
     const [middleGroups2,setMiddleGroups2]=useState([]);
     const [middleGroups3,setMiddleGroups3]=useState([]);
@@ -23,13 +35,18 @@ function Home(){
     useEffect(()=>{
         
         const handleload = async () => {
+            setMiddleGroups1([]);
+            setMiddleGroups2([]);
+            setMiddleGroups3([]);
+            setMiddleGroups4([]);
+
             fetch("https://backend-b4qi.onrender.com/api/groups", {
                 method: "GET",
                 headers:{
-                    page:1,
+                    page:0,
                     pageSize:12,
-                    sortBy:"latest",
-                    isPublic:true,
+                    sortBy: searchValues.option,
+                    isPublic:false,
                 }
                 ,
             }
@@ -93,15 +110,19 @@ function Home(){
         
         
         
-    },[]);
+    },[searchValues.option]);
     
    
         return (
             
             <CenterOutter>
-                <HeadSearch/>
+                <HeadSearch searchValues={searchValues} setSearchValues={setSearchValues}/>
                 {   middleGroups1[0] &&
                     <Groups middleGroups1={middleGroups1} middleGroups2={middleGroups2} middleGroups3={middleGroups3} middleGroups4={middleGroups4}/> 
+                }
+                {
+                    middleGroups1[0] ?
+                    <></> : <div></div>
                 }
                 <ListLoading/>
             </CenterOutter>

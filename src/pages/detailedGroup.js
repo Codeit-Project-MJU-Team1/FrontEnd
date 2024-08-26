@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import HeadSearch from "../components/headSearch";
 import Groups from "../components/groups";
 import ListLoading from "../components/listLoading";
+import { useState } from "react";
 
 const DetailedGroupOutter=styled.div`
     display:flex;
@@ -82,8 +83,12 @@ function CreatePostButton(){
 }
 
 function DetailedGroup(){
+    
     const params = useParams()
-
+    const [searchValues,setSearchValues]=useState({
+        option : "latest",
+        search : "",
+    })
     return(
         <DetailedGroupOutter>
             <GroupInfoCard id={params} />
@@ -93,7 +98,7 @@ function DetailedGroup(){
                 <PostsHeadName>추억 목록</PostsHeadName>
                 <CreatePostButton/>
             </GroupPostsHeaderOutter>
-            <HeadSearch/>
+            <HeadSearch searchValues={searchValues} setSearchValues={setSearchValues}/>
             <Groups/>
             <ListLoading/>
             

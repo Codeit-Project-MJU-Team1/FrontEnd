@@ -190,9 +190,10 @@ function Toggle({onChange,value})  {
         const toggleHandler = () => {
         // isOn의 상태를 변경하는 메소드를 구현
         setisOn(!isOn)
+        onChange();
+
     };
     const DummyCheck=styled.input`
-        display:none;
     `
     return(
         <GroupReleaseInput>
@@ -204,7 +205,6 @@ function Toggle({onChange,value})  {
                     <div className={`toggle-container ${isOn ? "toggle--checked" : null}`}/>
                     <div className={`toggle-circle ${isOn ? "toggle--checked" : null}`}/>
                 </ToggleContainer>
-                <DummyCheck id="toggle" onChange={onChange} value={value} type="checkbox"></DummyCheck>
             </label>
     </GroupReleaseInput>
 
@@ -278,14 +278,14 @@ function CreateGroup(){
     );
     }
 
-    const groupReleaseHandler = (e)=>{
-        
-    setValues(
-        {...values ,
-            "isPublic": e.target.value,
-        }
-    );
-    }
+    const groupReleaseHandler = ()=>{
+        setValues(
+            {...values ,
+                "isPublic": !values.isPublic,
+            }
+            );
+            console.log(values.isPublic);
+}
 
     const groupPWHandler= (e)=>{
         
@@ -334,7 +334,7 @@ function CreateGroup(){
             const groupData={
                 "name": values.name,
                 "introduction": values.introduction,
-                "isPublic": isPublic,
+                "isPublic": values.isPublic,
                 "password": values.password,
                 "imageUrl": data.imageUrl,
             }

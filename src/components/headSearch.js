@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useState } from "react"
 import searchImg from "../images/searchImg.png";
 import { Link } from "react-router-dom";
+import MakeSelect from "./makeSelect.js";
 
 const HeadSearchOuter=styled.div`
     display: flex;
@@ -35,7 +36,7 @@ const SearchInput=styled.input`
 `
 
 //정렬선택기능: 추후 구현 필요 
-const SortSelect=styled.input`
+const SortSelect=styled(MakeSelect)`
     width: 160px;
     height: 45px;
     gap: 0px;
@@ -98,10 +99,12 @@ function Buttons(){
 }
 
 
-function HeadSearch(){
-    const [search,setSearch]= useState("");
+function HeadSearch({searchValues,setSearchValues}){
     const onChange = (e) =>{
-        setSearch(e.target.value)
+        setSearchValues({
+            ...searchValues,
+            "search" : e.target.value,
+        })
     }
 
 
@@ -115,10 +118,10 @@ function HeadSearch(){
                 <Link>
                     <SearchImg src={searchImg}/>
                 </Link>
-                <SearchInput value={search} onChange={onChange} type="text" placeholder="그룹명을 검색해주세요"/>
+                <SearchInput value={searchValues.search} onChange={onChange} type="text" placeholder="그룹명을 검색해주세요"/>
             </SearchTab>
 
-            <SortSelect/>
+            <SortSelect setSearchValues={setSearchValues} searchValues={searchValues}/>
         </HeadSearchOuter>
     );
 }
