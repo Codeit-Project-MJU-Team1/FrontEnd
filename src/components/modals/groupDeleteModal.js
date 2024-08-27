@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
 import exitIcon from "../../images/exitIcon.png";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CreateModal=styled.div`
     display:flex;
@@ -87,7 +87,7 @@ const ModalButton=styled.input`
 
 function InnerModal({setModalOpen,id}){
 
-    const nav = Navigate();
+    const nav = useNavigate();
     // POST 관련 코드
 
     const [password,setPassword]=useState("");
