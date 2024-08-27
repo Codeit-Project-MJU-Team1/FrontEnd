@@ -78,29 +78,16 @@ const InfoHeadOutter=styled.div`
         text-align: left;
 
     `
-//카드 윗 부분
-function InfoHead({id}){
-    // useEffect(()=>{
-    //     fetch("https://backend-b4qi.onrender.com/api/groups/"+id, {
-    //         method: "GET",
-    //         headers:{
-    //             "groupId": id,
-    //         }
-    //         ,
-    //     }
-    //     ).then((response) => {
-    //           if (response.ok === true) {
-    //             console.log("원본")
-    //             console.log(response)
-    //           return response.json();
-    //           }
-    //           throw new Error("에러 발생!");
-    //     }).catch((err)=>{
-    //         alert(err);
-    //     })
-    // }
 
-    // ,[])
+    const getDateDiff= (date)=>{
+        const currentDate = new Date();
+        const groupDate = new Date(date);
+        const diffDate = currentDate.getTime()-groupDate.getTime();
+        return Math.floor(Math.abs(diffDate/(1000* 60 *60* 24))) ;
+    
+    };
+//카드 윗 부분
+function InfoHead({values , id}){
     
     const [editModalOpen,setEditModalOpen]= useState(false);
     const editModalHandler = () => {
@@ -117,13 +104,13 @@ function InfoHead({id}){
             <InfoHeadTop>
                 <InfoHeadTopFrag>
                     <InfoHeadTopFragLeft>
-                        D+265
+                    D+{getDateDiff(values.updatedAt)}
                     </InfoHeadTopFragLeft>
                         <div>
                             |
                         </div>
                         <div style={{marginLeft:'15px;'}}>
-                            공개
+                        {values.isPublic ? "공개": "비공개"}
                         </div>
                 </InfoHeadTopFrag>
                 <InfoHeadTopFrag>
@@ -141,7 +128,7 @@ function InfoHead({id}){
             </InfoHeadTop>
             <InfoHeadMiddle>
                 <InfoHeadMiddleStart>
-                    달봉이네 가족
+                    {values.name}
                 </InfoHeadMiddleStart>
                 <InfoHeadMiddleEnd>
                     <InfoHeadMiddleEndFrag>
@@ -149,7 +136,7 @@ function InfoHead({id}){
                             게시글
                         </div>
                         <div>
-                            8 
+                        {values.postCount} 
                         </div>
                     </InfoHeadMiddleEndFrag>
                     <div>
@@ -160,14 +147,14 @@ function InfoHead({id}){
                             그룹 공감
                         </div>
                         <div>
-                            1.5K
+                            {values.likeCount}
                         </div>
                     </InfoHeadMiddleEndFrag>
                 </InfoHeadMiddleEnd>
                 
             </InfoHeadMiddle>
             <InfoHeadBottom>
-                서로 한마음으로 응원하고 아끼지 않는 달봉이네 가족일까요?
+            {values.introduction}
             </InfoHeadBottom>
         </InfoHeadOutter>
         <GroupEditModal modalOpen={editModalOpen} setModalOpen={setEditModalOpen} id={id}></GroupEditModal>
@@ -243,14 +230,14 @@ function InfoFoot(){
 
 
 
-function GroupInfoCard({id}){
+function GroupInfoCard({values,id}){
 
 return(
 
     <CardInfoOutter>
-        <CardImg/>
+        <CardImg src={values.imageUrl}/>
         <CardInfo>
-            <InfoHead id={id}/>
+            <InfoHead values={values} id={id}/>
             <InfoFoot/>
         </CardInfo>
     </CardInfoOutter>

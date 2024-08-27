@@ -83,8 +83,42 @@ function CreatePostButton(){
 }
 
 function DetailedGroup(){
-    
     const {id} = useParams();
+    const [values,setValues]=useState({});
+    useEffect(
+        ()=>{
+            const handleload = async () => {
+    
+                fetch("https://backend-b4qi.onrender.com/api/groups/"+id, {
+                    method: "GET",
+                    headers:{
+                        groupId:id,
+                    }
+                    ,
+                }
+                ).then((response) => {
+                      if (response.ok === true) {
+                        console.log("원본")
+                        console.log(response)
+                      return response.json();
+                      }
+                      throw new Error("에러 발생!");
+                }).catch((err)=>{
+                    alert(err);
+                }).then((data)=> {
+                    console.log("받은 데이터");
+                    console.log(data);
+                    setValues(data)
+
+                    
+                })
+            }
+            handleload();
+        }
+        ,[]
+    )
+    
+    
     const [searchValues,setSearchValues]=useState({
         option : "latest",
         search : "",
@@ -94,7 +128,7 @@ function DetailedGroup(){
     
     return(
         <DetailedGroupOutter>
-            <GroupInfoCard id={id} />
+            <GroupInfoCard values={values}id={id} />
             <Line/>
             <GroupPostsHeaderOutter>
                 <DummyDiv/>

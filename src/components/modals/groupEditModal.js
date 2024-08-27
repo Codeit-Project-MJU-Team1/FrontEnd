@@ -215,11 +215,11 @@ function InnerModal({setModalOpen,id}){
                   console.log("이미지주소")
                   console.log(data.imageUrl)
                   const groupData={
-                      "name": values.name,
-                      "introduction": values.introduction,
+                      ...(values.name && {"name": values.name}),
+                      ...(values.introduction && {"introduction": values.introduction}),
                       "isPublic": values.isPublic,
                       "password": values.password,
-                      "imageUrl": data.imageUrl,
+                      ...(data.imageUrl &&{"imageUrl": data.imageUrl}),
                   }
                   console.log(JSON.stringify(groupData))
                   
@@ -227,7 +227,8 @@ function InnerModal({setModalOpen,id}){
                       method: "PUT",
                       body: JSON.stringify(groupData),
                       headers: {
-                          "groupId": id, // application/json 타입 선언
+                          "groupId" : id, // application/json 타입 선언
+                          "Content-Type": "application/json",
                         },
                       
                   }).then((response) => {
@@ -257,7 +258,41 @@ function InnerModal({setModalOpen,id}){
                   }
               )
         }else{
+            
+                  
+                const groupData={
+                      ...(values.name && {"name": values.name}),
+                      ...(values.introduction && {"introduction": values.introduction}),
+                      "isPublic": values.isPublic,
+                      "password": values.password,
+                  }
+                  console.log(JSON.stringify(groupData))
+                  console.log("수정 전달 사항")
+                  console.log(groupData)
+                  
+                  fetch( "https://backend-b4qi.onrender.com/api/groups/"+id, {
+                      method: "PUT",
+                      body: JSON.stringify(groupData),
+                      headers: {
+                          "groupId": id, // application/json 타입 선언
+                          "Content-Type": "application/json",
+                        },
+                      
+                  }).then((response) => {
+                        console.log(response)
+                    return response.json();
 
+                  })
+                  .then((data) => {
+                      
+                    console.log("결과");
+                    console.log(data);
+                    alert(data?.message)
+                    setDatas(data);
+                          
+      
+                      
+                  });
         }
         
 
