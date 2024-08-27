@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import HeadSearch from "../components/headSearch";
 import Groups from "../components/groups";
 import ListLoading from "../components/listLoading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const DetailedGroupOutter=styled.div`
     display:flex;
@@ -84,14 +84,17 @@ function CreatePostButton(){
 
 function DetailedGroup(){
     
-    const params = useParams()
+    const {id} = useParams();
     const [searchValues,setSearchValues]=useState({
         option : "latest",
         search : "",
     })
+    console.log("id")
+    console.log(id);
+    
     return(
         <DetailedGroupOutter>
-            <GroupInfoCard id={params} />
+            <GroupInfoCard id={id} />
             <Line/>
             <GroupPostsHeaderOutter>
                 <DummyDiv/>

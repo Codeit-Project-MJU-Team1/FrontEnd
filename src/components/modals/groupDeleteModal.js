@@ -1,51 +1,9 @@
 import { useRef, useState } from "react";
 import styled from "styled-components";
 import exitIcon from "../../images/exitIcon.png";
+import { Navigate } from "react-router-dom";
 
-
-
-function InnerModal({setModalOpen}){
-    // POST 관련 코드
-    // const [isComplete,setIsComplete]=useState();
-    // const [img,setImg]=useState();
-    const checkSignUp = (e) => {
-        e.preventDefault();
-        // const formData = new FormData();
-        // formData.append("image", img);
-        // console.log("보내기전");
-        // console.log(img);
-      
-    //     fetch("https://backend-b4qi.onrender.com/api/image", {
-    //       method: "POST",
-    //       body: formData,
-          
-    //     })
-    //       .then((response) => {
-    //         if (response.ok === true) {
-    //           return response.json();
-              
-    //         }
-    //         setIsComplete(false);
-    //         // setModal(true);
-    //         throw new Error("에러 발생!");
-    //       })
-    //       .catch((error) => {
-    //         alert(error);
-    //       })
-    //       .then((data) => {
-    //         console.log(data);
-    //         alert("성공적으로 수정이 완료되었습니다.");
-    //         setIsComplete(true);
-    //         // setModal(true);
-            
-    //       });
-          };
-    
-    // const [verifyModal,setVerifyModal]=useState(); 
-
-
-    
-    const CreateModal=styled.div`
+const CreateModal=styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -127,6 +85,56 @@ const ModalButton=styled.input`
 
 `
 
+function InnerModal({setModalOpen,id}){
+
+    const nav = Navigate();
+    // POST 관련 코드
+
+    const [password,setPassword]=useState("");
+    const checkSignUp = (e) => {
+        e.preventDefault();
+        
+        console.log("삭제확인")
+        console.log(id);
+        console.log(password);
+        const passwordData={
+            "password": password, 
+        }
+        fetch("https://backend-b4qi.onrender.com/api/groups/"+id, {
+          method: "DELETE",
+          headers:{
+                "Content-Type" : "application/json",
+                "groupId" : id ,
+          },
+          body: JSON.stringify(passwordData),
+          
+        })
+          .then((response) => {
+            if (response.status === 200 || response.status === 400 || response.status === 403) {
+                console.log(response);
+              return response.json();
+            }            
+            console.log(response);
+            throw new Error("에러 발생!");
+          })
+          .catch((error) => {
+            alert(error);
+          })
+          .then((data) => {
+            console.log(data?.message);
+            alert(data?.message);
+            nav("/");
+            
+            
+          });
+          };
+    
+    // const [verifyModal,setVerifyModal]=useState(); 
+
+
+    
+    
+
 
     
         return(
@@ -139,7 +147,7 @@ const ModalButton=styled.input`
                         <InputOutter>
                             <GroupPWOutter>
                                 <Headname>삭제 권한 인증</Headname>
-                                <GroupPW type="Password" placeholder="비밀번호를 입력해 주세요"></GroupPW>
+                                <GroupPW type="Password" onChange={(e)=>setPassword(e.target.value)} value={password} placeholder="비밀번호를 입력해 주세요"></GroupPW>
                                 </GroupPWOutter>
                             <ModalButton onClick={checkSignUp} type="submit" value="만들기"></ModalButton>
                         </InputOutter>
@@ -152,7 +160,7 @@ const ModalButton=styled.input`
 } 
 
 
-function GroupDeleteModal({modalOpen,setModalOpen}){
+function GroupDeleteModal({modalOpen,setModalOpen,id}){
     
     const modalBackground = useRef();
 
@@ -181,7 +189,7 @@ function GroupDeleteModal({modalOpen,setModalOpen}){
             //   }
             // }
               >
-                <InnerModal setModalOpen={setModalOpen}></InnerModal>
+                <InnerModal setModalOpen={setModalOpen} id={id}></InnerModal>
 
             </ModalContainer>
             }

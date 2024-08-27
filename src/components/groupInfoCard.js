@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import LikeButton from "./likeButton.js";
+import { useState } from "react";
+import GroupEditModal from "./modals/groupEditModal.js";
+import GroupDeleteModal from "./modals/groupDeleteModal.js";
 
 const CardInfoOutter=styled.div`
     display:flex;
@@ -76,9 +79,40 @@ const InfoHeadOutter=styled.div`
 
     `
 //카드 윗 부분
-function InfoHead(){
+function InfoHead({id}){
+    // useEffect(()=>{
+    //     fetch("https://backend-b4qi.onrender.com/api/groups/"+id, {
+    //         method: "GET",
+    //         headers:{
+    //             "groupId": id,
+    //         }
+    //         ,
+    //     }
+    //     ).then((response) => {
+    //           if (response.ok === true) {
+    //             console.log("원본")
+    //             console.log(response)
+    //           return response.json();
+    //           }
+    //           throw new Error("에러 발생!");
+    //     }).catch((err)=>{
+    //         alert(err);
+    //     })
+    // }
+
+    // ,[])
     
+    const [editModalOpen,setEditModalOpen]= useState(false);
+    const editModalHandler = () => {
+        setEditModalOpen(true)
+    }
+    const [deleteModalOpen,setDeleteModalOpen]= useState(false);
+    const deleteModalHandler = () => {
+        setDeleteModalOpen(true)
+    }
+
     return(
+        <>
         <InfoHeadOutter>
             <InfoHeadTop>
                 <InfoHeadTopFrag>
@@ -94,12 +128,12 @@ function InfoHead(){
                 </InfoHeadTopFrag>
                 <InfoHeadTopFrag>
                     <InfoHeadTopFragLeft>
-                        <Link>
+                        <Link onClick={editModalHandler}>
                         그룹 정보 수정하기
                         </Link>
                     </InfoHeadTopFragLeft>
                     <div style={{marginLeft: '25px'}}>
-                        <Link>
+                        <Link onClick={deleteModalHandler}>
                         그룹 삭제하기
                         </Link>
                     </div>
@@ -136,6 +170,9 @@ function InfoHead(){
                 서로 한마음으로 응원하고 아끼지 않는 달봉이네 가족일까요?
             </InfoHeadBottom>
         </InfoHeadOutter>
+        <GroupEditModal modalOpen={editModalOpen} setModalOpen={setEditModalOpen} id={id}></GroupEditModal>
+        <GroupDeleteModal modalOpen={deleteModalOpen} setModalOpen={setDeleteModalOpen} id={id}></GroupDeleteModal>
+        </>
         
     )
 
@@ -213,7 +250,7 @@ return(
     <CardInfoOutter>
         <CardImg/>
         <CardInfo>
-            <InfoHead/>
+            <InfoHead id={id}/>
             <InfoFoot/>
         </CardInfo>
     </CardInfoOutter>
