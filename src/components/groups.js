@@ -48,55 +48,55 @@ const MiddleGroups=styled.div`
 `
 
 
-function Test(){
+function Test({searchValues}){
     return(
         <>
              <MiddleGroups>
                 <SmallGroups>
-                        <GroupCard/>
-                        <GroupCard/>
+                        <GroupCard searchValues={searchValues}/>
+                        <GroupCard searchValues={searchValues}/>
                         <TestSmallGroup3/>
                 </SmallGroups>
                 <SmallGroups>
                         <TestSmallGroup2/>
-                        <GroupCard/>
-                        <GroupCard/>
-                </SmallGroups>
-            </MiddleGroups>
-            <MiddleGroups>
-                <SmallGroups>
-                        <TestSmallGroup2/>
-                        <GroupCard/>
-                        <TestSmallGroup3/>
-                </SmallGroups>
-                <SmallGroups>
-                        <GroupCard/>
-                        <TestSmallGroup2/>
-                        <GroupCard/>
+                        <GroupCard searchValues={searchValues}/>
+                        <GroupCard searchValues={searchValues}/>
                 </SmallGroups>
             </MiddleGroups>
             <MiddleGroups>
                 <SmallGroups>
-                        <TestSmallGroup3/>
                         <TestSmallGroup2/>
+                        <GroupCard searchValues={searchValues}/>
                         <TestSmallGroup3/>
                 </SmallGroups>
                 <SmallGroups>
+                        <GroupCard searchValues={searchValues}/>
                         <TestSmallGroup2/>
-                        <TestSmallGroup3/>
-                        <GroupCard/>
+                        <GroupCard searchValues={searchValues}/>
                 </SmallGroups>
             </MiddleGroups>
             <MiddleGroups>
                 <SmallGroups>
-                        <GroupCard/>
+                        <TestSmallGroup3/>
+                        <TestSmallGroup2/>
+                        <TestSmallGroup3/>
+                </SmallGroups>
+                <SmallGroups>
+                        <TestSmallGroup2/>
+                        <TestSmallGroup3/>
+                        <GroupCard searchValues={searchValues}/>
+                </SmallGroups>
+            </MiddleGroups>
+            <MiddleGroups>
+                <SmallGroups>
+                        <GroupCard searchValues={searchValues}/>
                         <TestSmallGroup2/>
                         <TestSmallGroup3/>
                 </SmallGroups>
                 <SmallGroups>
                         <TestSmallGroup3/>
                         <TestSmallGroup2/>
-                        <GroupCard/>
+                        <GroupCard searchValues={searchValues}/>
                 </SmallGroups>
             </MiddleGroups>
         </>
@@ -106,7 +106,7 @@ function Test(){
 
 
 
-function Groups({middleGroups1,middleGroups2,middleGroups3,middleGroups4}){
+function Groups({middleGroups1,middleGroups2,middleGroups3,middleGroups4,searchValues}){
     console.log("전달된 데이터");
     console.log(middleGroups1)
     console.log(middleGroups2)
@@ -117,25 +117,25 @@ function Groups({middleGroups1,middleGroups2,middleGroups3,middleGroups4}){
             <MiddleGroups>
                 {middleGroups1 && middleGroups1.map((group)=>{
                     console.log(group.id)
-                    return <GroupCard key={group.id} group={group}/>
+                    return <GroupCard searchValues={searchValues} key={group.id} group={group}/>
                 })}
             </MiddleGroups>
             <MiddleGroups>
                 {middleGroups2 && middleGroups2.map((group)=>{
                     console.log(group.id)
-                    return <GroupCard key={group.id} group={group}/>
+                    return <GroupCard searchValues={searchValues} key={group.id} group={group}/>
                 })}
             </MiddleGroups>
             <MiddleGroups>
                 {middleGroups3 && middleGroups3.map((group)=>{
                     console.log(group.id)
-                    return <GroupCard key={group.id} group={group}/>
+                    return <GroupCard searchValues={searchValues} key={group.id} group={group}/>
                 })}
             </MiddleGroups>
             <MiddleGroups>
                 {middleGroups4 && middleGroups4.map((group)=>{
                     console.log(group.id)
-                    return <GroupCard key={group.id} group={group}/>
+                    return <GroupCard searchValues={searchValues} key={group.id} group={group}/>
                 })}
             </MiddleGroups>
         </GroupsOutter>

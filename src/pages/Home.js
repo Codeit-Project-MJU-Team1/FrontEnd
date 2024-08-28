@@ -40,17 +40,16 @@ function Home(){
             setMiddleGroups2([]);
             setMiddleGroups3([]);
             setMiddleGroups4([]);
-            console.log(searchValues.isPublic)
+            console.log("공개여부");
+            console.log(searchValues.isPublic);
+            console.log("공개여부 이후");
 
             fetch("https://backend-b4qi.onrender.com/api/groups", {
                 method: "GET",
-                headers:{
-                    page:0,
-                    pageSize:12,
-                    sortBy: searchValues.option,
-                    isPublic:searchValues.isPublic,
-                }
-                ,
+                page:0,
+                pageSize:12,
+                sortBy: searchValues.option,
+                isPublic:searchValues.isPublic,
             }
             ).then((response) => {
                   if (response.ok === true) {
@@ -109,6 +108,7 @@ function Home(){
             })
         }
         handleload();
+        console.log(searchValues.isPublic);
         
         
         
@@ -118,9 +118,9 @@ function Home(){
         return (
             
             <CenterOutter>
-                <HeadSearch searchValues={searchValues} setSearchValues={setSearchValues}/>
+                <HeadSearch searchValues={searchValues} setSearchValues={setSearchValues} verifyValue={middleGroups1[0]}/>
                 {   middleGroups1[0] &&
-                    <Groups middleGroups1={middleGroups1} middleGroups2={middleGroups2} middleGroups3={middleGroups3} middleGroups4={middleGroups4}/> 
+                    <Groups searchValues={searchValues} middleGroups1={middleGroups1} middleGroups2={middleGroups2} middleGroups3={middleGroups3} middleGroups4={middleGroups4}/> 
                 }
                 {
                     middleGroups1[0] ?

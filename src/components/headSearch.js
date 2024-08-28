@@ -53,7 +53,9 @@ const SearchImg=styled.img`
 
 function Buttons({onHandler,offHandler}){
     console.log(typeof searchValues);
+    
     const [isPublic,setIsPublic] =useState(true);
+    
     const onPublic = (e)=>{ 
         setIsPublic(true);
         onHandler();

@@ -38,18 +38,22 @@ const MiddelInfo=styled.div`
     width:335px;
     gap:10px;
 `
-const GroupName=styled.div`
+const GroupName=styled(Link)`
     font-size: 16px;
     font-weight: 700;
     letter-spacing: -0.03em;
     text-align: left;
+    color:#282828;
+    text-decoration:none;
 
 `
-const GroupExplain=styled.div`
+const GroupExplain=styled(Link)`
     font-size: 16px;
     font-weight: 400;
     letter-spacing: -0.03em;
     text-align: left;
+    color:#282828;
+    text-decoration:none;
 
 `
 
@@ -87,13 +91,16 @@ const getDateDiff= (date)=>{
 
 
 
-function GroupCard({group}){
+function GroupCard({searchValues,group}){
     
     return(
         <GroupCardOutter>
+            { group.isPublic &&
             <Link to={"/group/"+group?.id} >
                 <GroupImg src={group.imageUrl}/>
             </Link>
+            }
+            
             
             <InfoOutter>
                 <TopInfo>
@@ -108,10 +115,10 @@ function GroupCard({group}){
                     </div>
                 </TopInfo>
                 <MiddelInfo>
-                    <GroupName>
+                    <GroupName to={"/group/"+group?.id}>
                     {group.name}
                     </GroupName>
-                    <GroupExplain>
+                    <GroupExplain to={"/group/"+group?.id}>
                     {group.introduction}
                     </GroupExplain>
                 </MiddelInfo>
