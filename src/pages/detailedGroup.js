@@ -5,6 +5,8 @@ import HeadSearch from "../components/headSearch";
 import Groups from "../components/groups";
 import ListLoading from "../components/listLoading";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 
 const DetailedGroupOutter=styled.div`
     display:flex;
@@ -83,18 +85,18 @@ function CreatePostButton(){
 }
 
 function DetailedGroup(){
+    //그룹 만들기 버튼 on/off
+    const { setIsCreateButton }=useContext(GroupCreateContext);
+    setIsCreateButton(false);
+
     const {id} = useParams();
     const [values,setValues]=useState({});
     useEffect(
         ()=>{
             const handleload = async () => {
     
-                fetch("https://backend-b4qi.onrender.com/api/groups/"+id, {
+                fetch(`https://backend-b4qi.onrender.com/api/groups/${id}?groupId=${id}`, {
                     method: "GET",
-                    headers:{
-                        groupId:id,
-                    }
-                    ,
                 }
                 ).then((response) => {
                       if (response.ok === true) {

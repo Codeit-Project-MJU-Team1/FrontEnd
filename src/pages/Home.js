@@ -3,6 +3,8 @@ import HeadSearch from "../components/headSearch.js";
 import Groups from "../components/groups.js";
 import ListLoading from "../components/listLoading.js";
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 
 const CenterOutter=styled.div`
     display:flex;
@@ -12,11 +14,17 @@ const CenterOutter=styled.div`
 
 
 function Home(){
+    //그룹 만들기 버튼 on/off
+    const { setIsCreateButton }=useContext(GroupCreateContext);
+    setIsCreateButton(true);
+
+
     const [datas,setDatas]=useState();
     const [searchValues,setSearchValues]=useState({
         option : "latest",
         search : "",
         isPublic: true,
+        keyword:"",
     })
     const onLoading = () =>{
 
@@ -44,12 +52,8 @@ function Home(){
             console.log(searchValues.isPublic);
             console.log("공개여부 이후");
 
-            fetch("https://backend-b4qi.onrender.com/api/groups", {
+            fetch(`https://backend-b4qi.onrender.com/api/groups?page=${0}&pageSize=${12}&sortBy=${encodeURIComponent(searchValues.option)}${ searchValues.keyword ? "&keyword="+encodeURIComponent(searchValues.keyword): "" }&isPublic=${searchValues.isPublic}`, {
                 method: "GET",
-                page:0,
-                pageSize:12,
-                sortBy: searchValues.option,
-                isPublic:searchValues.isPublic,
             }
             ).then((response) => {
                   if (response.ok === true) {
@@ -112,7 +116,7 @@ function Home(){
         
         
         
-    },[searchValues.option,searchValues.isPublic]);
+    },[searchValues.option,searchValues.isPublic,searchValues.keyword]);
     
    
         return (

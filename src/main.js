@@ -6,6 +6,10 @@ import CreateGroup from "./pages/createGroup.js";
 import DetailedGroup from "./pages/detailedGroup.js";
 import Test from "./pages/Test.js";
 import PrivateGroupAccess from "./pages/privateGroupAccess.js";
+import { createContext, useState } from "react";
+import { GroupCreateContext } from "./components/contexts/groupCreateContext.js";
+
+
 
 const MainBackground =styled.div`
     background-color:#FAFAFA;
@@ -15,18 +19,23 @@ const MainBackground =styled.div`
 
 
 function Main(){
+
+    const [isCreateButton,setIsCreateButton]= useState(false);
+    
     return(
         <MainBackground>
-                <BrowserRouter>
-                    <App/>
-                    <Routes>
-                        <Route path="/" Component={Home}/>
-                        <Route path="/createGroup" Component={CreateGroup}/>
-                        <Route path="/privateGroupAccess" Component={PrivateGroupAccess}/>
-                        <Route path="/group/:id" Component={DetailedGroup}/>
-                        <Route path="/Test" Component={Test}/>
-                    </Routes>
-                </BrowserRouter>
+            <GroupCreateContext.Provider value={{isCreateButton,setIsCreateButton}}>
+                    <BrowserRouter>
+                        <App/>
+                        <Routes>
+                            <Route path="/" Component={Home}/>
+                            <Route path="/createGroup" Component={CreateGroup}/>
+                            <Route path="/privateGroupAccess" Component={PrivateGroupAccess}/>
+                            <Route path="/group/:id" Component={DetailedGroup}/>
+                            <Route path="/Test" Component={Test}/>
+                        </Routes>
+                    </BrowserRouter>
+                </GroupCreateContext.Provider>
         </MainBackground>
     );
 };

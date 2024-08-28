@@ -223,11 +223,10 @@ function InnerModal({setModalOpen,id}){
                   }
                   console.log(JSON.stringify(groupData))
                   
-                  fetch( "https://backend-b4qi.onrender.com/api/groups/"+id, {
+                  fetch( `https://backend-b4qi.onrender.com/api/groups/${id}?groupId=${id}`, {
                       method: "PUT",
                       body: JSON.stringify(groupData),
                       headers: {
-                          "groupId" : id, // application/json 타입 선언
                           "Content-Type": "application/json",
                         },
                       

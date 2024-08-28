@@ -1,16 +1,10 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
+import { useContext } from "react";
+import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 
-const NavDiv =styled.div`
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    background-color:#FAFAFA;
-    width:1920px;
-    height:100px;
-    
-`
+
 const DummyDiv=styled.div`
     width: 200px;
     height: 45px;
@@ -44,7 +38,7 @@ const CreateGroupButton =styled.div`
 
 `
 function CreateGroupOutter(){
-   
+    
         
 
     return(
@@ -60,11 +54,22 @@ function CreateGroupOutter(){
 
 
 function Nav(){
+    const {isCreateButton}=useContext(GroupCreateContext);
+    const NavDiv =styled.div`
+    display:flex;
+    ${isCreateButton?"justify-content:space-between;" : "justify-content:center;" }
+    align-items:center;
+    background-color:#FAFAFA;
+    width:1920px;
+    height:100px;
+    
+    `
+    
     return (
     <NavDiv>
-        <DummyDiv/>
+        { isCreateButton && <DummyDiv/>}
         <Link to="/"><LogoImg src={logo}></LogoImg></Link>
-        <CreateGroupOutter/>
+        { isCreateButton && <CreateGroupOutter/>}
     </NavDiv>);
 }
 

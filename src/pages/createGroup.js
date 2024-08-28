@@ -3,6 +3,8 @@ import { useState } from "react";
 import CreateGroupModal from "../components/modals/createGroupModal";
 import Toggle from "../components/toggle";
 import ImgInput from "../components/imgInput";
+import { useContext } from "react";
+import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 
 const CenterOutter=styled.div`
     display:flex;
@@ -131,6 +133,11 @@ const Submit =styled.input`
 
 
 function CreateGroup(){
+    //그룹 만들기 버튼 on/off
+    const { setIsCreateButton }=useContext(GroupCreateContext);
+    setIsCreateButton(false);
+
+
     const [modal,setModal]=useState();
     const [datas,setDatas]=useState();
     const [isPublic,setIsPublic]=useState(false);

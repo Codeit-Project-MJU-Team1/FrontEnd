@@ -124,17 +124,14 @@ function HeadSearch({searchValues,setSearchValues}){
         
     }
 
-
-    // 검색 그룹 필터링 함수
-    // const filterGroups = **받아온 그룹 배열**.filter((g)=>{ return g.**그룹이름프로퍼티**.toLoclaeLowerCase().includes(search.toLoclaeLowerCase())})
-
     return(
         <HeadSearchOuter>
             <Buttons onHandler={onHandler} offHandler={offHandler}/>
             <SearchTab>
-                <Link>
-                    <SearchImg src={searchImg}/>
-                </Link>
+                <SearchImg onClick={()=>{setSearchValues({
+                    ...searchValues,
+                    "keyword":searchValues.search,
+                })}} src={searchImg}/>
                 <SearchInput value={searchValues?.search} onChange={onChange} type="text" placeholder="그룹명을 검색해주세요"/>
             </SearchTab>
 

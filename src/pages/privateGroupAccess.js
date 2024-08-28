@@ -2,6 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import PrivateAccessFailModal from "../components/modals/privateAccessFailModal";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 
 
 
@@ -94,6 +96,10 @@ const PrivateGroupAccessBackground = styled.div`
 
 
 function PrivateGroupAccess(){
+    //그룹 만들기 버튼 on/off
+    const { setIsCreateButton }=useContext(GroupCreateContext);
+    setIsCreateButton(false);
+
     const navigate=useNavigate();
     const[modal,setModal]=useState(false);
     const [password,setPassword]=useState("");

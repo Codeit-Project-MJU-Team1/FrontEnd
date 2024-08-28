@@ -100,11 +100,10 @@ function InnerModal({setModalOpen,id}){
         const passwordData={
             "password": password, 
         }
-        fetch("https://backend-b4qi.onrender.com/api/groups/"+id, {
+        fetch(`https://backend-b4qi.onrender.com/api/groups/${id}?groupId=${id}`, {
           method: "DELETE",
           headers:{
                 "Content-Type" : "application/json",
-                "groupId" : id ,
           },
           body: JSON.stringify(passwordData),
           
