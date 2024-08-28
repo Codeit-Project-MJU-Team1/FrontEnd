@@ -51,16 +51,17 @@ const SearchImg=styled.img`
 
 `
 
-function Buttons(){
-    
+function Buttons({onHandler,offHandler}){
+    console.log(typeof searchValues);
     const [isPublic,setIsPublic] =useState(true);
     const onPublic = (e)=>{ 
         setIsPublic(true);
-        console.log("True");
+        onHandler();
     }
     const onPrivate = (e)=>{ 
         setIsPublic(false);
         console.log("false");
+        offHandler();
     }
 
 
@@ -106,6 +107,20 @@ function HeadSearch({searchValues,setSearchValues}){
             "search" : e.target.value,
         })
     }
+    const onHandler= ()=>{
+        setSearchValues({
+            ...searchValues,
+            "isPublic":true,
+        })
+
+    }
+    const offHandler= ()=>{
+        setSearchValues({
+            ...searchValues,
+            "isPublic":false,
+        })
+        
+    }
 
 
     // 검색 그룹 필터링 함수
@@ -113,12 +128,12 @@ function HeadSearch({searchValues,setSearchValues}){
 
     return(
         <HeadSearchOuter>
-            <Buttons/>
+            <Buttons onHandler={onHandler} offHandler={offHandler}/>
             <SearchTab>
                 <Link>
                     <SearchImg src={searchImg}/>
                 </Link>
-                <SearchInput value={searchValues.search} onChange={onChange} type="text" placeholder="그룹명을 검색해주세요"/>
+                <SearchInput value={searchValues?.search} onChange={onChange} type="text" placeholder="그룹명을 검색해주세요"/>
             </SearchTab>
 
             <SortSelect setSearchValues={setSearchValues} searchValues={searchValues}/>

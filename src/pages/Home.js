@@ -16,6 +16,7 @@ function Home(){
     const [searchValues,setSearchValues]=useState({
         option : "latest",
         search : "",
+        isPublic: true,
     })
     const onLoading = () =>{
 
@@ -39,6 +40,7 @@ function Home(){
             setMiddleGroups2([]);
             setMiddleGroups3([]);
             setMiddleGroups4([]);
+            console.log(searchValues.isPublic)
 
             fetch("https://backend-b4qi.onrender.com/api/groups", {
                 method: "GET",
@@ -46,7 +48,7 @@ function Home(){
                     page:0,
                     pageSize:12,
                     sortBy: searchValues.option,
-                    isPublic:false,
+                    isPublic:searchValues.isPublic,
                 }
                 ,
             }
@@ -110,7 +112,7 @@ function Home(){
         
         
         
-    },[searchValues.option]);
+    },[searchValues.option,searchValues.isPublic]);
     
    
         return (
