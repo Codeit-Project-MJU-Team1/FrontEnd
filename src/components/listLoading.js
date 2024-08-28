@@ -14,10 +14,15 @@ const ListLoadingButton = styled.button`
     letter-spacing: -0.03em;
     text-align: center;
 `
-function ListLoading(){
+function ListLoading({isLoadingButton,onLoadingClick}){
 
     return(
-        <ListLoadingButton>더보기</ListLoadingButton>
+        <>
+            { isLoadingButton &&
+                <ListLoadingButton onClick={onLoadingClick}>더보기</ListLoadingButton>
+            }
+        </>
+        
     )
 }
 
