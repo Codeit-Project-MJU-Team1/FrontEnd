@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const GroupCardOutter= styled.div`
+const PostCardOutter= styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -14,7 +14,7 @@ const GroupCardOutter= styled.div`
     border-radius: 12px;
 
 `
-const GroupImg= styled.img`
+const PostImg= styled.img`
     width:335px;
     height:335px;
     
@@ -38,7 +38,7 @@ const MiddelInfo=styled.div`
     width:335px;
     gap:10px;
 `
-const GroupName=styled(Link)`
+const PostName=styled(Link)`
     font-size: 16px;
     font-weight: 700;
     letter-spacing: -0.03em;
@@ -47,7 +47,7 @@ const GroupName=styled(Link)`
     text-decoration:none;
 
 `
-const GroupExplain=styled(Link)`
+const PostExplain=styled(Link)`
     font-size: 16px;
     font-weight: 400;
     letter-spacing: -0.03em;
@@ -83,21 +83,21 @@ const BottomFragValue=styled.div`
 
 const getDateDiff= (date)=>{
     const currentDate = new Date();
-    const groupDate = new Date(date);
-    const diffDate = currentDate.getTime()-groupDate.getTime();
+    const PostDate = new Date(date);
+    const diffDate = currentDate.getTime()-PostDate.getTime();
     return Math.floor(Math.abs(diffDate/(1000* 60 *60* 24))) ;
 
 };
 
 
 
-function GroupCard({group}){
+function PostCard({Post}){
     
     return(
-        <GroupCardOutter>
-            { group.isPublic &&
-            <Link to={"/group/"+group?.id} >
-                <GroupImg src={group.imageUrl}/>
+        <PostCardOutter>
+            { Post.isPublic &&
+            <Link to={"/Post/"+Post?.id} >
+                <PostImg src={Post.imageUrl}/>
             </Link>
             }
             
@@ -105,22 +105,23 @@ function GroupCard({group}){
             <InfoOutter>
                 <TopInfo>
                     <div>
-                        D+{getDateDiff(group.createdAt)}
+                        D+{getDateDiff(Post.createdAt)}
                     </div>
                     <div>
                         |
                     </div>
                     <div>
-                        {group.isPublic ? "공개": "비공개"}
+                        {Post
+                        .isPublic ? "공개": "비공개"}
                     </div>
                 </TopInfo>
                 <MiddelInfo>
-                    <GroupName to={"/group/"+group?.id}>
-                    {group.name}
-                    </GroupName>
-                    <GroupExplain to={"/group/"+group?.id}>
-                    {group.introduction}
-                    </GroupExplain>
+                    <PostName to={"/Post/"+Post?.id}>
+                    {Post.name}
+                    </PostName>
+                    <PostExplain to={"/Post/"+Post?.id}>
+                    {Post.introduction}
+                    </PostExplain>
                 </MiddelInfo>
                 <BottomInfo>
                     
@@ -131,17 +132,17 @@ function GroupCard({group}){
                     
                     <BottomFrag>
                         <BottomInfoHeader>추억</BottomInfoHeader>
-                        <BottomFragValue>{group.postCount}</BottomFragValue>
+                        <BottomFragValue>{Post.postCount}</BottomFragValue>
                     </BottomFrag>
                     <BottomFrag>
                         <BottomInfoHeader>그룹 공감</BottomInfoHeader>
-                        <BottomFragValue>{group.likeCount}</BottomFragValue>
+                        <BottomFragValue>{Post.likeCount}</BottomFragValue>
                     </BottomFrag>
                 </BottomInfo>
             </InfoOutter>
-        </GroupCardOutter>
+        </PostCardOutter>
     );
 
 }
 
-export default GroupCard;
+export default PostCard;

@@ -7,8 +7,9 @@ import ListLoading from "../components/listLoading";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
+import Posts from "../components/posts.js";
 
-const DetailedGroupOutter=styled.div`
+const DetailedPostOutter=styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -91,6 +92,8 @@ function DetailedGroup(){
 
     const {id} = useParams();
     const [values,setValues]=useState({});
+
+    //그룹 상세 제반사항 로딩
     useEffect(
         ()=>{
             const handleload = async () => {
@@ -120,28 +123,210 @@ function DetailedGroup(){
         ,[]
     )
     
+    //그룹 내 추억 로딩
     
-    const [searchValues,setSearchValues]=useState({
+    const [isLoadingButton,setIsLoadingButton]=useState(false);
+    const [postsValues,setPostsValues]=useState({
         option : "latest",
         search : "",
+        isPublic: true,
+        keyword:"",
+        page:0,
     })
-    console.log("id")
-    console.log(id);
+    const onLoadingClick = () =>{
+        
+        fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/posts?page=${postsValues.page}&pageSize=${12}&sortBy=${encodeURIComponent(postsValues.option)}${ postsValues.keyword ? "&keyword="+encodeURIComponent(postsValues.keyword): "" }&isPublic=${postsValues.isPublic}`, {
+            method: "GET",
+        }
+        ).then((response) => {
+              if (response.ok === true) {
+                console.log("원본")
+                console.log(response)
+              return response.json();
+              }
+              throw new Error("에러 발생!");
+        }).catch((err)=>{
+            alert(err);
+        }).then((data)=> {
+            console.log("받은 데이터");
+            console.log(data);
+            
+            if(data[0]){
+                
+                data.map((group)=>{
+                    console.log("map 속")
+                    console.log(group)
+                    if(data.indexOf(group)%4===0){ // 배열이 불려온 순서(인덱스)에 따라 순서배치
+                        setMiddlePosts1((prevPosts)=>{
+                            return [...prevPosts,group];
+
+                        }
+                            
+                        )
+                        console.log(middlePosts1)
+                    }else if(data?.indexOf(group)%4===1){
+                        setMiddlePosts2(
+                            (prevPosts)=>{
+                                return [...prevPosts,group];
+    
+                            }
+                        )
+                        console.log(middlePosts2)
+                    }else if(data?.indexOf(group)%4===2){
+                        setMiddlePosts3(
+                            (prevPosts)=>{
+                                return [...prevPosts,group];
+    
+                            }
+                        )
+                        console.log(middlePosts3)
+                    }else if(data?.indexOf(group)%4===3){
+                        setMiddlePosts4(
+                            (prevPosts)=>{
+                                return [...prevPosts,group];
+    
+                            }
+                        )
+                        console.log(middlePosts4)
+                    }
+                })
+                if(!middlePosts4[-1]){
+                    setIsLoadingButton(false)
+                    setPostsValues({
+                        ...postsValues,
+                        "page" : 0,
+                    })
+                    return; // 마지막 로딩에서 그룹 로딩이 꽉안찼을 경우
+                }
+                setPostsValues({
+                    ...postsValues,
+                    "page" : postsValues?.page + 1,
+                }) 
+            }else{
+                setIsLoadingButton(false)
+                setPostsValues({
+                    ...postsValues,
+                    "page" : 0,
+                }) //로딩된 데이터가 없는 경우
+            }
+            
+        })
+    }
+    const handleload = async () => {
+        
+
+        fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/posts?page=${0}&pageSize=${12}&sortBy=${encodeURIComponent(postsValues.option)}${ postsValues.keyword ? "&keyword="+encodeURIComponent(postsValues.keyword): "" }&isPublic=${postsValues.isPublic}`, {
+            method: "GET",
+        }
+        ).then((response) => {
+              if (response.ok === true) {
+                console.log("원본")
+                console.log(response)
+              return response.json();
+              }
+              throw new Error("에러 발생!");
+        }).catch((err)=>{
+            alert(err);
+        }).then((data)=> {
+            console.log("받은 데이터");
+            console.log(data);
+            
+            if(data[0]){
+                
+                data?.map((post)=>{
+                    console.log("map 속")
+                    console.log(post)
+                    if(data.indexOf(post)%4===0){ // 배열이 불려온 순서(인덱스)에 따라 순서배치
+                        setMiddlePosts1((prevPosts)=>{
+                            return [...prevPosts,post];
+
+                        }
+                            
+                        )
+                        console.log(middlePosts1)
+                    }else if(data?.indexOf(post)%4===1){
+                        setMiddlePosts2(
+                            (prevPosts)=>{
+                                return [...prevPosts,post];
+    
+                            }
+                        )
+                        console.log(middlePosts2)
+                    }else if(data?.indexOf(post)%4===2){
+                        setMiddlePosts3(
+                            (prevPosts)=>{
+                                return [...prevPosts,post];
+    
+                            }
+                        )
+                        console.log(middlePosts3)
+                    }else if(data?.indexOf(post)%4===3){
+                        setMiddlePosts4(
+                            (prevPosts)=>{
+                                return [...prevPosts,post];
+    
+                            }
+                        )
+                        
+                    }
+                })
+                setIsLoadingButton(true);
+                setPostsValues({
+                    ...postsValues,
+                    "page" : 1,
+                })
+            }else{
+                setIsLoadingButton(false)
+            }
+            
+        })
+    }
+
+    const [middlePosts1,setMiddlePosts1]=useState([]);
+    const [middlePosts2,setMiddlePosts2]=useState([]);
+    const [middlePosts3,setMiddlePosts3]=useState([]);
+    const [middlePosts4,setMiddlePosts4]=useState([]);
+    if(middlePosts1[0] == false){
+        console.log("홈시작")
+    }
+
+
+    
+        
+    
+    
+    useEffect(()=>{
+        setPostsValues({
+            ...postsValues,
+            "page":0,
+        })
+        setMiddlePosts1([]);
+        setMiddlePosts2([]);
+        setMiddlePosts3([]);
+        setMiddlePosts4([]);
+        
+        
+        handleload();
+        console.log(postsValues.isPublic);
+        
+        
+        
+    },[postsValues.option,postsValues.keyword,postsValues.isPublic]);
     
     return(
-        <DetailedGroupOutter>
-            <GroupInfoCard values={values}id={id} />
+        <DetailedPostOutter>
+            <GroupInfoCard values={values} id={id} />
             <Line/>
             <GroupPostsHeaderOutter>
                 <DummyDiv/>
                 <PostsHeadName>추억 목록</PostsHeadName>
                 <CreatePostButton/>
             </GroupPostsHeaderOutter>
-            <HeadSearch searchValues={searchValues} setSearchValues={setSearchValues}/>
-            <Groups/>
-            <ListLoading/>
+            <HeadSearch searchValues={postsValues} setSearchValues={setPostsValues}/>
+            <Posts middlePosts1={middlePosts1} middlePosts2={middlePosts2} middlePosts3={middlePosts3} middlePosts4={middlePosts4} postsValues={postsValues}/>
+            <ListLoading isLoadingButton={isLoadingButton} onLoadingClick={onLoadingClick}/>
             
-        </DetailedGroupOutter>
+        </DetailedPostOutter>
     )
 }
 
