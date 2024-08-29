@@ -118,17 +118,20 @@ function GroupCard({group}){
                     <GroupName to={"/group/"+group?.id}>
                     {group.name}
                     </GroupName>
-                    <GroupExplain to={"/group/"+group?.id}>
+                    { group.isPublic &&
+                        <GroupExplain to={"/group/"+group?.id}>
+                    
                     {group.introduction}
                     </GroupExplain>
+                    }
                 </MiddelInfo>
                 <BottomInfo>
-                    
+                { group.isPublic &&
                     <BottomFrag>
                         <BottomInfoHeader>획득배지</BottomInfoHeader>
-                        <BottomFragValue>{3}</BottomFragValue>
+                        <BottomFragValue>{group?.badges.length}</BottomFragValue>
                     </BottomFrag>
-                    
+                }
                     <BottomFrag>
                         <BottomInfoHeader>추억</BottomInfoHeader>
                         <BottomFragValue>{group.postCount}</BottomFragValue>
