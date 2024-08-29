@@ -3,6 +3,7 @@ import styled from "styled-components";
 import exitIcon from "../../images/exitIcon.png"
 import Toggle from "../toggle";
 import ImgInput from "../imgInput";
+import { useNavigate } from "react-router-dom";
 
 const CreateModal=styled.div`
     display:flex;
@@ -147,10 +148,43 @@ function InnerModal({setModalOpen,id}){
     // 이전 값 관련 
     
     const [datas,setDatas]=useState();
-    const [isPublic,setIsPublic]=useState(false);
     const [isComplete,setIsComplete]=useState();
     const [values,setValues] =useState({});
     const [img,setImg]=useState();
+    const navigate =useNavigate();
+    
+    
+
+    useEffect(()=>{
+        const handleload = async () => {
+    
+            fetch(`https://backend-b4qi.onrender.com/api/groups/${id}?groupId=${id}`, {
+                method: "GET",
+            }
+            ).then((response) => {
+                  if (response.ok === true) {
+                    console.log("원본")
+                    console.log(response)
+                  return response.json();
+                  }
+                  throw new Error("에러 발생!");
+            }).catch((err)=>{
+                alert(err);
+            }).then((data)=> {
+                console.log("받은 데이터");
+                console.log({...data});
+                setValues({...data,
+                    "password":"",
+                });
+
+                
+            })
+        }
+        handleload();  
+        }
+
+    ,[])
+
     const groupNameHandler= (e)=>{
         setValues(
             {...values ,
@@ -215,43 +249,49 @@ function InnerModal({setModalOpen,id}){
                   console.log("이미지주소")
                   console.log(data.imageUrl)
                   const groupData={
-                      ...(values.name && {"name": values.name}),
-                      ...(values.introduction && {"introduction": values.introduction}),
-                      "isPublic": values.isPublic,
-                      "password": values.password,
-                      ...(data.imageUrl &&{"imageUrl": data.imageUrl}),
+                    "imageUrl": data.imageUrl,
+                    "name": values.name,
+                    "introduction": values.introduction,
+                    "isPublic": values.isPublic,
+                    "password": values.password,
                   }
                   console.log(JSON.stringify(groupData))
                   
-                  fetch( `https://backend-b4qi.onrender.com/api/groups/${id}?groupId=${id}`, {
-                      method: "PUT",
-                      body: JSON.stringify(groupData),
-                      headers: {
-                          "Content-Type": "application/json",
-                        },
-                      
-                  }).then((response) => {
-                      if (response.ok === true) {
+                  fetch( "https://backend-b4qi.onrender.com/api/groups/"+id, {
+                    method: "PUT",
+                    body: JSON.stringify(groupData),
+                    headers: {
+                        "groupId": id, // application/json 타입 선언
+                        "Content-Type": "application/json",
+                      },
+                    
+                }).then((response) => {
+                  if (response.ok === true) {
+                  
+                      console.log(response)
                       return response.json();
-                      
+                    
                       }
-                      console.log(response.ok);
+                      console.log("실패시 응답");
+                      console.log(response)
                       setIsComplete(response.ok);
-                      
-                      return;
-                      
-                  })
-                  .catch((error) => {
-                      alert(error);
-                  })
-                  .then((data) => {
-                      if(data){
-                          console.log("결과");
-                          console.log(data);
-                          setDatas(data);
-                          
-      
+                      throw new Error(response.status);
+                        
+                    }).catch((err)=>{
+                      if(err =="Error: 403"){
+                          alert("비밀번호가 일치하지 않습니다.")
+                      }else if(err == "Error: 404"){
+                          alert("존재하지 않는 그룹입니다.")
                       }
+                    })
+                  .then((data) => {
+                        if(data){
+                            console.log("결과");
+                            console.log(data);
+                            setDatas(data);
+                            alert("수정이 완료 되었습니다.")
+                            navigate(`/group/${id}`);
+                        }
                   });
                       
                   }
@@ -260,10 +300,11 @@ function InnerModal({setModalOpen,id}){
             
                   
                 const groupData={
-                      ...(values.name && {"name": values.name}),
-                      ...(values.introduction && {"introduction": values.introduction}),
-                      "isPublic": values.isPublic,
-                      "password": values.password,
+                    "imageUrl": values.imageUrl,
+                    "name": values.name,
+                    "introduction": values.introduction,
+                    "isPublic": values.isPublic,
+                    "password": values.password,
                   }
                   console.log(JSON.stringify(groupData))
                   console.log("수정 전달 사항")
@@ -278,70 +319,85 @@ function InnerModal({setModalOpen,id}){
                         },
                       
                   }).then((response) => {
+                    if (response.ok === true) {
+                    
                         console.log(response)
-                    return response.json();
-
-                  })
-                  .then((data) => {
+                        return response.json();
                       
-                    console.log("결과");
-                    console.log(data);
-                    alert(data?.message)
-                    setDatas(data);
+                        }
+                        console.log("실패시 응답");
+                        console.log(response)
+                        setIsComplete(response.ok);
+                        throw new Error(response.status);
+                          
+                      }).catch((err)=>{
+                        if(err =="Error: 403"){
+                            alert("비밀번호가 일치하지 않습니다.")
+                        }else if(err == "Error: 404"){
+                            alert("존재하지 않는 그룹입니다.")
+                        }
+                      }).then((data) => {
+                        if(data){
+                        console.log("결과");
+                        console.log(data);
+                        setDatas(data);
+                        alert("수정이 완료 되었습니다.")
+                        navigate(`/group/${id}`);
+                        }
+                        
                           
       
                       
                   });
         }
         
-
+        
         
       };
     
     // const [verifyModal,setVerifyModal]=useState(); 
 
-
-    
-    
-
-
-    
-        return(
+    return(
                 
-                <CreateModal>
-                    <ModalOffButton src={exitIcon} onClick={()=>setModalOpen(false)}>
+        <CreateModal>
+            <ModalOffButton src={exitIcon} onClick={()=>setModalOpen(false)}>
 
-                    </ModalOffButton>
-                    <ModalName>그룹 정보 수정</ModalName>
-                <InputOutter>
-                <GroupNameOutter>
-                    <Headname>그룹명</Headname>
-                    <GroupNameInput type="text" value={values.name} onChange={groupNameHandler} placeholder="그룹명을 입력해 주세요"/>
-                </GroupNameOutter>
-                <RepresentImgOutter>
-                    <Headname>대표 이미지</Headname>
-                    <ImgInput image={img} onChange={setImg}></ImgInput>
+            </ModalOffButton>
+            <ModalName>그룹 정보 수정</ModalName>
+        <InputOutter>
+        <GroupNameOutter>
+            <Headname>그룹명</Headname>
+            <GroupNameInput type="text" value={values.name} onChange={groupNameHandler} placeholder="그룹명을 입력해 주세요"/>
+        </GroupNameOutter>
+        <RepresentImgOutter>
+            <Headname>대표 이미지</Headname>
+            <ImgInput image={img} onChange={setImg}></ImgInput>
 
-                </RepresentImgOutter>
-                <GruopIntroOutter>
-                    <Headname>그룹 소개</Headname>
-                    <GroupIntroInput onChange={groupIntroHandler} value={values.introduction} placeholder="그룹을 소개해주세요"></GroupIntroInput>
-                </GruopIntroOutter>
-                <GroupReleaseOutter>
-                    <Headname >그룹 공개 선택</Headname>
-                    <Toggle onChange={groupReleaseHandler} value={values.isPublic} ></Toggle>
-                </GroupReleaseOutter>
-                <GroupPWOutter>
-                    <Headname>수정 권한 인증</Headname>
-                    <GroupPW type="Password" onChange={groupPWHandler} value={values.password} placeholder="비밀번호를 입력해 주세요"></GroupPW>
-                </GroupPWOutter>
-                <ModalButton onClick={checkSignUp} type="submit" value="수정하기"></ModalButton>
-            </InputOutter>
-            {/* <CreateGroupModal modalOpen={verifyModal} setModalOpen={setVerifyModal} isComplete={isComplete}></CreateGroupModal> */}
-            </CreateModal>
-            
-        )
+        </RepresentImgOutter>
+        <GruopIntroOutter>
+            <Headname>그룹 소개</Headname>
+            <GroupIntroInput onChange={groupIntroHandler} value={values.introduction} placeholder="그룹을 소개해주세요"></GroupIntroInput>
+        </GruopIntroOutter>
+        <GroupReleaseOutter>
+            <Headname >그룹 공개 선택</Headname>
+            <Toggle onChange={groupReleaseHandler} value={values.isPublic} ></Toggle>
+        </GroupReleaseOutter>
+        <GroupPWOutter>
+            <Headname>수정 권한 인증</Headname>
+            <GroupPW type="Password" onChange={groupPWHandler} value={values.password} placeholder="비밀번호를 입력해 주세요"></GroupPW>
+        </GroupPWOutter>
+        <ModalButton onClick={checkSignUp} type="submit" value="수정하기"></ModalButton>
+    </InputOutter>
+    {/* <CreateGroupModal modalOpen={verifyModal} setModalOpen={setVerifyModal} isComplete={isComplete}></CreateGroupModal> */}
+    </CreateModal>
     
+)
+    
+    
+
+
+    
+        
     
 } 
 

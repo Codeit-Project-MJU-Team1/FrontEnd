@@ -57,12 +57,12 @@ function Toggle({onChange,value})  {
     return(
         <GroupReleaseInput>
             <GroupReleaselabel>
-                {isOn ? "공개" : "비공개"}
+                {value ? "공개" : "비공개"}
             </GroupReleaselabel>
             <label htmlFor="toggle">
                 <ToggleContainer onClick={toggleHandler}>
-                    <div className={`toggle-container ${isOn ? "toggle--checked" : null}`}/>
-                    <div className={`toggle-circle ${isOn ? "toggle--checked" : null}`}/>
+                    <div className={`toggle-container ${value ? "toggle--checked" : null}`}/>
+                    <div className={`toggle-circle ${value ? "toggle--checked" : null}`}/>
                 </ToggleContainer>
             </label>
     </GroupReleaseInput>
