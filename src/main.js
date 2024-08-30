@@ -8,6 +8,7 @@ import Test from "./pages/Test.js";
 import PrivateGroupAccess from "./pages/privateGroupAccess.js";
 import { createContext, useState } from "react";
 import { GroupCreateContext } from "./components/contexts/groupCreateContext.js";
+import CreatePost from "./pages/createPost.js";
 
 
 
@@ -32,7 +33,9 @@ function Main(){
                             <Route path="/createGroup" Component={CreateGroup}/>
                             <Route path="/privateGroupAccess" Component={PrivateGroupAccess}/>
                             <Route path="/group/:id" Component={DetailedGroup}/>
+                            <Route path="/createPost/:id" Component={CreatePost}/>
                             <Route path="/Test" Component={Test}/>
+                            
                         </Routes>
                     </BrowserRouter>
                 </GroupCreateContext.Provider>

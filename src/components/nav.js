@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
 import { useContext } from "react";
-import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
+import { GroupCreateContext } from "./contexts//groupCreateContext.js";
 
 
 const DummyDiv=styled.div`

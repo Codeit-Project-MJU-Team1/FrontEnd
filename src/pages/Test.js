@@ -4,6 +4,8 @@ import PrivateAccessFailModal from "../components/modals/privateAccessFailModal"
 import { useState } from "react";
 import GroupEditModal from "../components/modals/groupEditModal";
 import GroupDeleteModal from "../components/modals/groupDeleteModal";
+import CreatePost from "./createPost";
+
 const TestOuter=styled.div`
     display:flex;
     align-items:center;
@@ -16,11 +18,7 @@ function Test(){
     const [test,setTest]=useState(true);
 
     return(
-        <TestOuter>
-            {/* <GroupEditModal 
-            modalOpen={test} setModalOpen={setTest}></GroupEditModal> */}
-            <GroupDeleteModal modalOpen={test} setModalOpen={setTest} ></GroupDeleteModal>
-        </TestOuter>
+        <CreatePost></CreatePost>
     )
 }
 

@@ -51,7 +51,7 @@ const PostsHeadName=styled.h1`
 `
 
 
-function CreatePostButton(){
+function CreatePostButton({id}){
 
     const CreatePostOutter =styled.div`
     display:flex;
@@ -77,8 +77,10 @@ function CreatePostButton(){
         
 
     return(
-    
-        <CreatePostOutter>추억 올리기</CreatePostOutter>
+        <Link to={`/createPost/${id}`}>
+            <CreatePostOutter>추억 올리기</CreatePostOutter>
+        </Link>
+        
         
     )
 
@@ -320,7 +322,7 @@ function DetailedGroup(){
             <GroupPostsHeaderOutter>
                 <DummyDiv/>
                 <PostsHeadName>추억 목록</PostsHeadName>
-                <CreatePostButton/>
+                <CreatePostButton id={id}/>
             </GroupPostsHeaderOutter>
             <HeadSearch searchValues={postsValues} setSearchValues={setPostsValues}/>
             <Posts middlePosts1={middlePosts1} middlePosts2={middlePosts2} middlePosts3={middlePosts3} middlePosts4={middlePosts4} postsValues={postsValues}/>
