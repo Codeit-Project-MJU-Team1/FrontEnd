@@ -36,7 +36,7 @@ const InputOutter=styled.div`
     gap:40px;
 `
 const Line=styled.div`
-    width:1px;
+    width:2px;
     height:100%;
     background-color:#DDDDDD;
 `
