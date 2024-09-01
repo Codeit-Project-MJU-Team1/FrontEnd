@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import PrivateAccessFailModal from "../components/modals/privateAccessFailModal";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 
@@ -99,18 +99,36 @@ function PrivateGroupAccess(){
     //그룹 만들기 버튼 on/off
     const { setIsCreateButton }=useContext(GroupCreateContext);
     setIsCreateButton(false);
+    const {id}= useParams();
 
     const navigate=useNavigate();
     const[modal,setModal]=useState(false);
     const [password,setPassword]=useState("");
 
     const clickHandle= ()=>{
-        if(password ==""){
-            navigate('/group:');
-        }else{
-            setModal(true);
+        const PostData= {
+            "password": password,
         }
-
+        fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/verify-password`, {
+            method: "Post",
+            body: JSON.stringify(PostData),
+            headers: {
+                "Content-Type": `application/json`, // application/json 타입 선언
+                "groupId": id,
+                },
+        }
+        ).then((response) => {
+              if (response.ok === true) {
+                console.log("원본")
+                console.log(response)
+                navigate('/group/'+id, { state :  {
+                    isAuthentic : true,
+                }});
+              }
+              throw new Error("에러 발생!");
+        }).catch((err)=>{
+            setModal(true);
+        })
     }
     const passwordHandle= (e)=>{
         setPassword(e.target.value);

@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import GroupInfoCard from "../components/groupInfoCard";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import HeadSearch from "../components/headSearch";
 import Groups from "../components/groups";
 import ListLoading from "../components/listLoading";
@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 import Posts from "../components/posts.js";
+import { KeyContext } from "../components/contexts/keyContext.js";
 
 const DetailedPostOutter=styled.div`
     display:flex;
@@ -91,13 +92,28 @@ function DetailedGroup(){
     //그룹 만들기 버튼 on/off
     const { setIsCreateButton }=useContext(GroupCreateContext);
     setIsCreateButton(false);
-
+    const { setKey ,key } = useContext(KeyContext);
     const {id} = useParams();
     const [values,setValues]=useState({});
+
+    const location= useLocation();
+    const navigate = useNavigate();
 
     //그룹 상세 제반사항 로딩
     useEffect(
         ()=>{
+            
+            if(key || location.state?.isPublic){
+                
+            }else{
+                setKey(location.state?.isAuthentic);
+                if(key){
+                    
+                }else{
+                    navigate(`/`);
+                }
+                
+            }
             const handleload = async () => {
     
                 fetch(`https://backend-b4qi.onrender.com/api/groups/${id}?groupId=${id}`, {

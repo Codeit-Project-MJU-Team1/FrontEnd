@@ -5,6 +5,7 @@ import ListLoading from "../components/listLoading.js";
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
+import { KeyContext } from "../components/contexts/keyContext.js";
 
 const CenterOutter=styled.div`
     display:flex;
@@ -18,6 +19,8 @@ function Home(){
     const { setIsCreateButton }=useContext(GroupCreateContext);
     setIsCreateButton(true);
 
+    // const {setKey} = useContext(KeyContext);
+    // setKey(false)
 
     const [datas,setDatas]=useState();
     const [isLoadingButton,setIsLoadingButton]=useState(false);

@@ -68,7 +68,10 @@ const ModalButton=styled.button`
                         그룹이 성공적으로 등록되었습니다.
                     </ModalExplain>
                     <ModalButton onClick={()=>{setModalOpen(false);
-                        navigate("/group/"+data.id);
+                        navigate('/group/'+data.id, { state :  {
+                            isAuthentic : true,
+                            isPublic: data.isPublic,
+                        }});
                     }} >확인</ModalButton>
                 </CreatModal>
             

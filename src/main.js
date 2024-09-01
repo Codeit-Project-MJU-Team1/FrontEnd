@@ -10,7 +10,7 @@ import { createContext, useState } from "react";
 import { GroupCreateContext } from "./components/contexts/groupCreateContext.js";
 import CreatePost from "./pages/createPost.js";
 import DetailedPost from "./pages/detailedPost.js";
-
+import { KeyContext } from "./components/contexts/keyContext.js";
 
 
 const MainBackground =styled.div`
@@ -23,22 +23,25 @@ const MainBackground =styled.div`
 function Main(){
 
     const [isCreateButton,setIsCreateButton]= useState(false);
+    const [key,setKey]= useState(""); 
     
     return(
         <MainBackground>
             <GroupCreateContext.Provider value={{isCreateButton,setIsCreateButton}}>
+            <KeyContext.Provider value={{key,setKey}}>
                     <BrowserRouter>
                         <App/>
                         <Routes>
                             <Route path="/" Component={Home}/>
                             <Route path="/createGroup" Component={CreateGroup}/>
-                            <Route path="/privateGroupAccess" Component={PrivateGroupAccess}/>
+                            <Route path="/privateGroupAccess/:id" Component={PrivateGroupAccess}/>
                             <Route path="/group/:id" Component={DetailedGroup}/>
                             <Route path="/createPost/:id" Component={CreatePost}/>
-                            <Route path="/Test" Component={Test}/>
                             <Route path="/group/:id/post/:postId" Component={DetailedPost}/>
+                            <Route path="/Test" Component={Test}/>
                         </Routes>
                     </BrowserRouter>
+                    </KeyContext.Provider>
                 </GroupCreateContext.Provider>
         </MainBackground>
     );

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../images/logo.png";
 import { useContext } from "react";
 import { GroupCreateContext } from "./contexts//groupCreateContext.js";
+import { KeyContext } from "../components/contexts/keyContext.js";
 
 
 const DummyDiv=styled.div`
@@ -37,10 +38,10 @@ const CreateGroupButton =styled.div`
 
 
 `
+
 function CreateGroupOutter(){
     
-        
-
+    
     return(
     
         <Link to="/createGroup">

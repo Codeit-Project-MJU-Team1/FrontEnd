@@ -115,9 +115,16 @@ function GroupCard({group}){
                     </div>
                 </TopInfo>
                 <MiddelInfo>
+                    {group.isPublic ?
                     <GroupName to={"/group/"+group?.id}>
-                    {group.name}
+                    {group.name} 
                     </GroupName>
+                    :
+                    <GroupName to={"/privateGroupAccess/"+group?.id}>
+                    {group.name} 
+                    </GroupName>
+                    }
+                    
                     { group.isPublic &&
                         <GroupExplain to={"/group/"+group?.id}>
                     

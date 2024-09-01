@@ -210,10 +210,12 @@ function CreateGroup(){
             const groupData={
                 "name": values.name,
                 "introduction": values.introduction,
-                "isPublic": values.isPublic,
+                "isPublic": values.isPublic ? true: false,
                 "password": values.password,
                 "imageUrl": data.imageUrl,
             }
+            
+            console.log("보내기전")
             console.log(JSON.stringify(groupData))
             
             fetch( "https://backend-b4qi.onrender.com/api/groups", {
