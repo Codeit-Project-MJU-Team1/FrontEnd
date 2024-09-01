@@ -111,13 +111,12 @@ function PostCard({Post}){
                         |
                     </div>
                     <div>
-                        {Post
-                        .isPublic ? "공개": "비공개"}
+                        {Post.isPublic ? "공개": "비공개"}
                     </div>
                 </TopInfo>
                 <MiddelInfo>
                     <PostName to={"/Post/"+Post?.id}>
-                    {Post.name}
+                    {Post.title}
                     </PostName>
                     <PostExplain to={"/Post/"+Post?.id}>
                     {Post.introduction}

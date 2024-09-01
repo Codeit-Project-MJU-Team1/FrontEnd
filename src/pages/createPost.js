@@ -7,6 +7,7 @@ import { useContext } from "react";
 import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 import { useParams } from "react-router-dom";
 import exitIcon from "../images/exitIcon.png";
+import PostUploadModal from "../components/modals/postUploadModal.js";
 
 const CenterOutter=styled.div`
     display:flex;
@@ -302,75 +303,15 @@ const PostMomentHandler= (e)=>{
         formImage.append("image", img);
         console.log("보내기전");
         console.log(formImage);
-        
-      
-        fetch("https://backend-b4qi.onrender.com/api/image", {
-          method: "POST",
-          body: formImage,
-          
-        }).then((response) => {
-            if (response.ok === true) {
-            return response.json();
-            
-            }
-            setIsComplete(false);
-            throw new Error("에러 발생!");
-        })
-        .catch((error) => {
-            alert(error);
-        }).then( (data) => {
-            console.log("이미지주소")
-            console.log(data.imageUrl)
-            const PostData={
-                "nickname": values.nickname,
-                "title": values.title,
-                "content": values.content,
-                "postPassword": values.postPassword,
-                "groupPassword": values.password,
-                "imageUrl": data.imageUrl,
+        setValues(
+            {
+                ...values,
                 "tags": tags,
-                "location": values.location,
-                "moment": "2024-08-15",
-                "isPublic": values.isPublic,
-            }
-            console.log(JSON.stringify(PostData))
-            
-            fetch( `https://backend-b4qi.onrender.com/api/groups/${id}/posts?groupId=${id}`, {
-                method: "POST",
-                body: JSON.stringify(PostData),
-                headers: {
-                    "Content-Type": `application/json`, // application/json 타입 선언
-                    "groupId": id,
-                  },
-                
-            }).then((response) => {
-                if (response.ok === true) {
-                return response.json();
-                
-                }
-                console.log(response.ok);
-                setIsComplete(response.ok);
-                console.log(response)
-                return;
-                
-            })
-            .catch((error) => {
-                alert(error);
-            })
-            .then((data) => {
-                if(data){
-                    console.log("결과");
-                    console.log(data);
-                    setIsComplete(true);
-                    setModal(true);
-                    setDatas(data)
-                    
-
-                }
-            });
-                
             }
         )
+        setModal(true);
+      
+        
 
         
       };
@@ -440,7 +381,7 @@ const PostMomentHandler= (e)=>{
             </InputOutter>
             </InputOutters>
             <Submit onClick={checkSignUp} type="submit" value="올리기"></Submit>
-            {/* <CreatePostModal modalOpen={modal} setModalOpen={setModal} isComplete={isComplete} data={datas}></CreatePostModal> */}
+            <PostUploadModal modalOpen={modal} id={id} setModalOpen={setModal} uploadData={values} img={img}></PostUploadModal>
         </CenterOutter>
         
     )

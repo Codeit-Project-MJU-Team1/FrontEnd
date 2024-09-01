@@ -148,7 +148,7 @@ function InnerModal({setModalOpen,id}){
                                 <Headname>삭제 권한 인증</Headname>
                                 <GroupPW type="Password" onChange={(e)=>setPassword(e.target.value)} value={password} placeholder="비밀번호를 입력해 주세요"></GroupPW>
                                 </GroupPWOutter>
-                            <ModalButton onClick={checkSignUp} type="submit" value="만들기"></ModalButton>
+                            <ModalButton onClick={checkSignUp} type="submit" value="삭제하기"></ModalButton>
                         </InputOutter>
                     {/* <CreateGroupModal modalOpen={verifyModal} setModalOpen={setVerifyModal} isComplete={isComplete}></CreateGroupModal> */}
                 </CreateModal>
