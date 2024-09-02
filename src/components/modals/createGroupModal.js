@@ -59,7 +59,7 @@ const ModalButton=styled.button`
 
     if(verify==true){
         return(
-            <>
+        
                 <CreatModal>
                     <ModalName>
                         그룹 만들기 성공
@@ -75,11 +75,11 @@ const ModalButton=styled.button`
                     }} >확인</ModalButton>
                 </CreatModal>
             
-            </>
+            
         )
     }else{
         return(
-            <>
+
                 <CreatModal>
                 <ModalName>
                         그룹 만들기 실패
@@ -90,7 +90,7 @@ const ModalButton=styled.button`
                     <ModalButton onClick={()=>setModalOpen(false)} >확인</ModalButton>
                 </CreatModal>
             
-            </>
+        
         )
     }
     

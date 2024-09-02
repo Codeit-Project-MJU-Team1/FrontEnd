@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import CreateGroupModal from "../components/modals/createGroupModal";
 import Toggle from "../components/toggle";
 import ImgInput from "../components/imgInput";
@@ -7,10 +7,12 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 import { useParams } from "react-router-dom";
-import ReplyIcon from "../images/ReplyIcon.png";
-import ReplyModifyIcon from "../images/ReplyModifyIcon.png";
-import ReplyDelete from "../images/ReplyDelete.png";
+import CommentIcon from "../images/commentIcon.png";
+import CommentModifyIcon from "../images/commentModifyIcon.png";
+import CommentDelete from "../images/commentDelete.png";
 import Icon from "../images/size16.png";
+import PostEditModal from "../components/modals/postEditModal.js";
+import PostDeleteModal from "../components/modals/postDeleteModal.js";
 
 const DetailedPostOutter=styled.div`
     width:1560px;
@@ -43,7 +45,9 @@ const TopInfo=styled.div`
     
 `
 const ReleaseOutter=styled.div`
-    display:flex;   
+    display:flex; 
+    font-size: 16px;
+    font-weight: 400;
     gap:20px; 
 `
 const EditorName=styled.div`
@@ -51,7 +55,7 @@ const EditorName=styled.div`
 `
 
 const Release=styled.div`
-    font-color:#B8B8B8;
+    font-color:#8D8D8D;
 `
 
 const Title=styled.div`
@@ -176,7 +180,7 @@ const PostContent=styled.div`
     text-align: left;
 
 `
-const ReplyButton=styled.div`
+const CommentButton=styled.div`
     display:flex;
     justify-content:center;
     align-items:center;
@@ -192,35 +196,35 @@ const ReplyButton=styled.div`
 
 `
 
-const ReplysOutter = styled.div`
+const CommentsOutter = styled.div`
     margin-top:80px;
     width:1510px;
     
 `
-const ReplyHeader = styled.div`
+const CommentHeader = styled.div`
 
     font-size: 18px;
     font-weight: 500;
     text-align: left;
 
 `
-const ReplysLine =styled.div`
+const CommentsLine =styled.div`
     margin-top:10px;
     width:100%;
     height:1px;
     background-color: #282828;
 `
-const ReplyList= styled.div`
+const CommentList= styled.div`
     margin-top:30px;
     gap:20px;
 `
-const ReplyOutter= styled.div`
+const CommentOutter= styled.div`
     display:flex;
     flex-direction:column;
     align-items:start;
 `
 
-const ReplyTopOutter=styled.div`
+const CommentTopOutter=styled.div`
     display:flex;
     gap:10px;
     font-size: 16px;
@@ -228,33 +232,33 @@ const ReplyTopOutter=styled.div`
     text-align: left;
     font-color:#B8B8B8;
 `
-const ReplyUser=styled.div`
+const CommentUser=styled.div`
 
 
 `
-const ReplyInfo=styled.div`
+const CommentInfo=styled.div`
     font-weight: 400;
     font-color:#B8B8B8;
 
 `
-const ReplyBottom=styled.div`
+const CommentBottom=styled.div`
     display:flex;
     width:100%;
     justify-content:space-between;
     margin-top:16px;
 `
-const ReplyCentent=styled.div`
+const CommentCentent=styled.div`
 
 `
-const ReplyModifyButtons=styled.div`
+const CommentModifyButtons=styled.div`
     gap:20px;
 `
-const ReplyModifyButton=styled.img`
+const CommentModifyButton=styled.img`
     width:20px;
     height:20px;
 `
 
-const ReplyLine= styled.div`
+const CommentLine= styled.div`
     margin-top:19px;
     width:100%;
     height:1px;
@@ -264,11 +268,59 @@ const ReplyLine= styled.div`
 
 
 function DetailedPost(){
+    const {id,postId} = useParams();
+    const [values,setValues]=useState({});
+    const [editModalOpen, setEditModalOpen] =useState(false);
+    const [deleteModalOpen,setDeleteModalOpen]=useState(false);
+    const date =new Date(values.createdAt);
     const { setIsCreateButton }=useContext(GroupCreateContext);
     setIsCreateButton(false);
 
-    const {id,postId} = useParams();
-    const [values,setValues]=useState({});
+    
+
+    useEffect(
+        ()=>{
+            
+            // if(key || location.state?.isPublic){
+                
+            // }else{
+            //     setKey(location.state?.isAuthentic);
+            //     if(key){
+                    
+            //     }else{
+            //         navigate(`/`);
+            //     }
+                
+            // }
+            const handleload = async () => {
+    
+                fetch(`https://backend-b4qi.onrender.com/api/posts/${postId}?postId=${postId}`, {
+                    method: "GET",
+                }
+                ).then((response) => {
+                      if (response.ok === true) {
+                        console.log("원본")
+                        console.log(response)
+                      return response.json();
+                      }
+                      throw new Error("에러 발생!");
+                }).catch((err)=>{
+                    alert(err);
+                }).then((data)=> {
+                    if(data){
+                        console.log("받은 데이터");
+                        console.log(data);
+                        setValues(data);
+                    }
+                    
+                    
+                })
+
+            }
+            handleload();
+        }
+        ,[]
+    )
 
 
     return(
@@ -277,33 +329,41 @@ function DetailedPost(){
                 <PostHeaderStart>
                     <TopInfo>
                         <ReleaseOutter>
-                            <EditorName>달봉이아들</EditorName><Release>| 공개</Release>
+                        <EditorName>{values.nickname}</EditorName><Release>|    {values.isPublic? "공개":"비공개"}</Release>
                         </ReleaseOutter>
                         <Title>
-                            인천 앞바다에서 무려 60cm 월척을 낚다!
+                            {values.content}
                         </Title>
                         <Tags>
-                            #인천
+                        {
+                        values.tags?.map((tag)=>{
+                            return(
+                                <div>
+                                    {`#${tag}`}
+                                </div>
+                            )
+                        })
+                    }
                         </Tags>
                     </TopInfo>
                     <BottomInfo>
                         <PostEnv>
-                           인천 앞바다 ·  24.01.19  18:00
+                           {`${values?.location}  ·  ${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`}  {date.getTime}:{date.getMinutes}
                         </PostEnv>
                         <PostResOutter>
                             <Link>
                                 <PostRes>
                                     <PostResImg src={Icon}/>
                                     <div>
-                                        120
+                                        {values.likeCount}
                                     </div>
                                 </PostRes>
                             </Link>
                             <Link>
                                 <PostRes>
-                                    <PostResImg src={ReplyIcon}/>
+                                    <PostResImg src={CommentIcon}/>
                                     <div>
-                                        120
+                                    {values.commentCount}
                                     </div>
                                 </PostRes>
                             </Link>
@@ -312,12 +372,18 @@ function DetailedPost(){
                 </PostHeaderStart>
                 <PostHeaderEnd>
                     <PostModifyOutter>
+                        <Link onClick={()=> setEditModalOpen(true)}>
                         <PostEdit>
                             추억 수정하기
                         </PostEdit>
+                        </Link>
+                        <Link onClick={()=> setDeleteModalOpen(true)}>
                         <PostDelete>
                             추억 삭제하기
                         </PostDelete>
+                        </Link>
+                        
+                        
                     </PostModifyOutter>
                     <Link>
                         <LikeButton>
@@ -332,56 +398,51 @@ function DetailedPost(){
             </PostHeaderOutter>
             <TopLine/>
             <PostOutter>
-                <PostImg/>
+                <PostImg src={values.imageUrl}/>
                 <PostContent>
-                    인천 앞바다에서 월척을 낚았습니다!
-                    가족들과 기억에 오래도록 남을 멋진 하루였어요 가족들과 기억에 오래도록 남을 멋진 하루였어요 가족들과 기억에 오래도록 남을 멋진 하루였어요
-
-                    인천 앞바다에서 월척을 낚았습니다!
-                    가족들과 기억에 오래도록 남을 멋진 하루였어요
-
-                    인천 앞바다에서 월척을 낚았습니다!
+                    {values.content}
                 </PostContent>
             </PostOutter>
             <Link>
-                <ReplyButton>
+                <CommentButton>
                     댓글 등록하기
-                </ReplyButton>
+                </CommentButton>
             </Link>
-            <ReplysOutter>
-                <ReplyHeader>
-                    댓글 8
-                </ReplyHeader>
-                <ReplysLine/>
-                <ReplyList>
-                    <ReplyOutter>
-                        <ReplyTopOutter>
-                            <ReplyUser>
+            <CommentsOutter>
+                <CommentHeader>
+                    댓글 {values.commentCount}
+                </CommentHeader>
+                <CommentsLine/>
+                <CommentList>
+                    <CommentOutter>
+                        <CommentTopOutter>
+                            <CommentUser>
                                 다람이네가족
-                            </ReplyUser>
-                            <ReplyInfo>
+                            </CommentUser>
+                            <CommentInfo>
                                 24.01.18  21:50
-                            </ReplyInfo>
-                        </ReplyTopOutter>
-                        <ReplyBottom>
-                            <ReplyCentent>
+                            </CommentInfo>
+                        </CommentTopOutter>
+                        <CommentBottom>
+                            <CommentCentent>
                                 우와 60cm이라니..!! 저도 가족들과 가봐야겠어요~
-                            </ReplyCentent>
-                            <ReplyModifyButtons>
-                                <ReplyModifyButton src={ReplyModifyIcon}>
+                            </CommentCentent>
+                            <CommentModifyButtons>
+                                <CommentModifyButton src={CommentModifyIcon}>
 
-                                </ReplyModifyButton>
-                                <ReplyModifyButton src={ReplyDelete}>
+                                </CommentModifyButton>
+                                <CommentModifyButton src={CommentDelete}>
                                     
-                                </ReplyModifyButton>
-                            </ReplyModifyButtons>
-                        </ReplyBottom>
-                        <ReplyLine/>
-                    </ReplyOutter>
-                </ReplyList>
-            </ReplysOutter>
+                                </CommentModifyButton>
+                            </CommentModifyButtons>
+                        </CommentBottom>
+                        <CommentLine/>
+                    </CommentOutter>
+                </CommentList>
+            </CommentsOutter>
             
-            
+            <PostEditModal modalOpen={editModalOpen} setModalOpen={setEditModalOpen} postId={postId} postValues={values}></PostEditModal>
+            <PostDeleteModal modalOpen={deleteModalOpen} setModalOpen={setDeleteModalOpen} postId={postId}></PostDeleteModal>
         </DetailedPostOutter>
 
     )

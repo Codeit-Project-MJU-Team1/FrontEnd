@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import ReplyIcon from "../images/ReplyIcon.png";
+import commentIcon from "../images/commentIcon.png";
 import Icon from "../images/size16.png";
 const PostCardOutter= styled.div`
     display:flex;
@@ -168,7 +168,7 @@ function PostCard({Post,id}){
                             </Link>
                             <Link>
                                 <PostRes>
-                                    <PostResImg src={ReplyIcon}/>
+                                    <PostResImg src={commentIcon}/>
                                     <div>
                                         {Post.commentCount}
                                     </div>

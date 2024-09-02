@@ -177,9 +177,6 @@ function CreatePost(){
 
 
     const [modal,setModal]=useState();
-    const [datas,setDatas]=useState();
-    const [isPublic,setIsPublic]=useState(false);
-    const [isComplete,setIsComplete]=useState();
     const [values,setValues] =useState({
         "nickname": "",
         "title": "",
@@ -299,16 +296,17 @@ const PostMomentHandler= (e)=>{
     const checkSignUp = (e) => {
 
         e.preventDefault();
-        const formImage = new FormData();
-        formImage.append("image", img);
-        console.log("보내기전");
-        console.log(formImage);
         setValues(
             {
                 ...values,
                 "tags": tags,
             }
         )
+        const formImage = new FormData();
+        formImage.append("image", img);
+        console.log("보내기전");
+        console.log(formImage);
+        
         setModal(true);
       
         
@@ -343,7 +341,7 @@ const PostMomentHandler= (e)=>{
                 <InputOutter>
                 <NameOutter>
                     <Headname>태그</Headname>
-                    <NameInput type="text" value={tag} onChange={PostTagHandler} onKeyDown={PostTagsHandler} placeholder="태그를 입력해 주세요"/>
+                    <NameInput type="text" value={tag} onChange={PostTagHandler} onKeyDown={PostTagsHandler} placeholder="태그 입력 후 Enter"/>
                     <TagsOutter>
                         {tags?.map( (e)=>{
                             console.log(e)
