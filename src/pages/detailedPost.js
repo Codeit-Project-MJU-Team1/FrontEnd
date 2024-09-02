@@ -13,6 +13,7 @@ import CommentDelete from "../images/commentDelete.png";
 import Icon from "../images/size16.png";
 import PostEditModal from "../components/modals/postEditModal.js";
 import PostDeleteModal from "../components/modals/postDeleteModal.js";
+import CommentCreateModal from "../components/modals/commentCreateModal.js";
 
 const DetailedPostOutter=styled.div`
     width:1560px;
@@ -272,6 +273,7 @@ function DetailedPost(){
     const [values,setValues]=useState({});
     const [editModalOpen, setEditModalOpen] =useState(false);
     const [deleteModalOpen,setDeleteModalOpen]=useState(false);
+    const [commentCreateModalOpen,setCommentCreateModalOpen]=useState(false);
     const date =new Date(values.createdAt);
     const { setIsCreateButton }=useContext(GroupCreateContext);
     setIsCreateButton(false);
@@ -403,7 +405,7 @@ function DetailedPost(){
                     {values.content}
                 </PostContent>
             </PostOutter>
-            <Link>
+            <Link onClick={()=> setCommentCreateModalOpen(true)}>
                 <CommentButton>
                     댓글 등록하기
                 </CommentButton>
@@ -443,6 +445,7 @@ function DetailedPost(){
             
             <PostEditModal modalOpen={editModalOpen} setModalOpen={setEditModalOpen} postId={postId} postValues={values}></PostEditModal>
             <PostDeleteModal modalOpen={deleteModalOpen} setModalOpen={setDeleteModalOpen} postId={postId}></PostDeleteModal>
+            <CommentCreateModal modalOpen={commentCreateModalOpen} setModalOpen={setCommentCreateModalOpen} postId={postId}></CommentCreateModal>
         </DetailedPostOutter>
 
     )

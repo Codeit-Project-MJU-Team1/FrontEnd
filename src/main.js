@@ -17,6 +17,11 @@ const MainBackground =styled.div`
     background-color:#FAFAFA;
     width:1920px;
     padding-bottom:120px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+
+    
 `
 
 
