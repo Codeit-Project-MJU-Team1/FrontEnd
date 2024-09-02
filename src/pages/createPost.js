@@ -274,12 +274,13 @@ const PostMomentHandler= (e)=>{
 }
 
     const PostReleaseHandler = ()=>{
+        const nextIsPublic=!values.isPublic;
         setValues(
             {...values ,
-                "isPublic": !values.isPublic,
+                "isPublic": nextIsPublic,
             }
             );
-            console.log(values.isPublic);
+            console.log(nextIsPublic);
 }
 
     const PostPWHandler= (e)=>{

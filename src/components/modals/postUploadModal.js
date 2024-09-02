@@ -104,7 +104,7 @@ function InnerModal({setModalOpen,id,uploadData,img}){
         const PostData= {
             "password": password,
         }
-        fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/verify-password`, {
+        fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/verify-password?groupId=${id}`, {
             method: "Post",
             body: JSON.stringify(PostData),
             headers: {
@@ -187,6 +187,7 @@ function InnerModal({setModalOpen,id,uploadData,img}){
               throw new Error("에러 발생!");
         }).catch((err)=>{
             console.log("접근에러")
+            console.log(err)
             setModalOpen(false)
         })
 
