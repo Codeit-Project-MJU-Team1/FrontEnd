@@ -8,12 +8,11 @@ import { useContext } from "react";
 import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 import { useParams } from "react-router-dom";
 import CommentIcon from "../images/commentIcon.png";
-import CommentModifyIcon from "../images/commentModifyIcon.png";
-import CommentDelete from "../images/commentDelete.png";
 import Icon from "../images/size16.png";
 import PostEditModal from "../components/modals/postEditModal.js";
 import PostDeleteModal from "../components/modals/postDeleteModal.js";
 import CommentCreateModal from "../components/modals/commentCreateModal.js";
+import Comment from "../components/comment.js";
 
 const DetailedPostOutter=styled.div`
     width:1560px;
@@ -69,6 +68,7 @@ const Title=styled.div`
 
 `
 const Tags=styled.div`
+    display:flex;
     gap:20px;
     font-size: 18px;
     font-weight: 400;
@@ -219,58 +219,13 @@ const CommentList= styled.div`
     margin-top:30px;
     gap:20px;
 `
-const CommentOutter= styled.div`
-    display:flex;
-    flex-direction:column;
-    align-items:start;
-`
-
-const CommentTopOutter=styled.div`
-    display:flex;
-    gap:10px;
-    font-size: 16px;
-    font-weight: 500;
-    text-align: left;
-    font-color:#B8B8B8;
-`
-const CommentUser=styled.div`
-
-
-`
-const CommentInfo=styled.div`
-    font-weight: 400;
-    font-color:#B8B8B8;
-
-`
-const CommentBottom=styled.div`
-    display:flex;
-    width:100%;
-    justify-content:space-between;
-    margin-top:16px;
-`
-const CommentCentent=styled.div`
-
-`
-const CommentModifyButtons=styled.div`
-    gap:20px;
-`
-const CommentModifyButton=styled.img`
-    width:20px;
-    height:20px;
-`
-
-const CommentLine= styled.div`
-    margin-top:19px;
-    width:100%;
-    height:1px;
-    background-color: #DDDDDD;
-    margin-top:19px;
-`
 
 
 function DetailedPost(){
     const {id,postId} = useParams();
     const [values,setValues]=useState({});
+    const [comments,setComments]=useState([]);
+    const [page,setPage]=useState(0);
     const [editModalOpen, setEditModalOpen] =useState(false);
     const [deleteModalOpen,setDeleteModalOpen]=useState(false);
     const [commentCreateModalOpen,setCommentCreateModalOpen]=useState(false);
@@ -325,6 +280,42 @@ function DetailedPost(){
     )
 
 
+
+    const handleloadCommnets = async () => {
+        
+
+        fetch(`https://backend-b4qi.onrender.com/api/posts/${postId}/comments?postId=${postId}&page=${page}&pageSize=${3}`, {
+            method: "GET",
+        }
+        ).then((response) => {
+              if (response.ok === true) {
+                console.log("원본")
+                console.log(response)
+              return response.json();
+              }
+              throw new Error("에러 발생!");
+        }).catch((err)=>{
+            alert(err);
+        }).then((data)=> {
+            console.log("받은 데이터");
+            console.log(data);
+            setComments(data)
+            
+        })
+    }
+
+
+
+    
+        
+    
+    
+    useEffect(()=>{
+        
+        handleloadCommnets();
+    
+    },[page]);
+
     return(
         <DetailedPostOutter>
             <PostHeaderOutter>
@@ -350,7 +341,7 @@ function DetailedPost(){
                     </TopInfo>
                     <BottomInfo>
                         <PostEnv>
-                           {`${values?.location}  ·  ${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`}  {date.getTime}:{date.getMinutes}
+                           {`${values?.location}  ·  ${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`}  {date.getHours()}:{date.getMinutes()}
                         </PostEnv>
                         <PostResOutter>
                             <Link>
@@ -365,7 +356,7 @@ function DetailedPost(){
                                 <PostRes>
                                     <PostResImg src={CommentIcon}/>
                                     <div>
-                                    {values.commentCount}
+                                    {values.commentCount ? values.commentCount+1: 0}
                                     </div>
                                 </PostRes>
                             </Link>
@@ -412,34 +403,20 @@ function DetailedPost(){
             </Link>
             <CommentsOutter>
                 <CommentHeader>
-                    댓글 {values.commentCount}
+                    댓글 {values.commentCount ? values.commentCount+1: 0}
                 </CommentHeader>
                 <CommentsLine/>
                 <CommentList>
-                    <CommentOutter>
-                        <CommentTopOutter>
-                            <CommentUser>
-                                다람이네가족
-                            </CommentUser>
-                            <CommentInfo>
-                                24.01.18  21:50
-                            </CommentInfo>
-                        </CommentTopOutter>
-                        <CommentBottom>
-                            <CommentCentent>
-                                우와 60cm이라니..!! 저도 가족들과 가봐야겠어요~
-                            </CommentCentent>
-                            <CommentModifyButtons>
-                                <CommentModifyButton src={CommentModifyIcon}>
-
-                                </CommentModifyButton>
-                                <CommentModifyButton src={CommentDelete}>
-                                    
-                                </CommentModifyButton>
-                            </CommentModifyButtons>
-                        </CommentBottom>
-                        <CommentLine/>
-                    </CommentOutter>
+                    {comments[0] ?
+                        comments.map((cmt)=>{
+                            
+                            return(
+                                <Comment cmt={cmt}></Comment>
+                            )
+                        }) 
+                        :
+                        <></>
+                    }
                 </CommentList>
             </CommentsOutter>
             
