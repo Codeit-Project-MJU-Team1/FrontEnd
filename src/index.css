@@ -24,3 +24,8 @@ input{
   padding-block: 0;
   padding-inline: 0;
 }
+
+a:link { 
+  text-decoration: none;
+ }
+  
