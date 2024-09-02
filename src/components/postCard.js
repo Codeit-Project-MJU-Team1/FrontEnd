@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-
+import ReplyIcon from "../images/ReplyIcon.png";
+import Icon from "../images/size16.png";
 const PostCardOutter= styled.div`
     display:flex;
     flex-direction:column;
@@ -58,27 +59,45 @@ const PostExplain=styled(Link)`
 `
 
 
-const BottomInfo=styled.div`
+const Bottom=styled.div`
     display:flex;
-    gap:40px;
+    justify-content:space-between;
+    width:100%;
 `
-const BottomInfoHeader=styled.div`
-font-size: 12px;
-font-weight: 400;
-letter-spacing: -0.03em;
-text-align: left;
-
-`
-const BottomFrag=styled.div`
-
-`
-const BottomFragValue=styled.div`
-    disply:flex;
-    font-size: 14px;
+const PostInfo=styled.div`
+   
+    font-size: 12px;
     font-weight: 400;
-    letter-spacing: -0.03em;
     text-align: left;
 
+`
+
+const Tags=styled.div`
+    display:flex;
+    gap:20px;
+    width:100%;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+
+    color:#B8B8B8;
+
+    
+`
+
+const ResOutter=styled.div`
+    gap:20px;
+    display:flex;
+`
+const PostRes=styled.div`
+    display:flex;
+    gap:5px;
+    color:#8D8D8D;
+`
+const PostResImg=styled.img`
+    display:flex;
+    width:24px;
+    height:24px;
 `
 
 const getDateDiff= (date)=>{
@@ -91,12 +110,15 @@ const getDateDiff= (date)=>{
 
 
 
-function PostCard({Post}){
-    
+function PostCard({Post,id}){
+        const date =new Date(Post.createdAt);
+
+
+
     return(
         <PostCardOutter>
             { Post.isPublic &&
-            <Link to={"/Post/"+Post?.id} >
+            <Link to={`Post/`+Post?.id} >
                 <PostImg src={Post.imageUrl}/>
             </Link>
             }
@@ -105,7 +127,7 @@ function PostCard({Post}){
             <InfoOutter>
                 <TopInfo>
                     <div>
-                        D+{getDateDiff(Post.createdAt)}
+                        {Post.nickname}
                     </div>
                     <div>
                         |
@@ -115,29 +137,45 @@ function PostCard({Post}){
                     </div>
                 </TopInfo>
                 <MiddelInfo>
-                    <PostName to={"/Post/"+Post?.id}>
+                    <PostName to={`Post/`+Post?.id}>
                     {Post.title}
                     </PostName>
-                    <PostExplain to={"/Post/"+Post?.id}>
-                    {Post.introduction}
-                    </PostExplain>
+                    <Tags>
+                    {
+                        Post?.tags.map((tag)=>{
+                            return(
+                                <div>
+                                    {`#${tag}`}
+                                </div>
+                            )
+                        })
+                    }
+                </Tags>
                 </MiddelInfo>
-                <BottomInfo>
-                    
-                    <BottomFrag>
-                        <BottomInfoHeader>획득배지</BottomInfoHeader>
-                        <BottomFragValue>{3}</BottomFragValue>
-                    </BottomFrag>
-                    
-                    <BottomFrag>
-                        <BottomInfoHeader>추억</BottomInfoHeader>
-                        <BottomFragValue>{Post.postCount}</BottomFragValue>
-                    </BottomFrag>
-                    <BottomFrag>
-                        <BottomInfoHeader>그룹 공감</BottomInfoHeader>
-                        <BottomFragValue>{Post.likeCount}</BottomFragValue>
-                    </BottomFrag>
-                </BottomInfo>
+                
+                <Bottom>
+                    <PostInfo>
+                        {`${Post?.location}  ·  ${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`}
+                    </PostInfo>
+                    <ResOutter>
+                        <Link>
+                            <PostRes>
+                                    <PostResImg src={Icon}/>
+                                    <div>
+                                        {Post.likeCount}
+                                    </div>
+                                </PostRes>
+                            </Link>
+                            <Link>
+                                <PostRes>
+                                    <PostResImg src={ReplyIcon}/>
+                                    <div>
+                                        {Post.commentCount}
+                                    </div>
+                                </PostRes>
+                            </Link>
+                    </ResOutter>
+                </Bottom>
             </InfoOutter>
         </PostCardOutter>
     );

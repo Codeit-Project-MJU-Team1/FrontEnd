@@ -89,16 +89,7 @@ function CreatePostButton({id}){
 }
 
 function DetailedGroup(){
-    //그룹 내 추억 로딩
-    
-    const [isLoadingButton,setIsLoadingButton]=useState(false);
-    const [postsValues,setPostsValues]=useState({
-        option : "latest",
-        search : "",
-        isPublic: true,
-        keyword:"",
-        page:0,
-    })
+
     //그룹 만들기 버튼 on/off
     const { setIsCreateButton }=useContext(GroupCreateContext);
     setIsCreateButton(false);
@@ -109,6 +100,18 @@ function DetailedGroup(){
 
     const location= useLocation();
     const navigate = useNavigate();
+    //그룹 내 추억 로딩
+    
+    const [isLoadingButton,setIsLoadingButton]=useState(false);
+    const [postsValues,setPostsValues]=useState({
+        option : "latest",
+        search : "",
+        isPublic: true,
+        keyword:"",
+        page:0,
+        groupId: id,
+    })
+    
 
     //그룹 상세 제반사항 로딩
     useEffect(
@@ -142,83 +145,7 @@ function DetailedGroup(){
                 }).then((data)=> {
                     console.log("받은 데이터");
                     console.log(data);
-                    fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/posts?page=${postsValues.page}&pageSize=${12}&sortBy=${encodeURIComponent(postsValues.option)}${ postsValues.keyword ? "&keyword="+encodeURIComponent(postsValues.keyword): "" }&isPublic=${postsValues.isPublic}`, {
-                        method: "GET",
-                    }
-                    ).then((response) => {
-                          if (response.ok === true) {
-                            console.log("원본")
-                            console.log(response)
-                          return response.json();
-                          }
-                          throw new Error("에러 발생!");
-                    }).catch((err)=>{
-                        alert(err);
-                    }).then((data)=> {
-                        console.log("받은 데이터");
-                        console.log(data);
-                        
-                        if(data[0]){
-                            
-                            data.map((group)=>{
-                                console.log("map 속")
-                                console.log(group)
-                                if(data.indexOf(group)%4===0){ // 배열이 불려온 순서(인덱스)에 따라 순서배치
-                                    setMiddlePosts1((prevPosts)=>{
-                                        return [...prevPosts,group];
-            
-                                    }
-                                        
-                                    )
-                                    console.log(middlePosts1)
-                                }else if(data?.indexOf(group)%4===1){
-                                    setMiddlePosts2(
-                                        (prevPosts)=>{
-                                            return [...prevPosts,group];
-                
-                                        }
-                                    )
-                                    console.log(middlePosts2)
-                                }else if(data?.indexOf(group)%4===2){
-                                    setMiddlePosts3(
-                                        (prevPosts)=>{
-                                            return [...prevPosts,group];
-                
-                                        }
-                                    )
-                                    console.log(middlePosts3)
-                                }else if(data?.indexOf(group)%4===3){
-                                    setMiddlePosts4(
-                                        (prevPosts)=>{
-                                            return [...prevPosts,group];
-                
-                                        }
-                                    )
-                                    console.log(middlePosts4)
-                                }
-                            })
-                            if(!middlePosts4[-1]){
-                                setIsLoadingButton(false)
-                                setPostsValues({
-                                    ...postsValues,
-                                    "page" : 0,
-                                })
-                                return; // 마지막 로딩에서 그룹 로딩이 꽉안찼을 경우
-                            }
-                            setPostsValues({
-                                ...postsValues,
-                                "page" : postsValues?.page + 1,
-                            }) 
-                        }else{
-                            setIsLoadingButton(false)
-                            setPostsValues({
-                                ...postsValues,
-                                "page" : 0,
-                            }) //로딩된 데이터가 없는 경우
-                        }
-                        
-                    })
-                    
+                    setValues(data);
                     
                 })
 

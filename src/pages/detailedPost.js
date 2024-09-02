@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 import { useParams } from "react-router-dom";
+import ReplyIcon from "../images/ReplyIcon.png";
 import ReplyModifyIcon from "../images/ReplyModifyIcon.png";
 import ReplyDelete from "../images/ReplyDelete.png";
 import Icon from "../images/size16.png";
@@ -97,6 +98,11 @@ const PostRes=styled.div`
     display:flex;
     gap:5px;
     color:#8D8D8D;
+`
+const PostResImg=styled.img`
+    display:flex;
+    width:24px;
+    height:24px;
 `
 
 const PostHeaderEnd=styled.div`  
@@ -287,9 +293,7 @@ function DetailedPost(){
                         <PostResOutter>
                             <Link>
                                 <PostRes>
-                                    <div>
-
-                                    </div>
+                                    <PostResImg src={Icon}/>
                                     <div>
                                         120
                                     </div>
@@ -297,9 +301,7 @@ function DetailedPost(){
                             </Link>
                             <Link>
                                 <PostRes>
-                                    <div>
-
-                                    </div>
+                                    <PostResImg src={ReplyIcon}/>
                                     <div>
                                         120
                                     </div>

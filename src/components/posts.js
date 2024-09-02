@@ -117,25 +117,25 @@ function Posts({middlePosts1,middlePosts2,middlePosts3,middlePosts4,PostsValues}
             <MiddlePosts>
                 {middlePosts1 && middlePosts1.map((Post)=>{
                     console.log(Post.id)
-                    return <PostCard key={Post.id} Post={Post}/>
+                    return <PostCard key={Post.id} Post={Post} id={PostsValues?.groupId}/>
                 })}
             </MiddlePosts>
             <MiddlePosts>
                 {middlePosts2 && middlePosts2.map((Post)=>{
                     console.log(Post.id)
-                    return <PostCard key={Post.id} Post={Post}/>
+                    return <PostCard key={Post.id} Post={Post} id={PostsValues?.groupId}/>
                 })}
             </MiddlePosts>
             <MiddlePosts>
                 {middlePosts3 && middlePosts3.map((Post)=>{
                     console.log(Post.id)
-                    return <PostCard key={Post.id} Post={Post}/>
+                    return <PostCard key={Post.id} Post={Post} id={PostsValues?.groupId}/>
                 })}
             </MiddlePosts>
             <MiddlePosts>
                 {middlePosts4 && middlePosts4.map((Post)=>{
                     console.log(Post.id)
-                    return <PostCard key={Post.id} Post={Post}/>
+                    return <PostCard key={Post.id} Post={Post} id={PostsValues?.groupId}/>
                 })}
             </MiddlePosts>
         </PostsOutter>
