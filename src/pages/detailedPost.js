@@ -16,6 +16,7 @@ import Comment from "../components/comment.js";
 import CommentEditModal from "../components/modals/commentEditModal.js";
 import CommentDeleteModal from "../components/modals/commentDeleteModal.js";
 import Pagination from "../components/pagination.js";
+import LikeButton from "../components/likeButton.js";
 
 const DetailedPostOutter=styled.div`
     width:1560px;
@@ -84,6 +85,7 @@ const BottomInfo=styled.div`
     display:flex;
     gap:41px;
     margin-top:62px;
+    align-items:center;
 `
 const PostEnv=styled.div`
 
@@ -121,6 +123,7 @@ const PostHeaderEnd=styled.div`
     justify-content:space-between;
     
     
+    
 
 `
 
@@ -131,30 +134,13 @@ const PostModifyOutter=styled.div`
     font-weight: 400;
     text-align: center;
     gap:60px;
+    margin-bottom:123px;
 
 `
 const PostEdit=styled.div`
 `
 const PostDelete=styled.div`
     font-color:#8D8D8D;
-`
-const LikeButton=styled.div`
-    display:flex;
-    text-align:center;
-    justify-content:center;
-    align-items:center;
-    width: 187.88px;
-    height: 52px;
-    gap: 10px;
-    border-radius: 6px;
-    border: 1px solid #282828;
-    margin-top:123px;
-    
-
-`
-const LIkeIcon=styled.img`
-    width:22px;
-    height:22px;
 `
 
 const TopLine =styled.div`
@@ -338,7 +324,25 @@ function DetailedPost(){
     }
 
 
-
+    const onLikeClick=()=>{
+        fetch(`https://backend-b4qi.onrender.com/api/posts/${postId}/like`, {
+            method: "POST",
+        }
+        ).then((response) => {
+              if (response.ok === true) {
+                console.log("원본")
+                console.log(response)
+              return response.json();
+              }
+              throw new Error("에러 발생!");
+        }).catch((err)=>{
+            alert(err);
+        }).then((data)=> {
+            console.log("받은 데이터");
+            console.log(data);
+        })
+    }
+    
     
         
     
@@ -411,15 +415,9 @@ function DetailedPost(){
                         
                         
                     </PostModifyOutter>
-                    <Link>
-                        <LikeButton>
-                            <LIkeIcon src={Icon}/>
-                            <div>
-                            공감 보내기
-                            </div>
-                            
-                        </LikeButton>
-                    </Link>
+                    
+                    <LikeButton onClick={onLikeClick} />
+                    
                 </PostHeaderEnd>
             </PostHeaderOutter>
             <TopLine/>

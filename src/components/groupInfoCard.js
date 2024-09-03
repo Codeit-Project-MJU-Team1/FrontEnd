@@ -89,6 +89,8 @@ const InfoHeadOutter=styled.div`
 //카드 윗 부분
 function InfoHead({values , id}){
     
+
+
     const [editModalOpen,setEditModalOpen]= useState(false);
     const editModalHandler = () => {
         setEditModalOpen(true)
@@ -196,7 +198,7 @@ const InfoFootOutter=styled.div`
 
 
         `
-    function Badges(){
+    function Badges({id}){
         
         return(
             <BadgesOutter>
@@ -208,7 +210,25 @@ const InfoFootOutter=styled.div`
         )
     }
 
-function InfoFoot(){
+function InfoFoot({id}){
+    const onClick=()=>{
+        fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/like`, {
+            method: "POST",
+        }
+        ).then((response) => {
+              if (response.ok === true) {
+                console.log("원본")
+                console.log(response)
+              return response.json();
+              }
+              throw new Error("에러 발생!");
+        }).catch((err)=>{
+            alert(err);
+        }).then((data)=> {
+            console.log("받은 데이터");
+            console.log(data);
+        })
+    }
     
     
     return(
@@ -216,8 +236,8 @@ function InfoFoot(){
         <InfoFootOutter>
             <div>획득 배지</div>
             <InfoFootBottom>
-                <Badges/>
-                <LikeButton/>
+                <Badges id={id}/>
+                <LikeButton onClick={onClick}/>
             </InfoFootBottom>
             
         </InfoFootOutter>
@@ -238,7 +258,7 @@ return(
         <CardImg src={values.imageUrl}/>
         <CardInfo>
             <InfoHead values={values} id={id}/>
-            <InfoFoot/>
+            <InfoFoot id={id}/>
         </CardInfo>
     </CardInfoOutter>
 )

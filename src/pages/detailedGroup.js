@@ -151,6 +151,7 @@ function DetailedGroup(){
 
             }
             handleload();
+            
         }
         ,[]
     )
@@ -293,6 +294,14 @@ function DetailedGroup(){
                         
                     }
                 })
+                if(!middlePosts4[-1]){
+                    setIsLoadingButton(false)
+                    setPostsValues({
+                        ...postsValues,
+                        "page" : 0,
+                    })
+                    return; // 마지막 로딩에서 그룹 로딩이 꽉안찼을 경우
+                }
                 setIsLoadingButton(true);
                 setPostsValues({
                     ...postsValues,
