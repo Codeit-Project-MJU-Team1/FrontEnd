@@ -10,11 +10,12 @@ const CreateModal=styled.div`
     flex-direction:column;
     align-items:center;
     position:relative;
-    width: 400px;
+    width: 480px;
     gap: 0px;
     border-radius: 6px;
     background:white;
     padding:40px;
+    
 `
 const ModalOffButton=styled.img`
       display:position;
@@ -36,7 +37,8 @@ const Headname=styled.h3`
 `
 const NicknameOutter=styled.div`
         width:400px;
-        height:75px
+        height:75px;
+        margin-top:60px;
 `
 const NicknameInput=styled.input`
         width: 380px;
@@ -47,6 +49,8 @@ const NicknameInput=styled.input`
         padding-left:20px;
 
 `
+
+
 
 const GruopIntroOutter=styled.div`
     margin-top:40px;
@@ -73,6 +77,7 @@ const ContentInput=styled.textarea`
 
 
 `
+
 
 
 
@@ -222,7 +227,7 @@ function InnerModal({setModalOpen,postId}){
             <ModalOffButton src={exitIcon} onClick={()=>setModalOpen(false)}>
 
             </ModalOffButton>
-            <ModalName>댓글 등록</ModalName>
+        <ModalName>댓글 등록</ModalName>
         <InputOutter>
         <NicknameOutter>
             <Headname>닉네임</Headname>

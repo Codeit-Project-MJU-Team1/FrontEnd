@@ -15,6 +15,7 @@ import CommentCreateModal from "../components/modals/commentCreateModal.js";
 import Comment from "../components/comment.js";
 import CommentEditModal from "../components/modals/commentEditModal.js";
 import CommentDeleteModal from "../components/modals/commentDeleteModal.js";
+import Pagination from "../components/pagination.js";
 
 const DetailedPostOutter=styled.div`
     width:1560px;
@@ -228,12 +229,14 @@ function DetailedPost(){
     const [values,setValues]=useState({});
     const [comments,setComments]=useState([]);
     const [page,setPage]=useState(0);
+    const [pagiNum,setPagiNum]=useState(0);
     const [editModalOpen, setEditModalOpen] =useState(false);
     const [deleteModalOpen,setDeleteModalOpen]=useState(false);
     const [commentCreateModalOpen,setCommentCreateModalOpen]=useState(false);
     const [CommentEditModalOpen,setCommentEditModalOpen]=useState(false);
     const [commentDeleteModalOpen,setCommentDeleteModalOpen]=useState(false);
     const [comment,setComment]=useState(false);
+    const [maxPagi,setMaxPagi]=useState(1);
     const date =new Date(values.createdAt);
     const { setIsCreateButton }=useContext(GroupCreateContext);
     setIsCreateButton(false);
@@ -277,8 +280,33 @@ function DetailedPost(){
                     
                     
                 })
-
+                
+                fetch(`https://backend-b4qi.onrender.com/api/posts/${postId}/comments?postId=${postId}&page=${0}&pageSize=${1000}`, {
+                    method: "GET",
+                }
+                ).then((response) => {
+                      if (response.ok === true) {
+                        console.log("원본")
+                        console.log(response)
+                      return response.json();
+                      }
+                      throw new Error("에러 발생!");
+                }).catch((err)=>{
+                    alert(err);
+                }).then((data)=> {
+                    if(data){
+                        console.log("받은 페이지네이션데이터");
+                        console.log(data);
+                        console.log(Math.ceil(data?.length/3))
+                        setMaxPagi(Math.ceil(data?.length/3))
+                    }
+                    
+                    
+                    
+                    
+                })
             }
+
             handleload();
         }
         ,[]
@@ -423,8 +451,9 @@ function DetailedPost(){
                         <></>
                     }
                 </CommentList>
+                
             </CommentsOutter>
-            
+            <Pagination setPage={setPage} setPagiNum={setPagiNum} maxPagi={maxPagi} page={page} pagiNum={pagiNum}></Pagination>
             <PostEditModal modalOpen={editModalOpen} setModalOpen={setEditModalOpen} postId={postId} postValues={values}></PostEditModal>
             <PostDeleteModal modalOpen={deleteModalOpen} setModalOpen={setDeleteModalOpen} postId={postId}></PostDeleteModal>
             <CommentCreateModal modalOpen={commentCreateModalOpen} setModalOpen={setCommentCreateModalOpen} postId={postId}></CommentCreateModal>

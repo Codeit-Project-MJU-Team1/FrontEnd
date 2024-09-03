@@ -33,6 +33,7 @@ const InputOutter=styled.form`
 const Headname=styled.h3`
         margin-bottom:10px;
         font-size:16px;
+        
 `
 
 
