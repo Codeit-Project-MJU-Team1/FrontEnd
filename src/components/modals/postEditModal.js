@@ -10,7 +10,7 @@ const CreateModal=styled.div`
     flex-direction:column;
     align-items:center;
     position:relative;
-    width: 400px;
+    width: 480px;
     gap: 0px;
     border-radius: 6px;
     background:white;
@@ -36,7 +36,7 @@ const CenterOutter=styled.div`
     align-items:center;
     background-color:#FAFAFA;
     padding:40px 80px 40px 80px;
-    width: 1120px;
+    width: 1040px;
     height: 794px;
     gap: 0px;
     border-radius: 6px;

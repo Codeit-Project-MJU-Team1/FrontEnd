@@ -8,7 +8,7 @@ const CreateModal=styled.div`
     flex-direction:column;
     align-items:center;
     position:relative;
-    width: 400px;
+    width: 480px;
     gap: 0px;
     border-radius: 6px;
     background:white;

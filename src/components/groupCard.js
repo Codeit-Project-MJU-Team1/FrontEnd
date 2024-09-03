@@ -5,12 +5,11 @@ const GroupCardOutter= styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
-    width:335px;
+    width:375px;
     padding:20px;
     gap:20px;
     background-color:#FAFAFA;
     border: 1px solid #DDDDDD;
-    width: 335px;
     border-radius: 12px;
 
 `
