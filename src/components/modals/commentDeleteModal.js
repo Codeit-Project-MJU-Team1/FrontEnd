@@ -34,46 +34,6 @@ const Headname=styled.h3`
         margin-bottom:10px;
         font-size:16px;
 `
-const NicknameOutter=styled.div`
-        width:400px;
-        height:75px
-`
-const NicknameInput=styled.input`
-        width: 380px;
-        height: 45px;
-        gap: 0px;
-        border-radius: 6px;
-        border: 1px solid #DDDDDD;
-        padding-left:20px;
-
-`
-
-const GruopIntroOutter=styled.div`
-    margin-top:40px;
-    width:400px;
-    height:150px
-
-`
-const ContentInput=styled.textarea`
-    width: 380px;
-    height: 110px;
-    gap: 0px;
-    border-radius: 6px;
-    border: 1px;
-    border:1px solid #DDDDDD;
-    resize:none;
-    font-family: Spoqa Han Sans Neo;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 17.53px;
-    letter-spacing: -0.03em;
-    text-align: left;
-    padding-top:20px;
-    padding-left:20px;
-
-
-`
-
 
 
 
@@ -127,11 +87,14 @@ const ModalButton=styled.input`
 
 `
 
-function InnerModal({setModalOpen,postId}){
+function InnerModal({setModalOpen,postId,commentValues}){
     // 이전 값 관련 
     
     const [datas,setDatas]=useState();
-    const [values,setValues] =useState({});
+    const [values,setValues] =useState(
+        {...commentValues,
+            password:"",
+    });
     const navigate =useNavigate();
 
     const nicknameHandler= (e)=>{
@@ -167,18 +130,16 @@ function InnerModal({setModalOpen,postId}){
         e.preventDefault();
         const groupData={
             
-                "nickname": values.nickname,
-                "content": values.content,
                 "password": values.password,
             
           }
         console.log(JSON.stringify(groupData))
                   
-        fetch( `https://backend-b4qi.onrender.com/api/posts/${postId}/comments?postId=${postId}`, {
-            method: "POST",
+        fetch( `https://backend-b4qi.onrender.com/api/comments/${commentValues.id}?commentId=${commentValues.id}`, {
+            method: "DELETE",
             body: JSON.stringify(groupData),
             headers: {
-                "postId": postId, // application/json 타입 선언
+                "commentId": commentValues.id, // application/json 타입 선언
                 "Content-Type": "application/json",
             },
                     
@@ -194,19 +155,19 @@ function InnerModal({setModalOpen,postId}){
             throw new Error(response.status);
                   
             }).catch((err)=>{
-                if(err =="Error: 400"){
-                    alert("양식이 맞지 않습니다.")
+                if(err =="Error: 403"){
+                    alert("비밀번호가 틀렸습니다.")
                 }else if(err == "Error: 404"){
-                    alert("게시글이 존재하지 않습니다.")
+                    alert("존재하지 않습니다.")
+                }else if(err == "Error: 400"){
+                    alert("존재하지 않습니다.")
                 }
             }).then((data) => {
                 if(data){
                     console.log("결과");
-                    console.log(data);
-                    setDatas(data);
-                    alert("등록이 완료 되었습니다.")
-                    }   
+                    console.log(data)
                 
+                }
             });
         
         }
@@ -222,21 +183,13 @@ function InnerModal({setModalOpen,postId}){
             <ModalOffButton src={exitIcon} onClick={()=>setModalOpen(false)}>
 
             </ModalOffButton>
-            <ModalName>댓글 등록</ModalName>
+            <ModalName>댓글 삭제</ModalName>
         <InputOutter>
-        <NicknameOutter>
-            <Headname>닉네임</Headname>
-            <NicknameInput type="text" value={values.nickname} onChange={nicknameHandler} placeholder="닉네임을 입력해 주세요"/>
-        </NicknameOutter>
-        <GruopIntroOutter>
-            <Headname>댓글</Headname>
-            <ContentInput onChange={contentHandler} value={values.content} placeholder="댓글을 입력 해주세요"></ContentInput>
-        </GruopIntroOutter>
         <PWOutter>
-            <Headname>비밀번호 생성</Headname>
+            <Headname>삭제 권한 인증</Headname>
             <PW type="Password" onChange={pWHandler} value={values.password} placeholder="비밀번호를 입력해 주세요"></PW>
         </PWOutter>
-        <ModalButton onClick={checkSignUp} type="submit" value="등록하기"></ModalButton>
+        <ModalButton onClick={checkSignUp} type="submit" value="삭제하기"></ModalButton>
     </InputOutter>
     {/* <CreateGroupModal modalOpen={verifyModal} setModalOpen={setVerifyModal} isComplete={isComplete}></CreateGroupModal> */}
     </CreateModal>
@@ -251,7 +204,7 @@ function InnerModal({setModalOpen,postId}){
 
 
 
-function CommentCreateModal({modalOpen,setModalOpen, postId}){
+function CommentDeleteModal({modalOpen,setModalOpen, postId ,commentValues}){
     
     const modalBackground = useRef();
 
@@ -280,7 +233,7 @@ function CommentCreateModal({modalOpen,setModalOpen, postId}){
             //   }
             // }
               >
-                <InnerModal setModalOpen={setModalOpen} postId={postId}></InnerModal>
+                <InnerModal setModalOpen={setModalOpen} postId={postId} commentValues={commentValues}></InnerModal>
 
             </ModalContainer>
             }
@@ -288,4 +241,4 @@ function CommentCreateModal({modalOpen,setModalOpen, postId}){
       );
 }
 
-export default CommentCreateModal;
+export default CommentDeleteModal;

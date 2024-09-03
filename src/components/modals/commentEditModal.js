@@ -35,6 +35,7 @@ const Headname=styled.h3`
         font-size:16px;
 `
 const NicknameOutter=styled.div`
+        margin-top:60px;
         width:400px;
         height:75px
 `
@@ -73,7 +74,6 @@ const ContentInput=styled.textarea`
 
 
 `
-
 
 
 
@@ -127,11 +127,14 @@ const ModalButton=styled.input`
 
 `
 
-function InnerModal({setModalOpen,postId}){
+function InnerModal({setModalOpen,postId,commentValues}){
     // 이전 값 관련 
     
     const [datas,setDatas]=useState();
-    const [values,setValues] =useState({});
+    const [values,setValues] =useState(
+        {...commentValues,
+            password:"",
+    });
     const navigate =useNavigate();
 
     const nicknameHandler= (e)=>{
@@ -174,11 +177,11 @@ function InnerModal({setModalOpen,postId}){
           }
         console.log(JSON.stringify(groupData))
                   
-        fetch( `https://backend-b4qi.onrender.com/api/posts/${postId}/comments?postId=${postId}`, {
-            method: "POST",
+        fetch( `https://backend-b4qi.onrender.com/api/comments/${commentValues.id}?commentId=${commentValues.id}`, {
+            method: "PUT",
             body: JSON.stringify(groupData),
             headers: {
-                "postId": postId, // application/json 타입 선언
+                "commentId": commentValues.id, // application/json 타입 선언
                 "Content-Type": "application/json",
             },
                     
@@ -194,17 +197,17 @@ function InnerModal({setModalOpen,postId}){
             throw new Error(response.status);
                   
             }).catch((err)=>{
-                if(err =="Error: 400"){
-                    alert("양식이 맞지 않습니다.")
+                if(err =="Error: 403"){
+                    alert("비밀번호가 틀렸습니다.")
                 }else if(err == "Error: 404"){
-                    alert("게시글이 존재하지 않습니다.")
+                    alert("존재하지 않습니다.")
                 }
             }).then((data) => {
                 if(data){
                     console.log("결과");
                     console.log(data);
                     setDatas(data);
-                    alert("등록이 완료 되었습니다.")
+                    alert("수정이 완료 되었습니다.")
                     }   
                 
             });
@@ -222,7 +225,7 @@ function InnerModal({setModalOpen,postId}){
             <ModalOffButton src={exitIcon} onClick={()=>setModalOpen(false)}>
 
             </ModalOffButton>
-            <ModalName>댓글 등록</ModalName>
+            <ModalName>댓글 수정</ModalName>
         <InputOutter>
         <NicknameOutter>
             <Headname>닉네임</Headname>
@@ -233,7 +236,7 @@ function InnerModal({setModalOpen,postId}){
             <ContentInput onChange={contentHandler} value={values.content} placeholder="댓글을 입력 해주세요"></ContentInput>
         </GruopIntroOutter>
         <PWOutter>
-            <Headname>비밀번호 생성</Headname>
+            <Headname>수정 권한 인증</Headname>
             <PW type="Password" onChange={pWHandler} value={values.password} placeholder="비밀번호를 입력해 주세요"></PW>
         </PWOutter>
         <ModalButton onClick={checkSignUp} type="submit" value="등록하기"></ModalButton>
@@ -251,7 +254,7 @@ function InnerModal({setModalOpen,postId}){
 
 
 
-function CommentCreateModal({modalOpen,setModalOpen, postId}){
+function CommentEditModal({modalOpen,setModalOpen, postId ,commentValues}){
     
     const modalBackground = useRef();
 
@@ -280,7 +283,7 @@ function CommentCreateModal({modalOpen,setModalOpen, postId}){
             //   }
             // }
               >
-                <InnerModal setModalOpen={setModalOpen} postId={postId}></InnerModal>
+                <InnerModal setModalOpen={setModalOpen} postId={postId} commentValues={commentValues}></InnerModal>
 
             </ModalContainer>
             }
@@ -288,4 +291,4 @@ function CommentCreateModal({modalOpen,setModalOpen, postId}){
       );
 }
 
-export default CommentCreateModal;
+export default CommentEditModal;

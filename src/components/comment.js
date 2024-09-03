@@ -51,10 +51,10 @@ const CommentLine= styled.div`
     margin-top:19px;
 `
 // ,commentId,onModifyClick,onDeleteClick
-function Comment({cmt}){
+function Comment({cmt,scet,scdt,setComment}){
     const date =new Date(cmt.createdAt);
     console.log(cmt)
-
+    setComment(cmt);
     return(
         <CommentOutter>
                     <CommentTopOutter>
@@ -70,10 +70,10 @@ function Comment({cmt}){
                                 {cmt.content}
                             </CommentCentent>
                             <CommentModifyButtons>
-                                <Link>
+                                <Link onClick={()=>{scet(true)}}>
                                     <CommentModifyButton src={CommentModifyIcon}/>
                                 </Link>
-                                <Link>
+                                <Link onClick={()=>{scdt(true)}}>
                                     <CommentModifyButton src={CommentDelete}/>
                                 </Link>
                             </CommentModifyButtons>

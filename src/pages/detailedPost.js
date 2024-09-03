@@ -13,6 +13,8 @@ import PostEditModal from "../components/modals/postEditModal.js";
 import PostDeleteModal from "../components/modals/postDeleteModal.js";
 import CommentCreateModal from "../components/modals/commentCreateModal.js";
 import Comment from "../components/comment.js";
+import CommentEditModal from "../components/modals/commentEditModal.js";
+import CommentDeleteModal from "../components/modals/commentDeleteModal.js";
 
 const DetailedPostOutter=styled.div`
     width:1560px;
@@ -229,6 +231,9 @@ function DetailedPost(){
     const [editModalOpen, setEditModalOpen] =useState(false);
     const [deleteModalOpen,setDeleteModalOpen]=useState(false);
     const [commentCreateModalOpen,setCommentCreateModalOpen]=useState(false);
+    const [CommentEditModalOpen,setCommentEditModalOpen]=useState(false);
+    const [commentDeleteModalOpen,setCommentDeleteModalOpen]=useState(false);
+    const [comment,setComment]=useState(false);
     const date =new Date(values.createdAt);
     const { setIsCreateButton }=useContext(GroupCreateContext);
     setIsCreateButton(false);
@@ -411,7 +416,7 @@ function DetailedPost(){
                         comments.map((cmt)=>{
                             
                             return(
-                                <Comment cmt={cmt}></Comment>
+                                <Comment cmt={cmt} scet={setCommentEditModalOpen} scdt={setCommentDeleteModalOpen} setComment={setComment} ></Comment>
                             )
                         }) 
                         :
@@ -423,6 +428,8 @@ function DetailedPost(){
             <PostEditModal modalOpen={editModalOpen} setModalOpen={setEditModalOpen} postId={postId} postValues={values}></PostEditModal>
             <PostDeleteModal modalOpen={deleteModalOpen} setModalOpen={setDeleteModalOpen} postId={postId}></PostDeleteModal>
             <CommentCreateModal modalOpen={commentCreateModalOpen} setModalOpen={setCommentCreateModalOpen} postId={postId}></CommentCreateModal>
+            <CommentEditModal modalOpen={CommentEditModalOpen} setModalOpen={setCommentEditModalOpen} postId={postId} commentValues={comment}></CommentEditModal>
+            <CommentDeleteModal modalOpen={commentDeleteModalOpen} setModalOpen={setCommentDeleteModalOpen} postId={postId} commentValues={comment}></CommentDeleteModal>
         </DetailedPostOutter>
 
     )
