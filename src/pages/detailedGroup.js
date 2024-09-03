@@ -141,7 +141,7 @@ function DetailedGroup(){
     const { setIsCreateButton }=useContext(GroupCreateContext);
     setIsCreateButton(false);
     const { setKey ,key } = useContext(KeyContext);
-    const {id} = useParams();
+    const {id,postId} = useParams();
     const [values,setValues]=useState({});
     const [postList,setPostList]=useState({});
 
@@ -404,7 +404,7 @@ function DetailedGroup(){
             <HeadSearch searchValues={postsValues} setSearchValues={setPostsValues}/>
             { middlePosts1[0] ?
             <>
-                <Posts middlePosts1={middlePosts1} middlePosts2={middlePosts2} middlePosts3={middlePosts3} middlePosts4={middlePosts4} postsValues={postsValues}/>
+                <Posts middlePosts1={middlePosts1} middlePosts2={middlePosts2} middlePosts3={middlePosts3} middlePosts4={middlePosts4} postsValues={postsValues} />
                 <ListLoading isLoadingButton={isLoadingButton} onLoadingClick={onLoadingClick}/>
             </>
             :

@@ -12,6 +12,7 @@ import CreatePost from "./pages/createPost.js";
 import DetailedPost from "./pages/detailedPost.js";
 import { KeyContext } from "./components/contexts/keyContext.js";
 import NotFound from "./pages/notFound.js";
+import PrivatePostAccess from "./pages/privatePostAccess.js";
 
 
 const MainBackground =styled.div`
@@ -43,6 +44,7 @@ function Main(){
                             <Route path="/privateGroupAccess/:id" Component={PrivateGroupAccess}/>
                             <Route path="/group/:id" Component={DetailedGroup}/>
                             <Route path="/createPost/:id" Component={CreatePost}/>
+                            <Route path="/privatePostAccess/:id/:postId" Component={PrivatePostAccess}/>
                             <Route path="/group/:id/post/:postId" Component={DetailedPost}/>
                             <Route path="/Test" Component={Test}/>
                             <Route path= "/*" Component={NotFound}/>

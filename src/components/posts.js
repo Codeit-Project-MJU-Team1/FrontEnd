@@ -51,28 +51,28 @@ const MiddlePosts=styled.div`
 function Test({PostsValues}){
     return(
         <>
-             <MiddlePosts>
+             {/* <MiddlePosts>
                 <SmallPosts>
-                        <PostCard PostsValues={PostsValues}/>
-                        <PostCard PostsValues={PostsValues}/>
+                        <PostCard postId={post.id} PostsValues={PostsValues}/>
+                        <PostCard postId={post.id} PostsValues={PostsValues}/>
                         <TestSmallPost3/>
                 </SmallPosts>
                 <SmallPosts>
                         <TestSmallPost2/>
-                        <PostCard PostsValues={PostsValues}/>
-                        <PostCard PostsValues={PostsValues}/>
+                        <PostCard postId={post.id} PostsValues={PostsValues}/>
+                        <PostCard postId={post.id} PostsValues={PostsValues}/>
                 </SmallPosts>
             </MiddlePosts>
             <MiddlePosts>
                 <SmallPosts>
                         <TestSmallPost2/>
-                        <PostCard PostsValues={PostsValues}/>
+                        <PostCard postId={post.id} PostsValues={PostsValues}/>
                         <TestSmallPost3/>
                 </SmallPosts>
                 <SmallPosts>
-                        <PostCard PostsValues={PostsValues}/>
+                        <PostCard postId={post.id} PostsValues={PostsValues}/>
                         <TestSmallPost2/>
-                        <PostCard PostsValues={PostsValues}/>
+                        <PostCard postId={post.id} PostsValues={PostsValues}/>
                 </SmallPosts>
             </MiddlePosts>
             <MiddlePosts>
@@ -84,21 +84,21 @@ function Test({PostsValues}){
                 <SmallPosts>
                         <TestSmallPost2/>
                         <TestSmallPost3/>
-                        <PostCard PostsValues={PostsValues}/>
+                        <PostCard postId={post.id} PostsValues={PostsValues}/>
                 </SmallPosts>
             </MiddlePosts>
             <MiddlePosts>
                 <SmallPosts>
-                        <PostCard PostsValues={PostsValues}/>
+                        <PostCard postId={post.id} PostsValues={PostsValues}/>
                         <TestSmallPost2/>
                         <TestSmallPost3/>
                 </SmallPosts>
                 <SmallPosts>
                         <TestSmallPost3/>
                         <TestSmallPost2/>
-                        <PostCard PostsValues={PostsValues}/>
+                        <PostCard postId={post.id} PostsValues={PostsValues}/>
                 </SmallPosts>
-            </MiddlePosts>
+            </MiddlePosts> */}
         </>
     )
 }
@@ -117,25 +117,25 @@ function Posts({middlePosts1,middlePosts2,middlePosts3,middlePosts4,PostsValues}
             <MiddlePosts>
                 {middlePosts1 && middlePosts1.map((Post)=>{
                     console.log(Post.id)
-                    return <PostCard key={Post.id} Post={Post} id={PostsValues?.groupId}/>
+                    return <PostCard postId={Post.id} key={Post.id} Post={Post} id={PostsValues?.groupId}/>
                 })}
             </MiddlePosts>
             <MiddlePosts>
                 {middlePosts2 && middlePosts2.map((Post)=>{
                     console.log(Post.id)
-                    return <PostCard key={Post.id} Post={Post} id={PostsValues?.groupId}/>
+                    return <PostCard postId={Post.id} key={Post.id} Post={Post} id={PostsValues?.groupId}/>
                 })}
             </MiddlePosts>
             <MiddlePosts>
                 {middlePosts3 && middlePosts3.map((Post)=>{
                     console.log(Post.id)
-                    return <PostCard key={Post.id} Post={Post} id={PostsValues?.groupId}/>
+                    return <PostCard postId={Post.id} key={Post.id} Post={Post} id={PostsValues?.groupId}/>
                 })}
             </MiddlePosts>
             <MiddlePosts>
                 {middlePosts4 && middlePosts4.map((Post)=>{
                     console.log(Post.id)
-                    return <PostCard key={Post.id} Post={Post} id={PostsValues?.groupId}/>
+                    return <PostCard postId={Post.id} key={Post.id} Post={Post} id={PostsValues?.groupId}/>
                 })}
             </MiddlePosts>
         </PostsOutter>

@@ -109,7 +109,7 @@ const getDateDiff= (date)=>{
 
 
 
-function PostCard({Post,id}){
+function PostCard({postID,Post,id}){
         const date =new Date(Post.createdAt);
 
 
@@ -117,7 +117,7 @@ function PostCard({Post,id}){
     return(
         <PostCardOutter>
             { Post.isPublic &&
-            <Link to={`Post/`+Post?.id} >
+            <Link to={`Post/`+Post.id} >
                 <PostImg src={Post.imageUrl}/>
             </Link>
             }
@@ -135,10 +135,19 @@ function PostCard({Post,id}){
                         {Post.isPublic ? "공개": "비공개"}
                     </div>
                 </TopInfo>
+                
                 <MiddelInfo>
-                    <PostName to={`Post/`+Post?.id}>
+                    { Post.isPublic?
+                    <PostName to={`Post/`+Post.id}>
                     {Post.title}
                     </PostName>
+                    :
+                    <PostName to={`/privatePostAccess/${id}/`+Post.id}>
+                    {Post.title}
+                    </PostName>
+                    }
+                    { Post.isPublic &&
+                    <>
                     <Tags>
                     {
                         Post?.tags.map((tag)=>{
@@ -150,12 +159,18 @@ function PostCard({Post,id}){
                         })
                     }
                 </Tags>
+                </>
+                }   
                 </MiddelInfo>
                 
                 <Bottom>
+                { Post.isPublic &&
+                    <>
                     <PostInfo>
                         {`${Post?.location}  ·  ${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`}
                     </PostInfo>
+                    </>
+                }
                     <ResOutter>
                         <Link>
                             <PostRes>
@@ -175,6 +190,7 @@ function PostCard({Post,id}){
                             </Link>
                     </ResOutter>
                 </Bottom>
+                
             </InfoOutter>
         </PostCardOutter>
     );

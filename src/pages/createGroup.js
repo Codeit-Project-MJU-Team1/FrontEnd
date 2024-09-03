@@ -132,6 +132,8 @@ const Submit =styled.input`
 `
 
 
+
+
 function CreateGroup(){
     //그룹 만들기 버튼 on/off
     const { setIsCreateButton }=useContext(GroupCreateContext);
