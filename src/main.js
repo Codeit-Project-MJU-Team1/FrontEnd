@@ -11,6 +11,7 @@ import { GroupCreateContext } from "./components/contexts/groupCreateContext.js"
 import CreatePost from "./pages/createPost.js";
 import DetailedPost from "./pages/detailedPost.js";
 import { KeyContext } from "./components/contexts/keyContext.js";
+import NotFound from "./pages/notFound.js";
 
 
 const MainBackground =styled.div`
@@ -44,6 +45,7 @@ function Main(){
                             <Route path="/createPost/:id" Component={CreatePost}/>
                             <Route path="/group/:id/post/:postId" Component={DetailedPost}/>
                             <Route path="/Test" Component={Test}/>
+                            <Route path= "/*" Component={NotFound}/>
                         </Routes>
                     </BrowserRouter>
                     </KeyContext.Provider>

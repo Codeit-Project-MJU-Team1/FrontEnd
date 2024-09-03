@@ -9,6 +9,7 @@ import { useContext } from "react";
 import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 import Posts from "../components/posts.js";
 import { KeyContext } from "../components/contexts/keyContext.js";
+import noContentImg from "../images/noContent.png"
 
 const DetailedPostOutter=styled.div`
     display:flex;
@@ -47,6 +48,52 @@ const PostsHeadName=styled.h1`
     line-height: 30.05px;
     letter-spacing: -0.03em;
     text-align: center;
+
+
+`
+
+
+
+const NoContentOutter=styled.div`
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:1920px;
+    height:711px;
+
+`
+const NoContentImg=styled.img`
+    margin-top:120px;
+    width:100px;
+    height:100px;
+`
+const NoContentLarge=styled.div`
+    margin-top:40px;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    color:#8D8D8D;
+
+`
+const NoContentSmall=styled.div`
+    margin-top:20px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    color:#8D8D8D;
+
+`
+const PostCreate=styled(Link)`
+    display:flex;
+    margin-top:180px;
+    width: 400px;
+    height: 50px;
+    border-radius: 6px;
+    background-color:#282828;
+    color: #FAFAFA;
+    align-items:center;
+    justify-content:center;
+    text-decoration: 'none';
 
 
 `
@@ -355,8 +402,25 @@ function DetailedGroup(){
                 <CreatePostButton id={id}/>
             </GroupPostsHeaderOutter>
             <HeadSearch searchValues={postsValues} setSearchValues={setPostsValues}/>
-            <Posts middlePosts1={middlePosts1} middlePosts2={middlePosts2} middlePosts3={middlePosts3} middlePosts4={middlePosts4} postsValues={postsValues}/>
-            <ListLoading isLoadingButton={isLoadingButton} onLoadingClick={onLoadingClick}/>
+            { middlePosts1[0] ?
+            <>
+                <Posts middlePosts1={middlePosts1} middlePosts2={middlePosts2} middlePosts3={middlePosts3} middlePosts4={middlePosts4} postsValues={postsValues}/>
+                <ListLoading isLoadingButton={isLoadingButton} onLoadingClick={onLoadingClick}/>
+            </>
+            :
+            <NoContentOutter>
+                <NoContentImg src={noContentImg}/>
+                <NoContentLarge>
+                    게시된 추억이 없습니다.
+                </NoContentLarge>
+                <NoContentSmall>
+                    첫번째 추억을 올려보세요!
+                </NoContentSmall>
+                    <PostCreate to={`/createPost/${id}`}>
+                        추억 올리기
+                    </PostCreate>
+            </NoContentOutter>
+            }
             
         </DetailedPostOutter>
     )

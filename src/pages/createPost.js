@@ -8,6 +8,7 @@ import { GroupCreateContext } from "../components/contexts/groupCreateContext.js
 import { useParams } from "react-router-dom";
 import exitIcon from "../images/exitIcon.png";
 import PostUploadModal from "../components/modals/postUploadModal.js";
+import noContent from "../images/noContent.png";
 
 const CenterOutter=styled.div`
     display:flex;

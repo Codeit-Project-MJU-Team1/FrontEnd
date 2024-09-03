@@ -208,7 +208,22 @@ const CommentList= styled.div`
     margin-top:30px;
     gap:20px;
 `
+const NoContentLarge=styled.div`
+    margin-top:121px;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    color:#8D8D8D;
 
+`
+const NoContentSmall=styled.div`
+    margin-top:19px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    color:#8D8D8D;
+
+`
 
 function DetailedPost(){
     const {id,postId} = useParams();
@@ -446,12 +461,25 @@ function DetailedPost(){
                             )
                         }) 
                         :
-                        <></>
+                        <>
+                        <NoContentLarge>
+                            게시된 추억이 없습니다.
+                        </NoContentLarge>
+                        <NoContentSmall>
+                            첫번째 추억을 올려보세요!
+                        </NoContentSmall>
+                        </>
                     }
                 </CommentList>
                 
             </CommentsOutter>
+            {comments[0] ?
             <Pagination setPage={setPage} setPagiNum={setPagiNum} maxPagi={maxPagi} page={page} pagiNum={pagiNum}></Pagination>
+            :
+            <></>
+            }
+            
+            
             <PostEditModal modalOpen={editModalOpen} setModalOpen={setEditModalOpen} postId={postId} postValues={values}></PostEditModal>
             <PostDeleteModal modalOpen={deleteModalOpen} setModalOpen={setDeleteModalOpen} postId={postId}></PostDeleteModal>
             <CommentCreateModal modalOpen={commentCreateModalOpen} setModalOpen={setCommentCreateModalOpen} postId={postId}></CommentCreateModal>

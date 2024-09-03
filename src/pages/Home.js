@@ -6,13 +6,57 @@ import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { GroupCreateContext } from "../components/contexts/groupCreateContext.js";
 import { KeyContext } from "../components/contexts/keyContext.js";
+import noContentImg from "../images/noContent.png"
+import { Link } from "react-router-dom";
 
 const CenterOutter=styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
 `
+const NoContentOutter=styled.div`
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:1920px;
+    height:895px;
 
+`
+const NoContentImg=styled.img`
+    margin-top:200px;
+    width:100px;
+    height:100px;
+`
+const NoContentLarge=styled.div`
+    margin-top:40px;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    color:#8D8D8D;
+
+`
+const NoContentSmall=styled.div`
+    margin-top:20px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    color:#8D8D8D;
+
+`
+const GroupCreate=styled(Link)`
+    display:flex;
+    margin-top:180px;
+    width: 400px;
+    height: 50px;
+    border-radius: 6px;
+    background-color:#282828;
+    color: #FAFAFA;
+    align-items:center;
+    justify-content:center;
+    text-decoration: 'none';
+
+
+`
 
 function Home(){
     //그룹 만들기 버튼 on/off
@@ -216,12 +260,21 @@ function Home(){
             
             <CenterOutter>
                 <HeadSearch searchValues={searchValues} setSearchValues={setSearchValues} verifyValue={middleGroups1[0]}/>
-                {   middleGroups1[0] &&
+                {   middleGroups1[0] ?
                     <Groups searchValues={searchValues} middleGroups1={middleGroups1} middleGroups2={middleGroups2} middleGroups3={middleGroups3} middleGroups4={middleGroups4}/> 
-                }
-                {
-                    middleGroups1[0] ?
-                    <></> : <div></div>
+                    :
+                    <NoContentOutter>
+                        <NoContentImg src={noContentImg}/>
+                        <NoContentLarge>
+                            등록된 {searchValues.isPublic?"공개":"비공개"} 그룹이 없습니다.
+                        </NoContentLarge>
+                        <NoContentSmall>
+                            가장 먼저 그룹을 만들어 보세요!
+                        </NoContentSmall>
+                            <GroupCreate to={`/createGroup`}>
+                                그룹 만들기
+                            </GroupCreate>
+                    </NoContentOutter>
                 }
                 <ListLoading isLoadingButton={isLoadingButton} onLoadingClick={onLoadingClick}/>
             </CenterOutter>
