@@ -245,7 +245,7 @@ function InfoFoot({values,id}){
                     {values?.badges &&
                         <BadgeSlide badges={values.badges}></BadgeSlide>
                     }
-                    <BadgeSlide badges={["postStreak_7","groupLike_10000","postStreak_7","groupLike_10000","postStreak_7","groupLike_10000"]}></BadgeSlide>
+                    {/* <BadgeSlide badges={["postStreak_7","groupLike_10000","postStreak_7","groupLike_10000","postStreak_7","groupLike_10000"]}></BadgeSlide> */}
                 </BadgesOutter>
                 
                 <LikeButton onClick={onClick}/>
