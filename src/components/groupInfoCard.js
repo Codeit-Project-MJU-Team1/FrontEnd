@@ -4,6 +4,7 @@ import LikeButton from "./likeButton.js";
 import { useState } from "react";
 import GroupEditModal from "./modals/groupEditModal.js";
 import GroupDeleteModal from "./modals/groupDeleteModal.js";
+import BadgeSlide from "./badgeSlide.js";
 
 const CardInfoOutter=styled.div`
     display:flex;
@@ -184,9 +185,13 @@ const InfoFootOutter=styled.div`
 
     const BadgesOutter=styled.div`
             display:flex;
+            flex-grow:0;
             justify-content:start;
             height:52px;
+            width:500px
             gap: 10px;
+            overflow:hidden;
+            margin-right:70px;
         
         `
         const Badge=styled.div`
@@ -210,7 +215,7 @@ const InfoFootOutter=styled.div`
         )
     }
 
-function InfoFoot({id}){
+function InfoFoot({values,id}){
     const onClick=()=>{
         fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/like`, {
             method: "POST",
@@ -236,7 +241,13 @@ function InfoFoot({id}){
         <InfoFootOutter>
             <div>획득 배지</div>
             <InfoFootBottom>
-                <Badges id={id}/>
+                <BadgesOutter>
+                    {values?.badges &&
+                        <BadgeSlide badges={values.badges}></BadgeSlide>
+                    }
+                    <BadgeSlide badges={["postStreak_7","groupLike_10000","postStreak_7","groupLike_10000","postStreak_7","groupLike_10000"]}></BadgeSlide>
+                </BadgesOutter>
+                
                 <LikeButton onClick={onClick}/>
             </InfoFootBottom>
             
@@ -258,7 +269,7 @@ return(
         <CardImg src={values.imageUrl}/>
         <CardInfo>
             <InfoHead values={values} id={id}/>
-            <InfoFoot id={id}/>
+            <InfoFoot values={values}id={id}/>
         </CardInfo>
     </CardInfoOutter>
 )
