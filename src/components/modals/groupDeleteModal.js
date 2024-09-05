@@ -13,6 +13,7 @@ const CreateModal=styled.div`
     border-radius: 6px;
     background:white;
     padding:40px;
+    
     `
     const ModalOffButton=styled.img`
       display:position;
@@ -162,7 +163,6 @@ function InnerModal({setModalOpen,id}){
 function GroupDeleteModal({modalOpen,setModalOpen,id}){
     
     const modalBackground = useRef();
-
     const ModalContainer= styled.div`
         width: 100%;
         height: 100%;
@@ -173,7 +173,7 @@ function GroupDeleteModal({modalOpen,setModalOpen,id}){
         justify-content: center;
         align-items: center;
         background: rgba(0, 0, 0, 0.5);
-
+        z-index: 3000;
         
     `
     

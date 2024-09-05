@@ -15,7 +15,6 @@ const CreateModal=styled.div`
     border-radius: 6px;
     background:white;
     padding:40px;
-    
 `
 const ModalOffButton=styled.img`
       display:position;
@@ -270,6 +269,7 @@ function CommentCreateModal({modalOpen,setModalOpen, postId}){
         justify-content: center;
         align-items: center;
         background: rgba(0, 0, 0, 0.5);
+        z-index: 3000;
 
         
     `

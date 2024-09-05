@@ -269,6 +269,7 @@ function CommentEditModal({modalOpen,setModalOpen, postId ,commentValues}){
         justify-content: center;
         align-items: center;
         background: rgba(0, 0, 0, 0.5);
+        z-index: 3000;
 
         
     `
