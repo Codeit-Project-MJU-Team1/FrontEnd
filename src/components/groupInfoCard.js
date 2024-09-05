@@ -184,17 +184,10 @@ const InfoFootOutter=styled.div`
     `
 
     const BadgesOutter=styled.div`
-            display:flex;
-            flex-grow:0;
-            justify-content:start;
-            height:52px;
-            width:500px
-            gap: 10px;
-            overflow:hidden;
-            margin-right:70px;
         
         `
-        const Badge=styled.div`
+        
+    const Badge=styled.div`
             height: 52px;
             padding: 16px 30px 16px 30px;
             gap: 10px;
@@ -202,19 +195,7 @@ const InfoFootOutter=styled.div`
             background-color:#F4F4F4;
 
 
-        `
-    function Badges({id}){
-        
-        return(
-            <BadgesOutter>
-                <Badge></Badge>
-                <Badge></Badge>
-                <Badge></Badge>
-            </BadgesOutter>
-            
-        )
-    }
-
+    `
 function InfoFoot({setValues,values,id}){
     const onClick=()=>{
         fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/like`, {
@@ -249,7 +230,31 @@ function InfoFoot({setValues,values,id}){
             <div>획득 배지</div>
             <InfoFootBottom>
                 <BadgesOutter>
-                    {values?.badges &&
+                { values.badges?.map((slideContent)=>{ 
+                    if(slideContent == "postStreak_7"){
+                        return(
+                            <Badge style={{width:"280px"}} >{"👾  7일 연속 추억 등록"}</Badge>
+                        )
+                    }else if(slideContent == "groupLike_10000"){
+                        return(
+                            <Badge style={{width:"280px"}} >{"🌼  그룹 공감 1만 개 이상 받기"}</Badge>
+                        )
+                    }else if(slideContent == "postLike_10000"){
+                        return(
+                            <Badge style={{width:"280px"}}>{"💖  게시글 공감 1만 개 이상 받기"}</Badge>
+                        )
+                    }else if(slideContent == "postCreate_20"){
+                        return(
+                            <Badge style={{width:"230px"}} >{"👋  추억 20개 이상 등록"}</Badge>
+                        )
+                    }else if(slideContent == "createGroup_1Year"){
+                        return(
+                            <Badge style={{width:"220px"}} >{"🌕  그룹 생성 후 1년 달성"}</Badge>
+                        )
+                    }
+                    })
+                }
+                    {values?.badges?.length > 3  &&
                         <BadgeSlide badges={values.badges}></BadgeSlide>
                     }
                     {/* <BadgeSlide badges={["postStreak_7","groupLike_10000","postStreak_7","groupLike_10000","postStreak_7","groupLike_10000"]}></BadgeSlide> */}
