@@ -139,7 +139,7 @@ function Home(){
                         console.log(middleGroups4)
                     }
                 })
-                if(!middleGroups4[-1]){
+                if(!((middleGroups1.length%3==0)&&(middleGroups2.length%3==0)&&(middleGroups3.length%3==0)&&(middleGroups4.length%3==0))){
                     setIsLoadingButton(false)
                     setSearchValues({
                         ...searchValues,
@@ -227,12 +227,13 @@ function Home(){
                     ...searchValues,
                     "page" : 1,
                 })
-                if(!middleGroups4[-1]){
+                if(!((middleGroups1.length%3==0)&&(middleGroups2.length%3==0)&&(middleGroups3.length%3==0)&&(middleGroups4.length%3==0))){
                     setIsLoadingButton(false)
                     setSearchValues({
                         ...searchValues,
                         "page" : 0,
                     })
+                    return; // 마지막 로딩에서 그룹 로딩이 꽉안찼을 경우
                 }
             }else{
                 setIsLoadingButton(false)

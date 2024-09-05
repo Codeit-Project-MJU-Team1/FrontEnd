@@ -148,7 +148,7 @@ function DetailedGroup(){
     
     //그룹 내 추억 로딩
     
-    const [isLoadingButton,setIsLoadingButton]=useState(false);
+    const [isLoadingButton,setIsLoadingButton]=useState(true);
     const [postsValues,setPostsValues]=useState({
         option : "latest",
         search : "",
@@ -266,7 +266,7 @@ function DetailedGroup(){
                         console.log(middlePosts4)
                     }
                 })
-                if(!middlePosts4[-1]){
+                if(!((middlePosts1.length%3==0)&&(middlePosts2.length%3==0)&&(middlePosts3.length%3==0)&&(middlePosts1.length%4==0))){
                     setIsLoadingButton(false)
                     setPostsValues({
                         ...postsValues,
@@ -278,7 +278,7 @@ function DetailedGroup(){
                     ...postsValues,
                     "page" : postsValues?.page + 1,
                 }) 
-            }else{
+                }else{
                 setIsLoadingButton(false)
                 setPostsValues({
                     ...postsValues,
@@ -348,7 +348,7 @@ function DetailedGroup(){
                         
                     }
                 })
-                if(!middlePosts4[-1]){
+                if(!((middlePosts1.length%3==0)&&(middlePosts2.length%3==0)&&(middlePosts3.length%3==0)&&(middlePosts1.length%4==0))){
                     setIsLoadingButton(false)
                     setPostsValues({
                         ...postsValues,
