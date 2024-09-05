@@ -184,7 +184,7 @@ function PostCard({postID,Post,id}){
                                 <PostRes>
                                     <PostResImg src={commentIcon}/>
                                     <div>
-                                        {Post.commentCount ? Post.commentCount+1: 0}
+                                        {Post.commentCount ? Post.commentCount: 0}
                                     </div>
                                 </PostRes>
                             </Link>

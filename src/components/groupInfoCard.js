@@ -184,7 +184,8 @@ const InfoFootOutter=styled.div`
     `
 
     const BadgesOutter=styled.div`
-        
+        display:flex;
+        gap:10px;
         `
         
     const Badge=styled.div`
@@ -230,6 +231,8 @@ function InfoFoot({setValues,values,id}){
             <div>획득 배지</div>
             <InfoFootBottom>
                 <BadgesOutter>
+                {values?.badges?.length < 4  &&
+                <>
                 { values.badges?.map((slideContent)=>{ 
                     if(slideContent == "postStreak_7"){
                         return(
@@ -254,6 +257,9 @@ function InfoFoot({setValues,values,id}){
                     }
                     })
                 }
+                </>
+                }
+
                     {values?.badges?.length > 3  &&
                         <BadgeSlide badges={values.badges}></BadgeSlide>
                     }

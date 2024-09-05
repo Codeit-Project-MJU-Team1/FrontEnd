@@ -410,7 +410,7 @@ function DetailedPost(){
                                 <PostRes>
                                     <PostResImg src={CommentIcon}/>
                                     <div>
-                                    {values.commentCount ? values.commentCount+1: 0}
+                                    {values.commentCount ? values.commentCount: 0}
                                     </div>
                                 </PostRes>
                             </Link>
@@ -451,7 +451,7 @@ function DetailedPost(){
             </Link>
             <CommentsOutter>
                 <CommentHeader>
-                    댓글 {values.commentCount ? values.commentCount+1: 0}
+                    댓글 {values.commentCount ? values.commentCount: 0}
                 </CommentHeader>
                 <CommentsLine/>
                 <CommentList>

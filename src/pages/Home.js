@@ -227,6 +227,13 @@ function Home(){
                     ...searchValues,
                     "page" : 1,
                 })
+                if(!middleGroups4[-1]){
+                    setIsLoadingButton(false)
+                    setSearchValues({
+                        ...searchValues,
+                        "page" : 0,
+                    })
+                }
             }else{
                 setIsLoadingButton(false)
             }

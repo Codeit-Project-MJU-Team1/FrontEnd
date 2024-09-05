@@ -209,6 +209,7 @@ function InnerModal({setModalOpen,postId}){
                     console.log(data);
                     setDatas(data);
                     alert("등록이 완료 되었습니다.")
+                    window.location.reload()
                     }   
                 
             });

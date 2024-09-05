@@ -46,29 +46,35 @@ function Pagination({setPage,page,setPagiNum,pagiNum,maxPagi}){
                         <Link onClick={prev} class="page-link">{"<"}</Link>
                         </li>
                         <PageList>
+
                         <li class={pagiNum==page?"page-item active":"page-item"}>
                             <Link class="page-link" onClick={()=> pageSelect(pagiNum)}>{pagiNum+1}</Link>
                         </li>
-                        {( maxPagi<pagiNum+1 )||
+
+                        {( maxPagi<pagiNum+2 )||
                         <li class={pagiNum+1==page?"page-item active":"page-item"} aria-current="page">
                         <Link class="page-link" onClick={()=> pageSelect(pagiNum+1)}>{pagiNum+2}</Link>
                         </li>}
-                        { (maxPagi<pagiNum+2) ||
+
+                        { (maxPagi<pagiNum+3) ||
                             <li class={pagiNum+2==page?"page-item active":"page-item"}><Link class="page-link" onClick={()=> pageSelect(pagiNum+2)}>
                         {pagiNum+3}
                         </Link></li>}
-                        { (maxPagi < pagiNum+3) ||
+
+                        { (maxPagi < pagiNum+4) ||
                             <li class={pagiNum+3==page?"page-item active":"page-item"}>
                                 <Link class="page-link" onClick={()=> pageSelect(pagiNum+4)}>
                                 {pagiNum+3}
                             </Link>
                         </li>}
-                        { (maxPagi<pagiNum+4) ||
+
+                        { (maxPagi<pagiNum+5) ||
                         <li class={pagiNum+4==page?"page-item active":"page-item"}>
                             <Link class="page-link" onClick={pageSelect(()=> pagiNum+5)}>
                             {pagiNum+4}
                             </Link>
                         </li>}
+                        
                             </PageList>
                         <li class={pagiNum+4 < maxPagi ?
                             "page-item"
