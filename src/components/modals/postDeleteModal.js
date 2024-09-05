@@ -85,7 +85,7 @@ const ModalButton=styled.input`
 
 `
 
-function InnerModal({setModalOpen,postId}){
+function InnerModal({setModalOpen,id,postId}){
 
     const nav = useNavigate();
     // POST 관련 코드
@@ -122,7 +122,7 @@ function InnerModal({setModalOpen,postId}){
           .then((data) => {
             console.log(data?.message);
             alert(data?.message);
-            nav("/");
+            nav(`/group/${id}`);
             
             
           });
@@ -159,7 +159,7 @@ function InnerModal({setModalOpen,postId}){
 } 
 
 
-function PostDeleteModal({modalOpen,setModalOpen,postId}){
+function PostDeleteModal({id,modalOpen,setModalOpen,postId}){
     
     const modalBackground = useRef();
 
@@ -188,7 +188,7 @@ function PostDeleteModal({modalOpen,setModalOpen,postId}){
             //   }
             // }
               >
-                <InnerModal setModalOpen={setModalOpen} postId={postId}></InnerModal>
+                <InnerModal id={id} setModalOpen={setModalOpen} postId={postId}></InnerModal>
 
             </ModalContainer>
             }

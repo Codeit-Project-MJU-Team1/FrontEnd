@@ -167,6 +167,8 @@ function InnerModal({setModalOpen,postId,commentValues}){
                 if(data){
                     console.log("결과");
                     console.log(data)
+                    alert("댓글 삭제가 완료 되었습니다.")
+                    window.location.reload()
                 
                 }
             });

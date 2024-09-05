@@ -145,8 +145,7 @@ function DetailedGroup(){
     const [values,setValues]=useState({});
     const [postList,setPostList]=useState({});
 
-    const location= useLocation();
-    const navigate = useNavigate();
+    
     //그룹 내 추억 로딩
     
     const [isLoadingButton,setIsLoadingButton]=useState(false);
@@ -402,7 +401,7 @@ function DetailedGroup(){
     
     return(
         <DetailedPostOutter>
-            <GroupInfoCard values={values} id={id} />
+            <GroupInfoCard setValues={setValues} values={values} id={id} />
             <Line/>
             <GroupPostsHeaderOutter>
                 <DummyDiv/>

@@ -396,7 +396,7 @@ const PostMomentHandler= (e)=>{
                             console.log("결과");
                             console.log(data);
                             alert("수정이 완료 되었습니다.")
-                            
+                            window.location.reload()
                         }
                   });
                       
@@ -452,7 +452,7 @@ const PostMomentHandler= (e)=>{
                         console.log("결과");
                         console.log(data);
                         alert("수정이 완료 되었습니다.")
-                        
+                        window.location.reload()
                         }
                         
                           

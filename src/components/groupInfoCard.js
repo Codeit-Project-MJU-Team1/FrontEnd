@@ -215,7 +215,7 @@ const InfoFootOutter=styled.div`
         )
     }
 
-function InfoFoot({values,id}){
+function InfoFoot({setValues,values,id}){
     const onClick=()=>{
         fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/like`, {
             method: "POST",
@@ -230,8 +230,15 @@ function InfoFoot({values,id}){
         }).catch((err)=>{
             alert(err);
         }).then((data)=> {
+            if(data){
             console.log("받은 데이터");
             console.log(data);
+            setValues({
+                ...values,
+                "likeCount":values.likeCount +1,
+            })
+            }
+            
         })
     }
     
@@ -261,15 +268,14 @@ function InfoFoot({values,id}){
 
 
 
-function GroupInfoCard({values,id}){
-
+function GroupInfoCard({setValues,values,id}){
 return(
 
     <CardInfoOutter>
         <CardImg src={values.imageUrl}/>
         <CardInfo>
             <InfoHead values={values} id={id}/>
-            <InfoFoot values={values}id={id}/>
+            <InfoFoot setValues={setValues} values={values} id={id}/>
         </CardInfo>
     </CardInfoOutter>
 )

@@ -290,7 +290,7 @@ function InnerModal({setModalOpen,id}){
                             console.log(data);
                             setDatas(data);
                             alert("수정이 완료 되었습니다.")
-                            navigate(`/group/${id}`);
+                            window.location.reload()
                         }
                   });
                       
@@ -342,7 +342,7 @@ function InnerModal({setModalOpen,id}){
                         console.log(data);
                         setDatas(data);
                         alert("수정이 완료 되었습니다.")
-                        navigate(`/group/${id}`);
+                        window.location.reload()
                         }
                         
                           

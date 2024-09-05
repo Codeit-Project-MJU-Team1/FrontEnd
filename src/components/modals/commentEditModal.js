@@ -208,6 +208,7 @@ function InnerModal({setModalOpen,postId,commentValues}){
                     console.log(data);
                     setDatas(data);
                     alert("수정이 완료 되었습니다.")
+                    window.location.reload()
                     }   
                 
             });

@@ -355,13 +355,15 @@ function DetailedPost(){
         }).then((data)=> {
             console.log("받은 데이터");
             console.log(data);
+            setValues({...values,
+                "likeCount":values.likeCount+1,})
         })
     }
     
     
         
     
-    
+    // 진입 및 댓글 페이지마다 댓글 로딩
     useEffect(()=>{
         
         handleloadCommnets();
@@ -377,7 +379,7 @@ function DetailedPost(){
                         <EditorName>{values.nickname}</EditorName><Release>|    {values.isPublic? "공개":"비공개"}</Release>
                         </ReleaseOutter>
                         <Title>
-                            {values.content}
+                            {values.title}
                         </Title>
                         <Tags>
                         {
@@ -481,7 +483,7 @@ function DetailedPost(){
             
             
             <PostEditModal modalOpen={editModalOpen} setModalOpen={setEditModalOpen} postId={postId} postValues={values}></PostEditModal>
-            <PostDeleteModal modalOpen={deleteModalOpen} setModalOpen={setDeleteModalOpen} postId={postId}></PostDeleteModal>
+            <PostDeleteModal modalOpen={deleteModalOpen} setModalOpen={setDeleteModalOpen} id={id} postId={postId}></PostDeleteModal>
             <CommentCreateModal modalOpen={commentCreateModalOpen} setModalOpen={setCommentCreateModalOpen} postId={postId}></CommentCreateModal>
             <CommentEditModal modalOpen={CommentEditModalOpen} setModalOpen={setCommentEditModalOpen} postId={postId} commentValues={comment}></CommentEditModal>
             <CommentDeleteModal modalOpen={commentDeleteModalOpen} setModalOpen={setCommentDeleteModalOpen} postId={postId} commentValues={comment}></CommentDeleteModal>
