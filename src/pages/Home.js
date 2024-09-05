@@ -75,9 +75,16 @@ function Home(){
         keyword:"",
         page:0,
     })
+    const options = [
+        {  label: "최신순", value: "latest" },
+        {  label: "추억순", value: "mostPosted" },
+        {  label: "공감순", value: "mostLiked" },
+        {  label: "뱃지순", value: "mostBadge" },
+      ]
+
     const onLoadingClick = () =>{
         
-        fetch(`https://backend-b4qi.onrender.com/api/groups?page=${searchValues.page}&pageSize=${12}&sortBy=${encodeURIComponent(searchValues.option)}${ searchValues.keyword ? "&keyword="+encodeURIComponent(searchValues.keyword): "" }&isPublic=${searchValues.isPublic}`, {
+        fetch(`https://backend-b4qi.onrender.com/api/groups?page=${searchValues.page}&pageSize=${12}&sortBy=${searchValues.option}${ searchValues.keyword ? "&keyword="+searchValues.keyword: "" }&isPublic=${searchValues.isPublic}`, {
             method: "GET",
         }
         ).then((response) => {
@@ -155,12 +162,14 @@ function Home(){
         })
     }
     const handleload = async () => {
-        
-
-        fetch(`https://backend-b4qi.onrender.com/api/groups?page=${0}&pageSize=${12}&sortBy=${encodeURIComponent(searchValues.option)}${ searchValues.keyword ? "&keyword="+encodeURIComponent(searchValues.keyword): "" }&isPublic=${searchValues.isPublic}`, {
+        console.log("핸들로드 하기 직전 option")
+        console.log(searchValues.option);
+        fetch(`https://backend-b4qi.onrender.com/api/groups?page=${0}&pageSize=${12}&sortBy=${searchValues.option}${ searchValues.keyword ? "&keyword="+searchValues.keyword: "" }&isPublic=${searchValues.isPublic}`, {
             method: "GET",
         }
         ).then((response) => {
+            console.log("핸들로드 한 직후 option")
+            console.log(searchValues.option);
               if (response.ok === true) {
                 console.log("원본")
                 console.log(response)
@@ -168,6 +177,7 @@ function Home(){
               }
               throw new Error("에러 발생!");
         }).catch((err)=>{
+            console.log(err)
             alert(err);
         }).then((data)=> {
             console.log("받은 데이터");
@@ -259,7 +269,7 @@ function Home(){
         return (
             
             <CenterOutter>
-                <HeadSearch searchValues={searchValues} setSearchValues={setSearchValues} verifyValue={middleGroups1[0]}/>
+                <HeadSearch options={options} searchValues={searchValues} setSearchValues={setSearchValues} verifyValue={middleGroups1[0]}/>
                 {   middleGroups1[0] ?
                     <Groups searchValues={searchValues} middleGroups1={middleGroups1} middleGroups2={middleGroups2} middleGroups3={middleGroups3} middleGroups4={middleGroups4}/> 
                     :

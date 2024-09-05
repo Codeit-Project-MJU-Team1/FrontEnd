@@ -102,7 +102,7 @@ function Buttons({onHandler,offHandler}){
 }
 
 
-function HeadSearch({searchValues,setSearchValues}){
+function HeadSearch({searchValues,setSearchValues,options}){
     const onChange = (e) =>{
         setSearchValues({
             ...searchValues,
@@ -135,7 +135,7 @@ function HeadSearch({searchValues,setSearchValues}){
                 <SearchInput value={searchValues?.search} onChange={onChange} type="text" placeholder="그룹명을 검색해주세요"/>
             </SearchTab>
 
-            <SortSelect setSearchValues={setSearchValues} searchValues={searchValues}/>
+            <SortSelect options={options} setSearchValues={setSearchValues} searchValues={searchValues}/>
         </HeadSearchOuter>
     );
 }

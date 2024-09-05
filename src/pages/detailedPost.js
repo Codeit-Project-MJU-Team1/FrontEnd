@@ -463,10 +463,10 @@ function DetailedPost(){
                         :
                         <>
                         <NoContentLarge>
-                            게시된 추억이 없습니다.
+                            게시된 댓글이 없습니다.
                         </NoContentLarge>
                         <NoContentSmall>
-                            첫번째 추억을 올려보세요!
+                            첫번째 댓글을 올려보세요!
                         </NoContentSmall>
                         </>
                     }

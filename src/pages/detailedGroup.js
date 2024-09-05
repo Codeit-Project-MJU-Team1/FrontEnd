@@ -158,6 +158,11 @@ function DetailedGroup(){
         page:0,
         groupId: id,
     })
+    const options = [
+        {  label: "최신순", value: "latest" },
+        {  label: "댓글순", value: "mostCommented" },
+        {  label: "공감순", value: "mostLiked" },
+      ]
     
 
     //그룹 상세 제반사항 로딩
@@ -176,7 +181,7 @@ function DetailedGroup(){
                 
             // }
             const handleload = async () => {
-    
+                
                 fetch(`https://backend-b4qi.onrender.com/api/groups/${id}?groupId=${id}`, {
                     method: "GET",
                 }
@@ -205,8 +210,9 @@ function DetailedGroup(){
     
     
     const onLoadingClick = () =>{
-        
-        fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/posts?page=${postsValues.page}&pageSize=${12}&sortBy=${encodeURIComponent(postsValues.option)}${ postsValues.keyword ? "&keyword="+encodeURIComponent(postsValues.keyword): "" }&isPublic=${postsValues.isPublic}`, {
+        console.log("보내기 직전")
+        console.log(postsValues.option)
+        fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/posts?page=${postsValues.page}&pageSize=${12}&sortBy=${postsValues.option}${ postsValues.keyword ? "&keyword="+postsValues.keyword: "" }&isPublic=${postsValues.isPublic}`, {
             method: "GET",
         }
         ).then((response) => {
@@ -285,8 +291,10 @@ function DetailedGroup(){
     }
     const handleload = async () => {
         
-
-        fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/posts?page=${0}&pageSize=${12}&sortBy=${encodeURIComponent(postsValues.option)}${ postsValues.keyword ? "&keyword="+encodeURIComponent(postsValues.keyword): "" }&isPublic=${postsValues.isPublic}`, {
+        console.log("보내기 직전")
+        console.log(postsValues.option)
+        
+        fetch(`https://backend-b4qi.onrender.com/api/groups/${id}/posts?page=${0}&pageSize=${12}&sortBy=${postsValues.option}${ postsValues.keyword ? "&keyword="+postsValues.keyword: "" }&isPublic=${postsValues.isPublic}`, {
             method: "GET",
         }
         ).then((response) => {
@@ -401,7 +409,7 @@ function DetailedGroup(){
                 <PostsHeadName>추억 목록</PostsHeadName>
                 <CreatePostButton id={id}/>
             </GroupPostsHeaderOutter>
-            <HeadSearch searchValues={postsValues} setSearchValues={setPostsValues}/>
+            <HeadSearch options={options} searchValues={postsValues} setSearchValues={setPostsValues}/>
             { middlePosts1[0] ?
             <>
                 <Posts middlePosts1={middlePosts1} middlePosts2={middlePosts2} middlePosts3={middlePosts3} middlePosts4={middlePosts4} postsValues={postsValues} />
