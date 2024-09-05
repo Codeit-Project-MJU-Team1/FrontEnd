@@ -360,7 +360,7 @@ const PostMomentHandler= (e)=>{
                     "tags": values.tags,
                     "location": values.location,
                     "moment": values.moment,
-                    "isPublic": true,
+                    "isPublic": values.isPublic ? true: false,
                 }
                   console.log(JSON.stringify(moidifiedValues))
                   
@@ -414,7 +414,7 @@ const PostMomentHandler= (e)=>{
                     "tags": values.tags,
                     "location": values.location,
                     "moment": values.moment,
-                    "isPublic": true,
+                    "isPublic": values.isPublic ? true: false,
                 }
                 
                   console.log(JSON.stringify(moidifiedValues))
