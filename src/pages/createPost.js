@@ -225,12 +225,17 @@ function CreatePost(){
     }
 
     const PostTagHandler= (e)=>{
-        
+        if(e.key === "Enter"){
+            e.preventDefault();
+            return;
+        }
         setTag(e.target.value);
         }
     
     const PostTagsHandler= (e)=>{
-        
+        if(tag=="" || tag[0] ==" " || tag[-1] ==" "){
+            return;
+        }
         if(e.key === "Enter"){
                 if(tags?.indexOf(e.target.value) == -1){
                     
@@ -240,22 +245,18 @@ function CreatePost(){
                         return;
                 }
             console.log("입력");
-            console.log(tag);
-            console.log(typeof(tags))
-            console.log(tags)
-            console.log(tag)
-
-            
-            setTags([...tags,e.target.value]);
+            console.log(e.target.value);
+            setTags((prvTags)=>[...prvTags,e.target.value]);
             console.log(tags)
             setTag("");
         }
         }
 
     const tagDeleteHandler= (e)=>{
-        console.log(`${e}번째 tag를 지우셨습니다.`)
-        const prevTags= tags;
-        setTags(prevTags.splice(e))
+        let prevTags = tags;
+        console.log(`${prevTags?.indexOf(e)}번째 tag를 지우셨습니다.`)
+        prevTags.splice(prevTags.indexOf(e),1)
+        setTags([...prevTags])
         console.log(tags)
         
 
@@ -351,13 +352,12 @@ const PostMomentHandler= (e)=>{
                     <NameInput type="text" value={tag} onChange={PostTagHandler} onKeyDown={PostTagsHandler} placeholder="태그 입력 후 Enter"/>
                     <TagsOutter>
                         {tags?.map( (e)=>{
-                            console.log(e)
                             return(
                                 <Tag key={e+1} >
                                     <TagName>
                                     {"#"+e}
                                     </TagName>
-                                    <TagDelete key={e+1} src={exitIcon} onClick={()=>{tagDeleteHandler(tags?.indexOf(e))}}>
+                                    <TagDelete key={e+1} src={exitIcon} onClick={()=>{tagDeleteHandler(e)}}>
                                     </TagDelete>
                                 </Tag>
                             

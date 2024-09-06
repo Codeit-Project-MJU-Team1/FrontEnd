@@ -248,36 +248,39 @@ function InnerModal({setModalOpen,postId,postValues}){
     }
 
     const PostTagHandler= (e)=>{
-        
         setTag(e.target.value);
-        }
+    }
     
     const PostTagsHandler= (e)=>{
-        
+        const input= document.querySelector('input[name-tags-outside]');
+        if(tag=="" || tag[0] ==" " || tag[-1] ==" "){
+            return;
+        }
         if(e.key === "Enter"){
-                if(tags?.indexOf(tag) == -1){
-                    
-        
+                if(tags?.indexOf(e.target.value) == -1){
+                        
+            
                 }else{
-                        setTag("");
-                        return;
+                    setTag("");
+                    return;
                 }
                 console.log("입력");
-                console.log(tag);
-                console.log(typeof(tags))
+                console.log(e.target.value);
+                setTags((prvTags)=>[...prvTags,e.target.value]);
                 console.log(tags)
-                console.log(tag)
-
-            
-            setTags(tags => [...tags,tag]);
-            console.log(tags)
-            setTag("");
-        }
-        }
-
-    const tagDeleteHandler= (e)=>{
-        tags.splice(e,1)
+                setTag("");
+            }
     }
+
+        const tagDeleteHandler= (e)=>{
+            let prevTags = tags;
+            console.log(`${prevTags?.indexOf(e)}번째 tag를 지우셨습니다.`)
+            prevTags.splice(prevTags.indexOf(e),1)
+            setTags([...prevTags])
+            console.log(tags)
+            
+    
+        }
 
 const PostLocationHandler= (e)=>{
         
@@ -326,7 +329,7 @@ const PostMomentHandler= (e)=>{
         setValues(
             {
                 ...values,
-                "tags": tags,
+                "tags": [...tags],
             }
         )
         if (img) {
@@ -504,7 +507,7 @@ const PostMomentHandler= (e)=>{
                                     <TagName>
                                     {"#"+e}
                                     </TagName>
-                                    <TagDelete src={exitIcon} onClick={()=>{tagDeleteHandler(tags?.findindex((tag)=>tag == e))}}>
+                                    <TagDelete key={e+1} src={exitIcon} onClick={()=>{tagDeleteHandler(e)}}>
                                     </TagDelete>
                                 </Tag>
                             
