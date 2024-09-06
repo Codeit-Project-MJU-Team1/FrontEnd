@@ -266,7 +266,7 @@ function DetailedGroup(){
                         console.log(middlePosts4)
                     }
                 })
-                if(!((middlePosts1.length%3==0)&&(middlePosts2.length%3==0)&&(middlePosts3.length%3==0)&&(middlePosts1.length%4==0))){
+                if(data.length%12!=0){
                     setIsLoadingButton(false)
                     setPostsValues({
                         ...postsValues,
@@ -348,7 +348,7 @@ function DetailedGroup(){
                         
                     }
                 })
-                if(!((middlePosts1.length%3==0)&&(middlePosts2.length%3==0)&&(middlePosts3.length%3==0)&&(middlePosts1.length%4==0))){
+                if(data.length%12!=0){
                     setIsLoadingButton(false)
                     setPostsValues({
                         ...postsValues,

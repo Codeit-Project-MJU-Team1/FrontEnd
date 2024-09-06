@@ -276,7 +276,7 @@ function InnerModal({setModalOpen,postId,postValues}){
         }
 
     const tagDeleteHandler= (e)=>{
-
+        tags.splice(e,1)
     }
 
 const PostLocationHandler= (e)=>{
@@ -504,7 +504,7 @@ const PostMomentHandler= (e)=>{
                                     <TagName>
                                     {"#"+e}
                                     </TagName>
-                                    <TagDelete src={exitIcon} onClick={()=>{tagDeleteHandler(e)}}>
+                                    <TagDelete src={exitIcon} onClick={()=>{tagDeleteHandler(tags?.findindex((tag)=>tag == e))}}>
                                     </TagDelete>
                                 </Tag>
                             

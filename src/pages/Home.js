@@ -139,7 +139,7 @@ function Home(){
                         console.log(middleGroups4)
                     }
                 })
-                if(!((middleGroups1.length%3==0)&&(middleGroups2.length%3==0)&&(middleGroups3.length%3==0)&&(middleGroups4.length%3==0))){
+                if(data.length%12!=0){
                     setIsLoadingButton(false)
                     setSearchValues({
                         ...searchValues,
@@ -227,7 +227,7 @@ function Home(){
                     ...searchValues,
                     "page" : 1,
                 })
-                if(!((middleGroups1.length%3==0)&&(middleGroups2.length%3==0)&&(middleGroups3.length%3==0)&&(middleGroups4.length%3==0))){
+                if(data.length%12!=0){
                     setIsLoadingButton(false)
                     setSearchValues({
                         ...searchValues,

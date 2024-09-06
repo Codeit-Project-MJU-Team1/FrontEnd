@@ -52,7 +52,7 @@ function BadgeSlide({badges}) {
       slidesPerView={badgesNum}
       onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
-      style={{width:`${totalLength}px`,gap:"10px",display:"flex",justifyContent:"start"}}
+      style={{width:`${totalLength>1000? 1000: totalLength}px`,gap:"10px",display:"flex",justifyContent:"start"}}
     >
         {
         badges.map((slideContent) => {

@@ -232,27 +232,32 @@ function CreatePost(){
     const PostTagsHandler= (e)=>{
         
         if(e.key === "Enter"){
-                if(tags?.indexOf(tag) == -1){
+                if(tags?.indexOf(e.target.value) == -1){
                     
         
                 }else{
                         setTag("");
                         return;
                 }
-                console.log("입력");
-                console.log(tag);
-                console.log(typeof(tags))
-                console.log(tags)
-                console.log(tag)
+            console.log("입력");
+            console.log(tag);
+            console.log(typeof(tags))
+            console.log(tags)
+            console.log(tag)
 
             
-            setTags(tags => [...tags,tag]);
+            setTags([...tags,e.target.value]);
             console.log(tags)
             setTag("");
         }
         }
 
     const tagDeleteHandler= (e)=>{
+        console.log(`${e}번째 tag를 지우셨습니다.`)
+        const prevTags= tags;
+        setTags(prevTags.splice(e))
+        console.log(tags)
+        
 
     }
 
@@ -352,7 +357,7 @@ const PostMomentHandler= (e)=>{
                                     <TagName>
                                     {"#"+e}
                                     </TagName>
-                                    <TagDelete src={exitIcon} onClick={()=>{tagDeleteHandler(e)}}>
+                                    <TagDelete key={e+1} src={exitIcon} onClick={()=>{tagDeleteHandler(tags?.indexOf(e))}}>
                                     </TagDelete>
                                 </Tag>
                             
