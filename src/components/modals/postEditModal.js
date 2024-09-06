@@ -76,7 +76,7 @@ const NameOutter=styled.div`
     width:400px;
 `
 const NameInput=styled.input`
-    width: 380px;
+    width: 400px;
     height: 45px;
     gap: 0px;
     border-radius: 6px;
@@ -123,7 +123,7 @@ const GruopIntroOutter=styled.div`
 
 `
 const PostIntroInput=styled.textarea`
-    width: 380px;
+    width: 400px;
     height: 110px;
     gap: 0px;
     border-radius: 6px;
@@ -138,6 +138,7 @@ const PostIntroInput=styled.textarea`
     text-align: left;
     padding-top:20px;
     padding-left:20px;
+    background-color:#FAFAFA;S
 
 
 `
@@ -159,7 +160,7 @@ const PostPWOutter=styled.div`
     height:75px
 `
 const PostPW =styled.input`
-    width: 380px;
+    width: 400px;
     height: 45px;
     gap: 0px;
     border-radius: 6px;

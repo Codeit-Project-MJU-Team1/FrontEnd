@@ -22,7 +22,7 @@ const LIkeIcon=styled.img`
 function LikeButton({onClick}){
     
     return(
-    <Link onClick={onClick}>
+    <Link style={{color:"#282828",}} onClick={onClick}>
         <LikeButtonOutter>
             <LIkeIcon src={Icon}/>
             <div>

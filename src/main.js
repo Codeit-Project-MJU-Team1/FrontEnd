@@ -18,7 +18,6 @@ import PrivatePostAccess from "./pages/privatePostAccess.js";
 const MainBackground =styled.div`
     background-color:#FAFAFA;
     width:1920px;
-    padding-bottom:120px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -33,10 +32,11 @@ function Main(){
     const [key,setKey]= useState(""); 
     
     return(
-        <MainBackground>
+        
             <GroupCreateContext.Provider value={{isCreateButton,setIsCreateButton}}>
             <KeyContext.Provider value={{key,setKey}}>
                     <BrowserRouter>
+                    <MainBackground>
                         <App/>
                         <Routes>
                             <Route path="/" Component={Home}/>
@@ -49,10 +49,11 @@ function Main(){
                             <Route path="/Test" Component={Test}/>
                             <Route path= "/*" Component={NotFound}/>
                         </Routes>
+                        </MainBackground>
                     </BrowserRouter>
                     </KeyContext.Provider>
                 </GroupCreateContext.Provider>
-        </MainBackground>
+    
     );
 };
 

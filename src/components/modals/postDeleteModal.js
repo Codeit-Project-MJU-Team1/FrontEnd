@@ -14,34 +14,31 @@ const CreateModal=styled.div`
     background:white;
     padding:40px;
     `
-    const ModalOffButton=styled.img`
-      display:position;
-      position:absolute;
-      width:30px;
-      height:30px;
-      top:20px;
-      right:20px;
+const ModalOffButton=styled.img`
+    display:position;
+    position:absolute;
+    width:30px;
+    height:30px;
+    top:20px;
+    right:20px;
 
-    `
+`
 
-    const InputOutter=styled.form`
+const InputOutter=styled.form`
+        margin-top:40px;
         width:400px;
         gap:40px;
-    `
-    const Headname=styled.h3`
+`
+const Headname=styled.h3`
         font-size:16px;
-    `
-
- 
-
-
+`
 
 const GroupPWOutter=styled.div`
     width:400px;
     height:75px
 `
 const GroupPW =styled.input`
-    width: 380px;
+    width: 400px;
     height: 45px;
     gap: 0px;
     border-radius: 6px;

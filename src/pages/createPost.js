@@ -34,12 +34,14 @@ const InputOutters=styled.div`
     gap:40px;
 `
 const InputOutter=styled.div`
+    display:flex;
+    flex-direction:column;
     width:400px;
     gap:40px;
 `
 const Line=styled.div`
-    width:2px;
-    height:100%;
+    width:1px;
+    height:575px;
     background-color:#DDDDDD;
 `
 const Headname=styled.h3`
@@ -50,7 +52,7 @@ const NameOutter=styled.div`
     width:400px;
 `
 const NameInput=styled.input`
-    width: 380px;
+    width: 400px;
     height: 45px;
     gap: 0px;
     border-radius: 6px;
@@ -84,21 +86,19 @@ const TagDelete=styled.img`
 
 
 const RepresentImgOutter=styled.div`
-    margin-top:40px;
     width:400px;
     height:75px
 `
 
 
 const GruopIntroOutter=styled.div`
-    margin-top:40px;
     width:400px;
     height:150px
 
 `
 const PostIntroInput=styled.textarea`
-    width: 380px;
-    height: 110px;
+    width: 400px;
+    height: 120px;
     gap: 0px;
     border-radius: 6px;
     border: 1px;
@@ -112,13 +112,14 @@ const PostIntroInput=styled.textarea`
     text-align: left;
     padding-top:20px;
     padding-left:20px;
+    background-color:#FAFAFA;
 
 
 `
 
 
 const PostReleaseOutter=styled.div`
-    margin-top:40px;
+    
     width:104px;
     height:64px;
     font-weight: 500;
@@ -128,7 +129,6 @@ const PostReleaseOutter=styled.div`
 `
 
 const PostPWOutter=styled.div`
-    margin-top:40px;
     width:400px;
     height:75px
 `

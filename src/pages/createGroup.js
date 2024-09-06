@@ -10,6 +10,7 @@ const CenterOutter=styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
+    background-color:#FAFAFA;
 `
 const PageName=styled.h2`
     margin-top:40px;
@@ -36,7 +37,7 @@ const GroupNameOutter=styled.div`
     height:75px
 `
 const GroupNameInput=styled.input`
-    width: 380px;
+    width: 400px;
     height: 45px;
     gap: 0px;
     border-radius: 6px;
@@ -59,7 +60,7 @@ const GruopIntroOutter=styled.div`
 
 `
 const GroupIntroInput=styled.textarea`
-    width: 380px;
+    width: 400px;
     height: 110px;
     gap: 0px;
     border-radius: 6px;
@@ -74,6 +75,7 @@ const GroupIntroInput=styled.textarea`
     text-align: left;
     padding-top:20px;
     padding-left:20px;
+    background-color:#FAFAFA;
 
 
 `
@@ -95,7 +97,7 @@ const GroupPWOutter=styled.div`
     height:75px
 `
 const GroupPW =styled.input`
-    width: 380px;
+    width: 400px;
     height: 45px;
     gap: 0px;
     border-radius: 6px;

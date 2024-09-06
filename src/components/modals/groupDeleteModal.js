@@ -38,11 +38,12 @@ const CreateModal=styled.div`
 
 
 const GroupPWOutter=styled.div`
+    margin-top:40px;
     width:400px;
     height:75px
 `
 const GroupPW =styled.input`
-    width: 380px;
+    width: 400px;
     height: 45px;
     gap: 0px;
     border-radius: 6px;

@@ -19,11 +19,13 @@ const CommentTopOutter=styled.div`
 `
 const CommentUser=styled.div`
 
-
 `
 const CommentInfo=styled.div`
+    display:flex;
+    gap:8px;
     font-weight: 400;
-    font-color:#B8B8B8;
+    color:#B8B8B8;
+    
 
 `
 const CommentBottom=styled.div`
@@ -36,6 +38,7 @@ const CommentCentent=styled.div`
 
 `
 const CommentModifyButtons=styled.div`
+    display:flex;
     gap:20px;
 `
 const CommentModifyButton=styled.img`
@@ -50,7 +53,7 @@ const CommentLine= styled.div`
     background-color: #DDDDDD;
     margin-top:19px;
 `
-// ,commentId,onModifyClick,onDeleteClick
+// commentId,onModifyClick,onDeleteClick
 function Comment({cmt,scet,scdt,setComment}){
     const date =new Date(cmt.createdAt);
     console.log(cmt)
@@ -62,7 +65,7 @@ function Comment({cmt,scet,scdt,setComment}){
                                 {cmt.nickname}
                             </CommentUser>
                             <CommentInfo>
-                               { `${date.getFullYear()}.${date.getMonth()}.${date.getDate()}  ${date.getHours()}:${date.getMinutes()}`}
+                               <span>{ `${date.getFullYear()}.${date.getMonth()}.${date.getDate()}`}</span> <span>{`${date.getHours()}:${date.getMinutes()}`}</span>
                             </CommentInfo>
                         </CommentTopOutter>
                         <CommentBottom>
@@ -70,12 +73,16 @@ function Comment({cmt,scet,scdt,setComment}){
                                 {cmt.content}
                             </CommentCentent>
                             <CommentModifyButtons>
+                                <div>{/* gap 적용을 위한 div */}
                                 <Link onClick={()=>{scet(true)}}>
                                     <CommentModifyButton src={CommentModifyIcon}/>
                                 </Link>
+                                </div>
+                                <div>{/* gap 적용을 위한 div */}
                                 <Link onClick={()=>{scdt(true)}}>
                                     <CommentModifyButton src={CommentDelete}/>
                                 </Link>
+                                </div>
                             </CommentModifyButtons>
                         </CommentBottom>
                         <CommentLine/>

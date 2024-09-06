@@ -57,6 +57,7 @@ const PasswordLabel=styled.label`
 
 `
 const PasswordInput=styled.input`
+    padding-left:20px;
     width: 400px;
     height: 45px;
     gap: 0px;

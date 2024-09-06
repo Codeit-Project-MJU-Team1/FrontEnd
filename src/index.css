@@ -22,6 +22,10 @@ input{
   padding:0;
   padding-block: 0;
   padding-inline: 0;
+  background-color:#FAFAFA;
+}
+button{
+  background-color:#FAFAFA;
 }
 
 a:link { 

@@ -59,7 +59,7 @@ const EditorName=styled.div`
 `
 
 const Release=styled.div`
-    font-color:#8D8D8D;
+    color:#8D8D8D;
 `
 
 const Title=styled.div`
@@ -97,7 +97,7 @@ const PostEnv=styled.div`
 const PostResOutter=styled.div`
     display:flex;
     gap:20px;
-    font-color: #8D8D8D;
+    color: #8D8D8D;
     font-size: 14px;
     font-weight: 400;
     text-align: left;
@@ -138,9 +138,10 @@ const PostModifyOutter=styled.div`
 
 `
 const PostEdit=styled.div`
+color:#282828;
 `
 const PostDelete=styled.div`
-    font-color:#8D8D8D;
+    color:#282828;
 `
 
 const TopLine =styled.div`
@@ -163,11 +164,17 @@ const PostImg=styled.img`
     border-radius: 6px;
 
 `
-const PostContent=styled.div`
+const PostContent=styled.p`
     margin-top:60px;
     font-size: 20px;
     font-weight: 400;
     text-align: left;
+
+`
+const CommentButtonOutter=styled.div`
+    margin-top:120px;
+
+
 
 `
 const CommentButton=styled.div`
@@ -176,7 +183,6 @@ const CommentButton=styled.div`
     align-items:center;
     width: 400px;
     height: 50px;
-    margin-top:120px;
     gap: 0px;
     border-radius: 6px;
     background-color: #282828;
@@ -376,7 +382,7 @@ function DetailedPost(){
                 <PostHeaderStart>
                     <TopInfo>
                         <ReleaseOutter>
-                        <EditorName>{values.nickname}</EditorName><Release>|    {values.isPublic? "공개":"비공개"}</Release>
+                        <EditorName>{values.nickname}</EditorName><Release>|</Release><Release>{values.isPublic? "공개":"비공개"}</Release>
                         </ReleaseOutter>
                         <Title>
                             {values.title}
@@ -444,11 +450,13 @@ function DetailedPost(){
                     {values.content}
                 </PostContent>
             </PostOutter>
+            <CommentButtonOutter>
             <Link onClick={()=> setCommentCreateModalOpen(true)}>
                 <CommentButton>
                     댓글 등록하기
                 </CommentButton>
             </Link>
+            </CommentButtonOutter>
             <CommentsOutter>
                 <CommentHeader>
                     댓글 {values.commentCount ? values.commentCount: 0}

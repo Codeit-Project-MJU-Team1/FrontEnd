@@ -83,7 +83,7 @@ const NoContentSmall=styled.div`
     color:#8D8D8D;
 
 `
-const PostCreate=styled(Link)`
+const PostCreate=styled.div`
     display:flex;
     margin-top:180px;
     width: 400px;
@@ -423,9 +423,13 @@ function DetailedGroup(){
                 <NoContentSmall>
                     첫번째 추억을 올려보세요!
                 </NoContentSmall>
-                    <PostCreate to={`/createPost/${id}`}>
-                        추억 올리기
-                    </PostCreate>
+                    <div>
+                        <Link to={`/createPost/${id}`}>
+                            <PostCreate>
+                            추억 올리기
+                            </PostCreate>
+                        </Link>
+                    </div>
             </NoContentOutter>
             }
             

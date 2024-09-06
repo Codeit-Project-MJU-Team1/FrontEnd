@@ -35,13 +35,12 @@ const SearchInput=styled.input`
 
 `
 
-//정렬선택기능: 추후 구현 필요 
+//정렬선택기능 
 const SortSelect=styled(MakeSelect)`
     width: 160px;
     height: 45px;
     gap: 0px;
     border: 1px;
-    opacity: 0px;
     margin: 0 0 0 20px;
 ` 
 const SearchImg=styled.img`

@@ -40,7 +40,7 @@ const NicknameOutter=styled.div`
         margin-top:60px;
 `
 const NicknameInput=styled.input`
-        width: 380px;
+        width: 400px;
         height: 45px;
         gap: 0px;
         border-radius: 6px;
@@ -58,7 +58,7 @@ const GruopIntroOutter=styled.div`
 
 `
 const ContentInput=styled.textarea`
-    width: 380px;
+    width: 400px;
     height: 110px;
     gap: 0px;
     border-radius: 6px;
@@ -73,6 +73,7 @@ const ContentInput=styled.textarea`
     text-align: left;
     padding-top:20px;
     padding-left:20px;
+    background-color:#FAFAFA;
 
 
 `

@@ -44,8 +44,8 @@ const PWOutter=styled.div`
     height:75px
 `
 const PW =styled.input`
-    width: 380px;
-    height: 45px;
+    width: 400px;
+    height:45px;
     gap: 0px;
     border-radius: 6px;
     border: 1px solid #DDDDDD;

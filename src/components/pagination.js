@@ -39,7 +39,7 @@ function Pagination({setPage,page,setPagiNum,pagiNum,maxPagi}){
         <nav aria-label="...">
                     <ul class="pagination">
                         
-                        <li class={pagiNum+1 > 1 ?
+                        <li style={{marginRight:"20px"}} class={pagiNum+1 > 1 ?
                             "page-item"
                             :
                             "page-item disabled"}>
@@ -77,7 +77,7 @@ function Pagination({setPage,page,setPagiNum,pagiNum,maxPagi}){
                         </li>}
                         
                             </PageList>
-                        <li class={pagiNum+5 < maxPagi ?
+                        <li style={{marginLeft :"20px",}} class={pagiNum+5 < maxPagi ?
                             "page-item"
                             :
                             "page-item disabled"}>

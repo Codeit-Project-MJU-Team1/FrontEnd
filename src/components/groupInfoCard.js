@@ -46,6 +46,8 @@ const InfoHeadOutter=styled.div`
         justify-content:space-between;
         color:#8D8D8D;
         margin-right:15px;
+        gap:15px;
+        
     `
     const InfoHeadTopFragLeft=styled.div`
         color:#282828;
@@ -117,14 +119,18 @@ function InfoHead({values , id}){
                         </div>
                 </InfoHeadTopFrag>
                 <InfoHeadTopFrag>
-                    <InfoHeadTopFragLeft>
+                    
                         <Link onClick={editModalHandler}>
+                        <InfoHeadTopFragLeft>
                         그룹 정보 수정하기
+                        </InfoHeadTopFragLeft>
                         </Link>
-                    </InfoHeadTopFragLeft>
+                    
                     <div style={{marginLeft: '25px'}}>
                         <Link onClick={deleteModalHandler}>
+                        <InfoHeadTopFragLeft>
                         그룹 삭제하기
+                        </InfoHeadTopFragLeft>
                         </Link>
                     </div>
                 </InfoHeadTopFrag>
