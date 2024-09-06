@@ -21,7 +21,7 @@ function Pagination({setPage,page,setPagiNum,pagiNum,maxPagi}){
         
     }
     const next= ()=>{
-        if(pagiNum+4<maxPagi-1){
+        if(pagiNum+4<maxPagi){
             setPagiNum(pagiNum+1);
             console.log("next")
         }
@@ -57,26 +57,27 @@ function Pagination({setPage,page,setPagiNum,pagiNum,maxPagi}){
                         </li>}
 
                         { (maxPagi<pagiNum+3) ||
-                            <li class={pagiNum+2==page?"page-item active":"page-item"}><Link class="page-link" onClick={()=> pageSelect(pagiNum+2)}>
+                            <li class={pagiNum+2==page?"page-item active":"page-item"}>
+                        <Link class="page-link" onClick={()=> pageSelect(pagiNum+2)}>
                         {pagiNum+3}
                         </Link></li>}
 
                         { (maxPagi < pagiNum+4) ||
                             <li class={pagiNum+3==page?"page-item active":"page-item"}>
-                                <Link class="page-link" onClick={()=> pageSelect(pagiNum+4)}>
-                                {pagiNum+3}
+                                <Link class="page-link" onClick={()=> pageSelect(pagiNum+3)}>
+                                {pagiNum+4}
                             </Link>
                         </li>}
 
                         { (maxPagi<pagiNum+5) ||
                         <li class={pagiNum+4==page?"page-item active":"page-item"}>
-                            <Link class="page-link" onClick={pageSelect(()=> pagiNum+5)}>
-                            {pagiNum+4}
+                            <Link class="page-link" onClick={()=> pageSelect(pagiNum+4)}>
+                            {pagiNum+5}
                             </Link>
                         </li>}
                         
                             </PageList>
-                        <li class={pagiNum+4 < maxPagi ?
+                        <li class={pagiNum+5 < maxPagi ?
                             "page-item"
                             :
                             "page-item disabled"}>
